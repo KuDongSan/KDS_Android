@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">KUmpare</string>
+
+    <!-- Naming Rules -->
+    <!-- 도메인명_컴포넌트함축어_용도(=목적) -->
+
+    <!-- Common -->
+
+    <!-- Main -->
+    <string name="main_btm_nav_home_title">홈</string>
+    <string name="main_btm_nav_settings_title">설정</string>
+
+    <!-- Home -->
+    <string name="home_btn_try_get_http_method">GET API 보내기</string>
+    <string name="home_btn_try_post_http_method">POST API 보내기</string>
+    <string name="home_et_id">아이디를 입력하세요.</string>
+    <string name="home_et_pw">비밀번호를 입력하세요.</string>
+
+    <!-- MyPage -->
+    <string name="my_page_tv_counter">%1d 번 눌렀습니다.</string>
+    <string name="my_page_btn_counting_number">테스트</string>
+</resources>
