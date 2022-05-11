@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".config.ApplicationClass"
         android:icon="@mipmap/ic_launcher"
@@ -21,8 +20,7 @@
         tools:ignore="AllowBackup"
         tools:targetApi="s">
         <activity
-            android:name=".src.splash.SplashActivity"
-            android:screenOrientation="portrait"
+            android:name=".src.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -31,6 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".src.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".src.main.MainActivity"
             android:screenOrientation="portrait"

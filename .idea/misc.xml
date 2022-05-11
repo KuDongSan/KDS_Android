@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/main_btm_nav_item_color.xml" value="0.331" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/social_login_background.xml" value="0.331" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_splash.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/dialog_loading.xml" value="0.36614583333333334" />

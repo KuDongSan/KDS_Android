@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#fcfcfc</color>
-    <color name="colorPrimaryDark">#889dfe</color>
-    <color name="colorAccent">#889dfe</color>
+    <color name="colorPrimaryDark">#3CB371</color>
+    <color name="colorAccent">#109972</color>
 
     <!-- 기본 -->
     <color name="white">#FFFFFF</color>
@@ -11,5 +11,11 @@
     <color name="whiteForBackground">#FFFFFF</color>
     <color name="blackForText">#4a4a4a</color>
     <color name="redForText">#d9534f</color>
+
+    <color name="util_blue">#3590D3</color>
+
+    <color name="main_green_base">#72CC82</color>
+    <color name="main_green">#3CB371</color>
+    <color name="main_green_accent">#109972</color>
 
 </resources>
