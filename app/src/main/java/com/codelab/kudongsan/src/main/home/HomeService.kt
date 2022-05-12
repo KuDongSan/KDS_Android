@@ -1,6 +1,5 @@
-package com.codelab.kumpare.src.main.home
+package com.codelab.kudongsan.src.main.home
 
-import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 

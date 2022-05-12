@@ -1,11 +1,11 @@
-package com.codelab.kumpare.src.main
+package com.codelab.kudongsan.src.main
 
 import android.os.Bundle
-import com.codelab.kumpare.R
-import com.codelab.kumpare.config.BaseActivity
-import com.codelab.kumpare.databinding.ActivityMainBinding
-import com.codelab.kumpare.src.main.home.HomeFragment
-import com.codelab.kumpare.src.main.myPage.MyPageFragment
+import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.BaseActivity
+import com.codelab.kudongsan.databinding.ActivityMainBinding
+import com.codelab.kudongsan.src.main.home.HomeFragment
+import com.codelab.kudongsan.src.main.myPage.MyPageFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {

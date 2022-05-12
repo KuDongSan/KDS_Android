@@ -1,4 +1,4 @@
-package com.codelab.kumpare.config
+package com.codelab.kudongsan.config
 
 import android.content.Context
 import android.os.Bundle

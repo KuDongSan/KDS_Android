@@ -1,4 +1,4 @@
-package com.codelab.kumpare.config
+package com.codelab.kudongsan.config
 
 import com.google.gson.annotations.SerializedName
 

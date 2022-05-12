@@ -1,4 +1,4 @@
-package com.codelab.kumpare
+package com.codelab.kudongsan
 
 import org.junit.Test
 

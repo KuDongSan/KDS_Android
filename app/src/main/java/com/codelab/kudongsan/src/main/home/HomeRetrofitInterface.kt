@@ -1,7 +1,4 @@
-package com.codelab.kumpare.src.main.home
-
-import retrofit2.Call
-import retrofit2.http.*
+package com.codelab.kudongsan.src.main.home
 
 interface HomeRetrofitInterface {
 //    @GET("/users")

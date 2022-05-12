@@ -1,7 +1,7 @@
-package com.codelab.kumpare.config
+package com.codelab.kudongsan.config
 
-import com.codelab.kumpare.config.ApplicationClass.Companion.X_ACCESS_TOKEN
-import com.codelab.kumpare.config.ApplicationClass.Companion.sSharedPreferences
+import com.codelab.kudongsan.config.ApplicationClass.Companion.X_ACCESS_TOKEN
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response

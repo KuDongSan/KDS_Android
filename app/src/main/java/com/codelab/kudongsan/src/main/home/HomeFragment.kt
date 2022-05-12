@@ -1,12 +1,12 @@
-package com.codelab.kumpare.src.main.home
+package com.codelab.kudongsan.src.main.home
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.codelab.kumpare.R
-import com.codelab.kumpare.config.ApplicationClass
-import com.codelab.kumpare.config.BaseFragment
-import com.codelab.kumpare.databinding.FragmentHomeBinding
+import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass
+import com.codelab.kudongsan.config.BaseFragment
+import com.codelab.kudongsan.databinding.FragmentHomeBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapView

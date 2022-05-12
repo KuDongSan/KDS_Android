@@ -1,14 +1,13 @@
-package com.codelab.kumpare.src.login
+package com.codelab.kudongsan.src.login
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.codelab.kumpare.R
-import com.codelab.kumpare.config.BaseActivity
-import com.codelab.kumpare.databinding.ActivityLoginBinding
-import com.codelab.kumpare.databinding.ActivityMainBinding
-import com.codelab.kumpare.src.main.MainActivity
+import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.BaseActivity
+import com.codelab.kudongsan.databinding.ActivityLoginBinding
+import com.codelab.kudongsan.src.main.MainActivity
+
 
 class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 

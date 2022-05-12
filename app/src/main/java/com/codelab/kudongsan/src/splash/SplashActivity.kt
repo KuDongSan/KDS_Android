@@ -1,12 +1,12 @@
-package com.codelab.kumpare.src.splash
+package com.codelab.kudongsan.src.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.codelab.kumpare.config.BaseActivity
-import com.codelab.kumpare.databinding.ActivitySplashBinding
-import com.codelab.kumpare.src.main.MainActivity
+import com.codelab.kudongsan.config.BaseActivity
+import com.codelab.kudongsan.databinding.ActivitySplashBinding
+import com.codelab.kudongsan.src.main.MainActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding::inflate) {
     override fun onCreate(savedInstanceState: Bundle?) {
