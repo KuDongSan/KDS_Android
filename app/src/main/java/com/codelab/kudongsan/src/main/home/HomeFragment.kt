@@ -1,12 +1,15 @@
 package com.codelab.kudongsan.src.main.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseFragment
 import com.codelab.kudongsan.databinding.FragmentHomeBinding
+import com.codelab.kudongsan.src.main.MainActivity
 import com.codelab.kudongsan.src.main.home.adapters.AssetsRecyclerViewAdapter
+import com.codelab.kudongsan.src.main.home.assets.AssetsActivity
 import com.codelab.kudongsan.src.main.home.models.AssetsRecyclerViewData
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind, R.layout.fragment_home),
@@ -20,6 +23,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     private fun initRecyclerView() {
         val assetsData: MutableList<AssetsRecyclerViewData> = loadData()
         val magazineAdapter = AssetsRecyclerViewAdapter()
+        magazineAdapter.itemClickListener = object : AssetsRecyclerViewAdapter.OnItemClickListener {
+            override fun OnItemClick(position: Int) {
+                val intent = Intent(requireActivity(), AssetsActivity::class.java)
+                intent.putExtra("regionId", position)
+                startActivity(intent)
+                (activity as MainActivity).overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
+            }
+        }
         magazineAdapter.listData = assetsData
         with(binding.fragmentHomeHorizontalAssetsListRecyclerView) {
             adapter = magazineAdapter
@@ -53,7 +64,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
 //        listData.add(AssetsRecyclerViewData(R.drawable.img_gwangjin, "양천구", "#건대입구역", "#성수동 맛집"))
 //        listData.add(AssetsRecyclerViewData(R.drawable.img_gwangjin, "강북구", "#건대입구역", "#성수동 맛집"))
 //        listData.add(AssetsRecyclerViewData(R.drawable.img_gwangjin, "중랑구", "#건대입구역", "#성수동 맛집"))
-
 
         return listData
     }

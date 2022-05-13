@@ -6,7 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codelab.kudongsan.databinding.AssetsRecyclerItemBinding
 import com.codelab.kudongsan.src.main.home.models.AssetsRecyclerViewData
 
-class AssetsRecyclerViewAdapter: RecyclerView.Adapter<Holder>() {
+class AssetsRecyclerViewAdapter: RecyclerView.Adapter<AssetsRecyclerViewAdapter.Holder>() {
+    interface OnItemClickListener {
+        fun OnItemClick(position: Int)
+    }
+
+    var itemClickListener: OnItemClickListener? = null
 
     var listData = mutableListOf<AssetsRecyclerViewData>()
 
@@ -25,13 +30,19 @@ class AssetsRecyclerViewAdapter: RecyclerView.Adapter<Holder>() {
         holder.setData(data)
     }
 
+    inner class Holder(val binding: AssetsRecyclerItemBinding): RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.assetsItemCardView.setOnClickListener {
+                itemClickListener?.OnItemClick(adapterPosition)
+            }
+        }
+        fun setData(data: AssetsRecyclerViewData) {
+            binding.assetsImageView.setImageResource(data.img)
+            binding.assetsTitleTextView.text = data.title
+            binding.assetsFirstTextView.text = data.hashtag_first
+            binding.assetsSecondTextView.text = data.hashtag_second
+        }
+    }
+
 }
 
-class Holder(val binding: AssetsRecyclerItemBinding): RecyclerView.ViewHolder(binding.root) {
-    fun setData(data: AssetsRecyclerViewData) {
-        binding.assetsImageView.setImageResource(data.img)
-        binding.assetsTitleTextView.text = data.title
-        binding.assetsFirstTextView.text = data.hashtag_first
-        binding.assetsSecondTextView.text = data.hashtag_second
-    }
-}
