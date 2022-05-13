@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface AssetsRetrofitInterface {
 
     @GET("/api/property")
-    fun getAssets(@Query("region") region: String?): Call<GetAssetsResponse>
+    fun getAssets(@Query("address") address: String?): Call<GetAssetsResponse>
 
 }
