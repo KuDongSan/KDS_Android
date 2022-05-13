@@ -5,10 +5,12 @@ data class AssetsListData(
     var salesType: String,
     var serviceType: String,
     var image_thumbnail: String,
-    var deposit: Long,
-    var monthlyRentPrice: Long?,
+    var deposit: Int,
+    var monthlyRentPrice: Int?,
+    var manageCost: Double,
     var area: Double,
     var address: String,
-    var manageCost: Double,
-    var subways: ArrayList<String>
+    var subwayName: String,
+    var subwayDescription: String,
+    var subwayDistance: Int
 )

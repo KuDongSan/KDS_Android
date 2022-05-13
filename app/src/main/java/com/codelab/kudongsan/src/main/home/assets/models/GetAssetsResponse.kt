@@ -2,6 +2,4 @@ package com.codelab.kudongsan.src.main.home.assets.models
 
 import com.google.gson.annotations.SerializedName
 
-data class GetAssetsResponse(
-    @SerializedName("result") val result: ArrayList<ResultGetAssets>
-)
+class GetAssetsResponse : ArrayList<ResultGetAssets>()

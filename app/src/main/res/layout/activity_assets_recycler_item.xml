@@ -18,7 +18,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="전세"
         android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textSize="11sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,7 +32,7 @@
         android:fontFamily="@font/roboto_bold"
         android:text="오피스텔"
         android:textColor="#808080"
-        android:textSize="10sp"
+        android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/activity_assets_sales_type_button"
         app:layout_constraintStart_toEndOf="@id/activity_assets_sales_type_button"
         app:layout_constraintTop_toTopOf="@id/activity_assets_sales_type_button" />
@@ -41,11 +41,11 @@
         android:id="@+id/activity_assets_price_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_bold"
         android:text="3억"
-        android:textColor="#808080"
+        android:textColor="@color/black"
         android:textSize="24sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@id/activity_assets_sales_type_button"
         app:layout_constraintTop_toBottomOf="@id/activity_assets_sales_type_button" />
 
@@ -53,21 +53,34 @@
         android:id="@+id/activity_assets_area_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/roboto_regular"
         android:text="44.55㎡"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/black"
+        android:textColor="#808080"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/activity_assets_price_text_view"
         app:layout_constraintTop_toBottomOf="@id/activity_assets_price_text_view" />
 
     <TextView
-        android:id="@+id/activity_assets_address_text_view"
+        android:id="@+id/activity_assets_manage_cost_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
-        android:text="서울특별시 송파구 방이동"
+        android:text="관리비 협의"
+        android:layout_marginStart="10dp"
+        android:textColor="#808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/activity_assets_area_text_view"
+        app:layout_constraintStart_toEndOf="@id/activity_assets_area_text_view"
+        app:layout_constraintTop_toTopOf="@id/activity_assets_area_text_view" />
+
+    <TextView
+        android:id="@+id/activity_assets_address_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="서울특별시 송파구 방이동"
         android:textColor="#D3D3D3"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/activity_assets_area_text_view"
@@ -77,22 +90,22 @@
         android:id="@+id/activity_assets_card_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="50dp"
         android:transitionName="image"
         app:cardCornerRadius="5dp"
         app:cardElevation="0dp"
-        android:layout_marginStart="50dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/activity_assets_address_text_view"
         app:layout_constraintBottom_toBottomOf="@id/activity_assets_address_text_view"
+        app:layout_constraintDimensionRatio="1.5:1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/activity_assets_sales_type_button">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/activity_assets_image_view"
             android:layout_width="match_parent"
-            android:transitionName="image"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/img_temp_assets" />
+            android:src="@drawable/img_temp_assets"
+            android:transitionName="image" />
 
     </androidx.cardview.widget.CardView>
 
