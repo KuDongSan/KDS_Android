@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/assets_item_card_view"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        app:cardCornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/assets_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_gwangjin" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/assets_title_text_view"
+        android:layout_width="60dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="90dp"
+        android:background="@drawable/white_round_rectangle"
+        android:elevation="10dp"
+        android:gravity="center"
+        android:text="광진구"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/assets_item_card_view"
+        app:layout_constraintStart_toStartOf="@id/assets_item_card_view" />
+
+    <TextView
+        android:id="@+id/assets_first_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:elevation="50dp"
+        android:text="#건대입구역"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/assets_title_text_view"
+        app:layout_constraintTop_toBottomOf="@id/assets_title_text_view" />
+
+    <TextView
+        android:id="@+id/assets_second_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:elevation="50dp"
+        android:text="#성수동 맛집"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/assets_title_text_view"
+        app:layout_constraintTop_toBottomOf="@id/assets_first_text_view" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

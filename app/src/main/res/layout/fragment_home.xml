@@ -1,13 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
     tools:context=".src.main.home.HomeFragment">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/fragment_home_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="좋은 경험의 부동산\n쿠동산"
+                android:textColor="@color/main_green_accent"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_home_my_current_asset_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="내 부동산 시세"
+                android:textColor="@color/main_green_accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/fragment_home_title_text_view"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_title_text_view" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_home_alert_constraint_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/fragment_home_my_current_asset_text_view"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_my_current_asset_text_view">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fragment_home_alert_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/main_alert"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fragment_home_alert_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="잠깐만요!"
+                    android:textColor="@color/main_green"
+                    app:layout_constraintEnd_toEndOf="@id/fragment_home_alert_image_view"
+                    app:layout_constraintStart_toStartOf="@id/fragment_home_alert_image_view"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_image_view" />
+
+                <TextView
+                    android:id="@+id/fragment_home_alert_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="해당 기능은 내 부동산 등록을 마친 회원만 가능합니다."
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_title_text_view" />
+
+                <TextView
+                    android:id="@+id/fragment_home_alert_content_second_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="내 부동산 등록 후 편리하게 내 부동산 시세를 살펴보세요!"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_content_text_view" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/fragment_home_register_my_asset_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/register_my_asset_background"
+                    android:elevation="0dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="내 부동산 등록하러 가기"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_content_second_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/fragment_home_look_around_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="다른 부동산 둘러보기"
+                android:textColor="@color/main_green_accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/fragment_home_my_current_asset_text_view"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_constraint_layout" />
+            
+            <com.codelab.kudongsan.util.NestedScrollableHost
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_look_around_text_view"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_home_horizontal_assets_list_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.codelab.kudongsan.util.NestedScrollableHost>
 
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
