@@ -27,6 +27,10 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
+        binding.activityAssetsRegionTitleTextView.text = "$address 매물"
+        binding.activityAssetsBackButton.setOnClickListener {
+            onBackPressed()
+        }
         AssetsService(view = this).tryGetAssets(address = address)
         //init()
     }
