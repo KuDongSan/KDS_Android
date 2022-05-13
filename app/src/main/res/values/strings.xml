@@ -8,7 +8,9 @@
 
     <!-- Main -->
     <string name="main_btm_nav_home_title">홈</string>
-    <string name="main_btm_nav_settings_title">설정</string>
+    <string name="main_btm_nav_map_title">지도</string>
+    <string name="main_btm_nav_interests_title">찜 목록</string>
+    <string name="main_btm_nav_settings_title">더보기</string>
 
     <!-- Home -->
     <string name="home_btn_try_get_http_method">GET API 보내기</string>

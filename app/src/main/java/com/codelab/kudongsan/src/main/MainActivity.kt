@@ -5,7 +5,7 @@ import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityMainBinding
 import com.codelab.kudongsan.src.main.home.HomeFragment
-import com.codelab.kudongsan.src.main.myPage.MyPageFragment
+import com.codelab.kudongsan.src.main.map.MapFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -24,9 +24,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }
-                    R.id.menu_main_btm_nav_my_page -> {
+                    R.id.menu_main_btm_nav_map -> {
                         supportFragmentManager.beginTransaction()
-                            .replace(R.id.main_frm, MyPageFragment())
+                            .replace(R.id.main_frm, MapFragment())
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }
