@@ -2,6 +2,7 @@ package com.codelab.kudongsan.config
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.kakao.sdk.common.KakaoSdk
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -37,6 +38,9 @@ class ApplicationClass : Application() {
             applicationContext.getSharedPreferences("SOFTSQUARED_TEMPLATE_APP", MODE_PRIVATE)
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
+
+        // KakaoSDK 초기화
+        KakaoSdk.init(this,"f13d02f2853b0ec4e8253d833d096f37")
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.

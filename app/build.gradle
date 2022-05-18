@@ -72,7 +72,12 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
 
     // 카카오 로그인 모듈
-    //implementation "com.kakao.sdk:v2-user:2.0.1"
+    implementation "com.kakao.sdk:v2-user:2.9.1" // 카카오 로그인
+    implementation "com.kakao.sdk:v2-talk:2.9.1" // 친구, 메시지(카카오톡)
+    implementation "com.kakao.sdk:v2-story:2.9.1" // 카카오스토리
+    implementation "com.kakao.sdk:v2-link:2.9.1" // 메시지(카카오링크)
+    implementation "com.kakao.sdk:v2-navi:2.9.1" // 카카오내비
+
 
     implementation 'com.tbuonomo:dotsindicator:4.2'
 

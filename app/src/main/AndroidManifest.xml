@@ -44,6 +44,20 @@
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
+                <data android:host="oauth"
+                    android:scheme="kakaof13d02f2853b0ec4e8253d833d096f37" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="mpi2o5n2k1" />
