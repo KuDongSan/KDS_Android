@@ -3,6 +3,7 @@ package com.codelab.kudongsan.src.main
 import android.os.Bundle
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
+import com.codelab.kudongsan.databinding.ActivityAssetsBinding.inflate
 import com.codelab.kudongsan.databinding.ActivityMainBinding
 import com.codelab.kudongsan.src.main.home.HomeFragment
 import com.codelab.kudongsan.src.main.interests.InterestsFragment
@@ -14,7 +15,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, HomeFragment()).commitAllowingStateLoss()
 
         binding.mainBtmNav.setOnItemSelectedListener{ item ->

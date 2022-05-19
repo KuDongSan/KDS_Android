@@ -2,10 +2,18 @@ package com.codelab.kudongsan.src.login
 
 import android.content.ContentValues
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_NAME
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_THUMB
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.main.MainActivity
@@ -14,6 +22,7 @@ import com.kakao.sdk.user.UserApiClient
 
 
 class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+    lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +93,12 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
 //                user.kakaoAccount?.profile?.nickname
 //                user.kakaoAccount?.profile?.thumbnailImageUrl
 
+                editor = sSharedPreferences.edit()
+                editor.putString(K_USER_NAME,user?.kakaoAccount?.profile?.nickname)
+                editor.putString(K_USER_ACCOUNT,user?.kakaoAccount?.email )
+                //user?.kakaoAccount?.profile?.profileImageUrl
+                editor.putString(K_USER_THUMB,user?.kakaoAccount?.profile?.thumbnailImageUrl)
+                editor.apply()
                 val intent = Intent(this, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)

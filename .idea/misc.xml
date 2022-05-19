@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/djswn/AndroidStudioProjects/KDS_Android/app/src/main/res/layout/fragment_settings.xml" value="0.2875" />
+        <entry key="..\:/Users/djswn/AndroidStudioProjects/KDS_Android/app/src/main/res/menu/menu_main_bottom_nav.xml" value="0.2875" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/main_btm_nav_item_color.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_service_type_button.xml" value="0.328" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_type_button.xml" value="0.328" />

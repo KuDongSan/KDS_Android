@@ -23,6 +23,9 @@ class ApplicationClass : Application() {
     companion object {
         // 만들어져있는 SharedPreferences 를 사용해야합니다. 재생성하지 않도록 유념해주세요
         lateinit var sSharedPreferences: SharedPreferences
+        val K_USER_NAME = "kakaoUserName"
+        val K_USER_ACCOUNT = "kakaoUserAccount"
+        val K_USER_THUMB = "kakaoUserThumbnailImageUrl"
 
         // JWT Token Header 키 값
         val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
