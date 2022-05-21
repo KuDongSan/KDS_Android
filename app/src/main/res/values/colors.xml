@@ -19,4 +19,6 @@
     <color name="main_green">#3CB371</color>
     <color name="main_green_accent">#109972</color>
 
+    <color name="border_color_thick">#F3F3F3</color>
+
 </resources>
