@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/wonseok/AndroidStudioProjects/KDS_Android/app/src/main/res/layout/activity_assets.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/wonseok/AndroidStudioProjects/KDS_Android/app/src/main/res/layout/activity_detail.xml" value="0.22" />
+        <entry key="..\:/Users/wonseok/AndroidStudioProjects/KDS_Android/app/src/main/res/layout/fragment_my_page.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/main_btm_nav_item_color.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_service_type_button.xml" value="0.328" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_type_button.xml" value="0.328" />

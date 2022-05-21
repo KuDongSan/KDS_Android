@@ -30,8 +30,11 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
         Glide.with(this).load(R.drawable.home_animation_unscreen)
             .into(binding.activityLoginGif)
 
-        updateKakaoLogin()
-        initLayout()
+        binding.activityLoginKakaoLayout.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        //updateKakaoLogin()
+        //initLayout()
 
     }
 
