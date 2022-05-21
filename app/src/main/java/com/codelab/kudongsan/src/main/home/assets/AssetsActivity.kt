@@ -78,13 +78,14 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
         adapter.notifyDataSetChanged()
 
-//        adapter.setOnItemClickListener = object : AssetsRecyclerAdapter.OnItemClickListener {
-//            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
-//                val intent = Intent(this@AssetsActivity, )
-//                intent.putExtra("itemId", adapter.listData[pos].itemId)
-//                startActivity(intent)
-//            }
-//        }
+        adapter.listener = object : AssetsRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
+                val intent = Intent(this@AssetsActivity, AssetsDetailActivity::class.java)
+                intent.putExtra("itemId", data.itemId)
+                //Log.d("checkitemId", data.itemId.toString())
+                startActivity(intent)
+            }
+        }
 
         response.forEach { item ->
             data.add(

@@ -24,7 +24,7 @@ class AssetsRecyclerAdapter(private val context: Context) :
 
     var listData = mutableListOf<AssetsListData>()
 
-    private var listener: OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener

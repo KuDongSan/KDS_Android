@@ -20,6 +20,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="s">
         <activity
+            android:name=".src.main.home.assets.AssetsDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".src.main.home.assets.AssetsActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
