@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.databinding.ActivityAssetsRecyclerItemBinding
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
+import java.text.DecimalFormat
 
 class AssetsRecyclerAdapter(private val context: Context) :
     RecyclerView.Adapter<AssetsRecyclerAdapter.Holder>() {
@@ -24,11 +25,8 @@ class AssetsRecyclerAdapter(private val context: Context) :
 
     var listData = mutableListOf<AssetsListData>()
 
-    private var listener: OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
 
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = ActivityAssetsRecyclerItemBinding.inflate(
@@ -65,11 +63,12 @@ class AssetsRecyclerAdapter(private val context: Context) :
                     "${data.deposit/10000}억"
                 }
             } else {
+                val dec = DecimalFormat("#,###")
                 if(data.monthlyRentPrice!=null) {
-                    "${data.deposit}/${data.monthlyRentPrice}"
+                    "${dec.format(data.deposit)}/${data.monthlyRentPrice}"
                 }
                 else {
-                    "${data.deposit}"
+                    "${dec.format(data.deposit)}"
                 }
             }
             with(binding.activityAssetsSalesTypeButton) {
@@ -96,7 +95,7 @@ class AssetsRecyclerAdapter(private val context: Context) :
                 "아파트"
             }
             binding.activityAssetsManageCostTextView.text = if(data.manageCost == 0.0) {
-                "관리비 협의"
+                "관리비 없음"
             } else {
                 "관리비 ${data.manageCost.toInt()}만원"
             }

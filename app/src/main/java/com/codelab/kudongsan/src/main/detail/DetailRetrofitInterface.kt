@@ -8,6 +8,6 @@ import retrofit2.http.Path
 interface DetailRetrofitInterface {
 
     @GET("/api/property/{propertyId}")
-    fun getDetail(@Path("propertyId") propertyId: String): Call<GetDetailResponse>
+    fun getDetail(@Path("propertyId") propertyId: Int): Call<GetDetailResponse>
 
 }

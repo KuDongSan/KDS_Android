@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityAssetsBinding
+import com.codelab.kudongsan.src.main.detail.DetailActivity
 import com.codelab.kudongsan.src.main.home.assets.adapters.AssetsRecyclerAdapter
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
 import com.codelab.kudongsan.src.main.home.assets.models.GetAssetsResponse
@@ -78,13 +79,13 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
         adapter.notifyDataSetChanged()
 
-//        adapter.setOnItemClickListener = object : AssetsRecyclerAdapter.OnItemClickListener {
-//            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
-//                val intent = Intent(this@AssetsActivity, )
-//                intent.putExtra("itemId", adapter.listData[pos].itemId)
-//                startActivity(intent)
-//            }
-//        }
+        adapter.listener = object : AssetsRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
+                val intent = Intent(this@AssetsActivity, DetailActivity::class.java)
+                intent.putExtra("itemId", adapter.listData[pos].itemId)
+                startActivity(intent)
+            }
+        }
 
         response.forEach { item ->
             data.add(

@@ -20,6 +20,11 @@
         tools:ignore="AllowBackup"
         tools:targetApi="s">
         <activity
+            android:name=".src.main.detail.DetailActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".src.main.home.assets.AssetsActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
