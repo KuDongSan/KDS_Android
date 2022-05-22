@@ -12,7 +12,7 @@ data class GetDetailResponse(
     @SerializedName("salePrice") val salePrice: Int?,
     @SerializedName("monthlyRentPrice") val monthlyRentPrice: Int?,
     @SerializedName("area") val area: Area,
-    @SerializedName("jibunAddress") val jibunAddress: String,
+    @SerializedName("jibunAddress") val jibunAddress: String?,
     @SerializedName("address") val address: String,
     @SerializedName("roomType") val roomType: RoomType,
     @SerializedName("title") val title: String,

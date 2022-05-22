@@ -29,9 +29,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val itemId = intent.getIntExtra("itemId", -1)
-        showCustomToast("$itemId")
         DetailService(view = this).tryGetDetail(itemId = itemId)
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -103,11 +101,38 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             }
             activityDetailMoveInDateContentTextView.text = response.moveinDate
             activityDetailManageCostTotalContentTextView.text = if(response.manageCostNotInc==null) {
-                "${response.manageCost.toInt()}만원"
+                if (response.manageCost == 0.0) {
+                    "관리비 없음"
+                }
+                else {
+                    "${response.manageCost.toInt()}만원"
+                }
             } else {
-                "${response.manageCost.toInt()}만원\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
+                if (response.manageCost == 0.0) {
+                    "관리비 없음\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
+                }
+                else {
+                    "${response.manageCost.toInt()}만원\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
+                }
             }
-
+            activityDetailRoomTypeTotalContentTextView.text = when(response.roomType.roomTypeCode) {
+                "01" -> "오픈형 원룸 (욕실 ${response.bathroomCount}개)"
+                "02" -> "분리형 원룸 (욕실 ${response.bathroomCount}개)"
+                "03" -> "복층형 원룸 (욕실 ${response.bathroomCount}개)"
+                "04" -> "투룸 (욕실 ${response.bathroomCount}개)"
+                "05" -> "쓰리룸+ (욕실 ${response.bathroomCount}개)"
+                "06" -> "포룸+ (욕실 ${response.bathroomCount}개)"
+                else -> "정보 없음"
+            }
+            activityDetailAreaTotalContentTextView.text = "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
+            activityDetailRoomDirectionContentTextView.text = roomDirectionToKor(response.roomDirection)
+            activityDetailFloorContentTextView.text = if(response.floor.floorString.length != 1) {
+                "${response.floor.floorString}/${response.floor.floorAll}"
+            } else {
+                "${response.floor.floorString}층/${response.floor.floorAll}"
+            }
+            activityDetailResidenceTypeContentTextView.text = response.residenceType
+            activityDetailJibunAddressContentTextView.text = response.jibunAddress ?: "문의"
         }
     }
 
@@ -117,11 +142,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
     @SuppressLint("SimpleDateFormat")
     private fun calcDate(date: String): String {
-        var sf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-        var date = sf.parse(date)
+        val sf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        val newDate = sf.parse(date)
 
-        var today = Calendar.getInstance()
-        var calcDate = (today.time.time - date.time) / (60 * 60 * 24 * 1000)
+        val today = Calendar.getInstance()
+        val calcDate = (today.time.time - newDate.time) / (60 * 60 * 24 * 1000)
 
         return calcDate.toString()
     }
@@ -141,6 +166,20 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         }
         //showCustomToast("$newArr")
         return newArr.joinToString(", ")
+    }
+
+    private fun roomDirectionToKor(roomDirection: String): String {
+        when(roomDirection) {
+            "E" -> return "동향"
+            "W" -> return "서향"
+            "S" -> return "남향"
+            "N" -> return "북향"
+            "NE" -> return "북동향"
+            "NW" -> return "북서향"
+            "SE" -> return "남동향"
+            "SW" -> return "남서향"
+            else -> return "알 수 없음"
+        }
     }
 
 }
