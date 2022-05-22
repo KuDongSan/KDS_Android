@@ -5,19 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatDrawableManager.preload
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ImageSliderAdapter(private val context: Context, private val sliderImage: MutableList<String>) : RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder>() {
+class ImageSliderAdapter(
+    private val context: Context,
+    private val sliderImage: MutableList<String>
+) : RecyclerView.Adapter<ImageSliderAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.activity_detail_viewpager, parent, false)
+        val view: View = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_detail_viewpager, parent, false)
         return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bindSliderImage(sliderImage[position])
+        CoroutineScope(Dispatchers.Main).launch {
+            holder.bindSliderImage(sliderImage[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -25,9 +35,9 @@ class ImageSliderAdapter(private val context: Context, private val sliderImage: 
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val mImageView: ImageView = itemView.findViewById(R.id.imageSlider)
+        val mImageView: ImageView = itemView.findViewById(R.id.imageSlider)
         fun bindSliderImage(imageURL: String?) {
-            Glide.with(context).load(imageURL).into(mImageView)
+            Glide.with(context).load(imageURL).override(0, 0).into(mImageView)
         }
     }
 

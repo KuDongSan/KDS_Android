@@ -14,6 +14,9 @@ import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.databinding.ActivityAssetsRecyclerItemBinding
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
 class AssetsRecyclerAdapter(private val context: Context) :
