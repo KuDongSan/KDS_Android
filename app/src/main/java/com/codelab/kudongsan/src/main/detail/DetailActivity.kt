@@ -141,13 +141,15 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             activityDetailResidenceTypeContentTextView.text = response.residenceType
             activityDetailJibunAddressContentTextView.text = response.jibunAddress ?: "문의"
 
-
-
             if (response.options == null) {
                 data.clear()
+                activityDetailOptionsNoIncTextView.visibility = View.GONE
+                activityDetailOptionsGridRecyclerView.visibility = View.VISIBLE
             }
             else {
                 data.clear()
+                activityDetailOptionsNoIncTextView.visibility = View.VISIBLE
+                activityDetailOptionsGridRecyclerView.visibility = View.GONE
                 optionsListToItem(response.options)
                 val data: MutableList<OptionsItem> = data
                 var adapterSeller = OptionsItemRecyclerAdapter(this@DetailActivity)
