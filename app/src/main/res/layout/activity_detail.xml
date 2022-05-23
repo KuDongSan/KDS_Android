@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_detail_title_constraint_layout"
@@ -730,280 +730,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_options_title_text_view" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/activity_detail_options_constraint_layout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_detail_options_grid_recycler_view"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_options_title_divider">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/activity_detail_options_grid_recycler_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/activity_detail_options_no_inc_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="옵션에 포함된 항목이 없습니다"
-                    android:textColor="@color/main_green_accent"
-                    android:textSize="16sp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/activity_detail_fifth_divider"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_options_constraint_layout" />
-
-            <TextView
-                android:id="@+id/activity_detail_mange_cost_inc_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="관리비 포함 항목"
-                android:textColor="@color/main_green_accent"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_fifth_divider" />
-
-            <TextView
-                android:id="@+id/activity_detail_mange_cost_inc_title_sub_text_view"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_mange_cost_inc_title_text_view"
-                tools:text="관리비 : 10만원 (전기, 가스, 수도, 인터넷, 티비 별도)" />
-
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/activity_detail_manage_cost_title_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_up"
-                android:tint="@color/main_green_accent"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_mange_cost_inc_title_sub_text_view"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_mange_cost_inc_title_text_view" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_options_title_divider" />
+
 
             <View
-                android:id="@+id/activity_detail_manage_cost_title_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_options_grid_recycler_view"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_mange_cost_inc_title_sub_text_view" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/activity_detail_manage_cost_constraint_layout"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_title_divider">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/activity_detail_manage_cost_grid_recycler_view"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/activity_detail_manage_cost_no_inc_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="관리비에 포함된 항목이 없습니다"
-                    android:textColor="@color/main_green_accent"
-                    android:textSize="16sp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:id="@+id/activity_detail_seventh_divider"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_constraint_layout" />
-
-            <!-- -->
-
-            <TextView
-                android:id="@+id/activity_detail_near_subways_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="인근 전철역"
-                android:textColor="@color/main_green_accent"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_seventh_divider" />
-
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/activity_detail_near_subways_title_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_up"
-                android:tint="@color/main_green_accent"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_near_subways_title_text_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_near_subways_title_text_view" />
-
-            <View
-                android:id="@+id/activity_detail_near_subways_title_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_near_subways_title_button" />
-
-
-            <TextView
-                android:id="@+id/activity_detail_near_subways_content_text_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_near_subways_title_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_near_subways_title_divider"
-                tools:text="어린이대공원역(7호선), 건대입구역(2호선,7호선), 군자역(5호선,7호선)" />
-
-            <View
-                android:id="@+id/activity_detail_eighth_divider"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_near_subways_content_text_view" />
-
-            <!-- -->
-
-            <TextView
-                android:id="@+id/activity_detail_description_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="상세 설명"
-                android:textColor="@color/main_green_accent"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_eighth_divider" />
-
-            <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/activity_detail_description_title_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_up"
-                android:tint="@color/main_green_accent"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_description_title_text_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_description_title_text_view" />
-
-            <View
-                android:id="@+id/activity_detail_description_title_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_description_title_button" />
-
-            <TextView
-                android:id="@+id/activity_detail_description_content_text_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="15sp"
-                android:fontFamily="@font/roboto_regular"
-                tools:text="💕 남성역 도보 10분\n💕 아래층 방2, 화장실1, 부엌, 테라스, 세탁실 2 / 윗층 방2, 화장실1\n💕 단독주택이라 정확한 평수 X \n💕 전세자금대출 가능\n 22.05.06에 직방에 등록된 매물입니다."
-                android:textColor="@color/main_green"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_description_title_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_description_title_divider" />
-
-            <View
-                android:id="@+id/activity_detail_ninth_divider"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_description_content_text_view" />
-
-            <!-- -->
-
+                android:background="@color/main_green_accent"
+                android:layout_height="150dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
