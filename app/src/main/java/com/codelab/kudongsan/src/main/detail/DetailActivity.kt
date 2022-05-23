@@ -145,9 +145,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             if (response.options == null) {
                 data.clear()
+                activityDetailOptionsNoIncTextView.visibility = View.GONE
+                activityDetailOptionsGridRecyclerView.visibility = View.VISIBLE
             }
             else {
                 data.clear()
+                activityDetailOptionsNoIncTextView.visibility = View.VISIBLE
+                activityDetailOptionsGridRecyclerView.visibility = View.GONE
                 optionsListToItem(response.options)
                 val data: MutableList<OptionsItem> = data
                 var adapterSeller = OptionsItemRecyclerAdapter(this@DetailActivity)
