@@ -17,6 +17,7 @@ import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreference
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.main.MainActivity
+import com.codelab.kudongsan.src.main.home.filtering.FilteringActivity
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
@@ -31,7 +32,9 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
             .into(binding.activityLoginGif)
 
         binding.activityLoginKakaoLayout.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, FilteringActivity::class.java))
+
         }
         //updateKakaoLogin()
         //initLayout()

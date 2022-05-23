@@ -23,11 +23,17 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     AssetsActivityView {
 
     val scope = CoroutineScope(Dispatchers.IO)
-    val data: MutableList<AssetsListData> = mutableListOf()
+    var data: MutableList<AssetsListData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
+
+
+        if (intent.getParcelableArrayListExtra<AssetsListData>("response") != null) {
+            data = intent.getParcelableArrayListExtra<AssetsListData>("response")!!
+        }
+
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         binding.activityAssetsBackButton.setOnClickListener {
             onBackPressed()
@@ -87,24 +93,24 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
             }
         }
 
-        response.forEach { item ->
-            data.add(
-                AssetsListData(
-                    item.itemId,
-                    item.salesType,
-                    item.serviceType,
-                    item.image_thumbnail,
-                    item.deposit,
-                    item.monthlyRentPrice,
-                    item.manageCost,
-                    item.area,
-                    item.address,
-                    item.subways[0].name,
-                    item.subways[0].description,
-                    item.subways[0].distance
-                )
-            )
-        }
+//        response.forEach { item ->
+//            data.add(
+//                AssetsListData(
+//                    item.itemId,
+//                    item.salesType,
+//                    item.serviceType,
+//                    item.image_thumbnail,
+//                    item.deposit,
+//                    item.monthlyRentPrice,
+//                    item.manageCost,
+//                    item.area,
+//                    item.address,
+//                    item.subways[0].name,
+//                    item.subways[0].description,
+//                    item.subways[0].distance
+//                )
+//            )
+//        }
 //        adapter.notifyDataSetChanged()
 //        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
     }

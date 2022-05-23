@@ -1,7 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
 }
+
 
 android {
     compileSdk 31
@@ -78,6 +81,8 @@ dependencies {
     implementation "com.kakao.sdk:v2-link:2.9.1" // 메시지(카카오링크)
     implementation "com.kakao.sdk:v2-navi:2.9.1" // 카카오내비
 
+    // https://github.com/Jay-Goo/RangeSeekBar
+    implementation 'com.github.Jay-Goo:RangeSeekBar:1.0.0'
 
     implementation 'com.tbuonomo:dotsindicator:4.2'
 

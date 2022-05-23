@@ -1,10 +1,6 @@
-package com.codelab.kudongsan.src.main.home.assets.models
+package com.codelab.kudongsan.src.main.home.filtering.models
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
-
-@Parcelize
-data class AssetsListData(
+data class FilteringListData(
     var itemId: Int,
     var salesType: String,
     var serviceType: String,
@@ -17,4 +13,4 @@ data class AssetsListData(
     var subwayName: String,
     var subwayDescription: String,
     var subwayDistance: Int
-) : Parcelable
+)

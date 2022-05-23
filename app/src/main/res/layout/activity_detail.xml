@@ -66,632 +66,632 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/activity_detail_nested_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:fitsSystemWindows="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/activity_detail_title_constraint_layout">
+            android:id="@+id/activity_detail_nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            android:fitsSystemWindows="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_detail_title_constraint_layout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true">
 
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/activity_detail_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="375dp"
-                android:transitionName="image"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:background="#808080" />
+                    android:id="@+id/activity_detail_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="375dp"
+                    android:transitionName="image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:background="#808080"/>
 
             <com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-                android:id="@+id/activity_detail_dots_indicator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:dotsColor="@color/white"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="8dp"
-                app:dotsSpacing="4dp"
-                app:dotsStrokeColor="@color/border_color_thick"
-                app:dotsStrokeWidth="4dp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_viewpager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                    android:id="@+id/activity_detail_dots_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:dotsColor="@color/white"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="8dp"
+                    app:dotsSpacing="4dp"
+                    app:dotsStrokeColor="@color/border_color_thick"
+                    app:dotsStrokeWidth="4dp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_viewpager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
-                android:id="@+id/activity_detail_status_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="거래가 가능한 집이에요."
-                android:textColor="@color/main_green"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_viewpager" />
+                    android:id="@+id/activity_detail_status_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="거래가 가능한 집이에요."
+                    android:textColor="@color/main_green"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_viewpager"/>
 
             <TextView
-                android:id="@+id/activity_detail_updated_at_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_base"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_viewpager"
-                tools:text="00일전" />
+                    android:id="@+id/activity_detail_updated_at_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_base"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_viewpager"
+                    tools:text="00일전"/>
 
             <TextView
-                android:id="@+id/activity_detail_sales_type_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/main_green_accent"
-                android:textSize="22sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_status_text_view"
-                tools:text="전세" />
+                    android:id="@+id/activity_detail_sales_type_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_status_text_view"
+                    tools:text="전세"/>
 
 
             <TextView
-                android:id="@+id/activity_detail_deposit_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/main_green_accent"
-                android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_sales_type_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_sales_type_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_sales_type_text_view"
-                tools:text="2억 5,000" />
+                    android:id="@+id/activity_detail_deposit_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_sales_type_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_sales_type_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_sales_type_text_view"
+                    tools:text="2억 5,000"/>
 
             <View
-                android:id="@+id/activity_detail_first_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_sales_type_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_sales_type_text_view" />
+                    android:id="@+id/activity_detail_first_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_sales_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_sales_type_text_view"/>
 
             <TextView
-                android:id="@+id/activity_detail_area_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:text="면적(전용)"
-                android:textColor="@color/main_green"
-                android:textSize="19sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider" />
+                    android:id="@+id/activity_detail_area_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:text="면적(전용)"
+                    android:textColor="@color/main_green"
+                    android:textSize="19sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_manage_cost_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="관리비"
-                android:textColor="@color/main_green"
-                android:textSize="19sp"
-                app:layout_constraintEnd_toStartOf="@id/activity_detail_room_type_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_area_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider" />
+                    android:id="@+id/activity_detail_manage_cost_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="관리비"
+                    android:textColor="@color/main_green"
+                    android:textSize="19sp"
+                    app:layout_constraintEnd_toStartOf="@id/activity_detail_room_type_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_area_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_room_type_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="구조"
-                android:textColor="@color/main_green"
-                android:textSize="19sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_manage_cost_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider" />
+                    android:id="@+id/activity_detail_room_type_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="구조"
+                    android:textColor="@color/main_green"
+                    android:textSize="19sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_manage_cost_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_first_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_area_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/main_green_accent"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_area_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_area_text_view"
-                tools:text="9평" />
+                    android:id="@+id/activity_detail_area_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_area_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_area_text_view"
+                    tools:text="9평"/>
 
             <TextView
-                android:id="@+id/activity_detail_manage_cost_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/main_green_accent"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_text_view"
-                tools:text="10만원" />
+                    android:id="@+id/activity_detail_manage_cost_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_text_view"
+                    tools:text="10만원"/>
 
             <TextView
-                android:id="@+id/activity_detail_room_type_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/main_green_accent"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_room_type_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_text_view"
-                tools:text="분리형 원룸" />
+                    android:id="@+id/activity_detail_room_type_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_room_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_text_view"
+                    tools:text="분리형 원룸"/>
 
             <View
-                android:id="@+id/activity_detail_second_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_area_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_area_content_text_view" />
+                    android:id="@+id/activity_detail_second_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_area_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_area_content_text_view"/>
 
             <TextView
-                android:id="@+id/activity_detail_title_content_text_view"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="@id/activity_detail_second_divider"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_second_divider"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_second_divider"
-                tools:text="LH가능 한강변 반지하 투룸 전세" />
+                    android:id="@+id/activity_detail_title_content_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/activity_detail_second_divider"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_second_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_second_divider"
+                    tools:text="LH가능 한강변 반지하 투룸 전세"/>
 
             <View
-                android:id="@+id/activity_detail_third_divider"
-                android:layout_width="0dp"
-                android:layout_height="10dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_title_content_text_view" />
+                    android:id="@+id/activity_detail_third_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_title_content_text_view"/>
 
             <TextView
-                android:id="@+id/activity_detail_assets_info_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="매물 정보"
-                android:textColor="@color/main_green_accent"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_third_divider" />
+                    android:id="@+id/activity_detail_assets_info_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="매물 정보"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_third_divider"/>
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
-                android:id="@+id/activity_detail_assets_info_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_up"
-                android:tint="@color/main_green_accent"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_assets_info_text_view" />
+                    android:id="@+id/activity_detail_assets_info_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:backgroundTint="@color/transparent"
+                    android:src="@drawable/ic_up"
+                    android:tint="@color/main_green_accent"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_assets_info_text_view"/>
 
             <View
-                android:id="@+id/activity_detail_assets_info_title_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_info_button" />
+                    android:id="@+id/activity_detail_assets_info_title_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_info_button"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_parking_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="주차"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_info_title_divider" />
+                    android:id="@+id/activity_detail_parking_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="주차"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_info_title_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_parking_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_parking_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_parking_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_parking_text_view"
-                tools:text="1대 가능" />
+                    android:id="@+id/activity_detail_parking_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_parking_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_parking_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_parking_text_view"
+                    tools:text="1대 가능"/>
 
             <View
-                android:id="@+id/activity_detail_assets_parking_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_parking_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_parking_text_view" />
+                    android:id="@+id/activity_detail_assets_parking_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_parking_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_parking_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_elevator_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="엘리베이터"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_parking_divider" />
+                    android:id="@+id/activity_detail_elevator_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="엘리베이터"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_parking_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_elevator_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_elevator_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_elevator_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_elevator_text_view"
-                tools:text="있음" />
+                    android:id="@+id/activity_detail_elevator_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_elevator_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_elevator_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_elevator_text_view"
+                    tools:text="있음"/>
 
             <View
-                android:id="@+id/activity_detail_assets_elevator_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_elevator_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_elevator_text_view" />
+                    android:id="@+id/activity_detail_assets_elevator_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_elevator_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_elevator_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_move_in_date_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="입주가능일"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_elevator_divider" />
+                    android:id="@+id/activity_detail_move_in_date_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="입주가능일"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_elevator_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_move_in_date_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_move_in_date_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_move_in_date_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_move_in_date_text_view"
-                tools:text="즉시 입주" />
+                    android:id="@+id/activity_detail_move_in_date_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_move_in_date_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_move_in_date_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_move_in_date_text_view"
+                    tools:text="즉시 입주"/>
 
             <View
-                android:id="@+id/activity_detail_assets_move_in_date_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_move_in_date_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_move_in_date_text_view" />
+                    android:id="@+id/activity_detail_assets_move_in_date_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_move_in_date_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_move_in_date_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_manage_cost_total_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="관리비"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_manage_cost_total_content_text_view" />
+                    android:id="@+id/activity_detail_manage_cost_total_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="관리비"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_manage_cost_total_content_text_view"/>
 
             <TextView
-                android:id="@+id/activity_detail_manage_cost_total_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:lineSpacingExtra="5dp"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_move_in_date_divider"
-                tools:text="10만원\n관리비 외 사용 따라 부과\n전기, 가스, 수도, 인터넷, 티비" />
+                    android:id="@+id/activity_detail_manage_cost_total_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lineSpacingExtra="5dp"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_move_in_date_divider"
+                    tools:text="10만원\n관리비 외 사용 따라 부과\n전기, 가스, 수도, 인터넷, 티비"/>
 
             <View
-                android:id="@+id/activity_detail_assets_manage_cost_total_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_total_content_text_view" />
+                    android:id="@+id/activity_detail_assets_manage_cost_total_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_manage_cost_total_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_room_type_total_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="구조"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_manage_cost_total_divider" />
+                    android:id="@+id/activity_detail_room_type_total_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="구조"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_manage_cost_total_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_room_type_total_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_room_type_total_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_room_type_total_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_room_type_total_text_view"
-                tools:text="분리형 원룸 (욕실 1개)" />
+                    android:id="@+id/activity_detail_room_type_total_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_room_type_total_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_room_type_total_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_room_type_total_text_view"
+                    tools:text="분리형 원룸 (욕실 1개)"/>
 
             <View
-                android:id="@+id/activity_detail_room_type_total_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_total_content_text_view" />
+                    android:id="@+id/activity_detail_room_type_total_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_total_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_area_total_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="면적(전용)"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_total_divider" />
+                    android:id="@+id/activity_detail_area_total_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="면적(전용)"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_room_type_total_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_area_total_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_area_total_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_area_total_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_area_total_text_view"
-                tools:text="9평" />
+                    android:id="@+id/activity_detail_area_total_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_area_total_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_area_total_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_area_total_text_view"
+                    tools:text="9평"/>
 
             <View
-                android:id="@+id/activity_detail_area_total_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_area_total_content_text_view" />
+                    android:id="@+id/activity_detail_area_total_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_area_total_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_room_direction_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="방향"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_area_total_divider" />
+                    android:id="@+id/activity_detail_room_direction_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="방향"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_area_total_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_room_direction_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_room_direction_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_room_direction_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_room_direction_text_view"
-                tools:text="남향" />
+                    android:id="@+id/activity_detail_room_direction_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_room_direction_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_room_direction_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_room_direction_text_view"
+                    tools:text="남향"/>
 
             <View
-                android:id="@+id/activity_detail_room_direction_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_room_direction_content_text_view" />
+                    android:id="@+id/activity_detail_room_direction_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_room_direction_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_floor_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="층/건물층수"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_room_direction_divider" />
+                    android:id="@+id/activity_detail_floor_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="층/건물층수"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_room_direction_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_floor_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_floor_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_floor_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_floor_text_view"
-                tools:text="2층/6층" />
+                    android:id="@+id/activity_detail_floor_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_floor_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_floor_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_floor_text_view"
+                    tools:text="2층/6층"/>
 
             <View
-                android:id="@+id/activity_detail_floor_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_floor_content_text_view" />
+                    android:id="@+id/activity_detail_floor_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_floor_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_residence_type_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="건물종류"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_floor_divider" />
+                    android:id="@+id/activity_detail_residence_type_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="건물종류"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_floor_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_residence_type_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_residence_type_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_residence_type_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_residence_type_text_view"
-                tools:text="공동주택" />
+                    android:id="@+id/activity_detail_residence_type_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_residence_type_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_residence_type_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_residence_type_text_view"
+                    tools:text="공동주택"/>
 
             <View
-                android:id="@+id/activity_detail_residence_type_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_residence_type_content_text_view" />
+                    android:id="@+id/activity_detail_residence_type_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_manage_cost_total_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_residence_type_content_text_view"/>
 
             <!-- -->
 
             <TextView
-                android:id="@+id/activity_detail_jibun_address_text_view"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="건물종류"
-                android:textColor="@color/main_green"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_residence_type_divider" />
+                    android:id="@+id/activity_detail_jibun_address_text_view"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="건물종류"
+                    android:textColor="@color/main_green"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_assets_info_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_residence_type_divider"/>
 
             <TextView
-                android:id="@+id/activity_detail_jibun_address_content_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/main_green_accent"
-                android:textSize="15sp"
-                app:layout_constraintBottom_toBottomOf="@id/activity_detail_jibun_address_text_view"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_jibun_address_text_view"
-                app:layout_constraintTop_toTopOf="@id/activity_detail_jibun_address_text_view"
-                tools:text="송파구 잠실동 245-19" />
+                    android:id="@+id/activity_detail_jibun_address_content_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/main_green_accent"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_detail_jibun_address_text_view"
+                    app:layout_constraintStart_toEndOf="@id/activity_detail_jibun_address_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_detail_jibun_address_text_view"
+                    tools:text="송파구 잠실동 245-19"/>
 
             <View
-                android:id="@+id/activity_detail_jibun_address_divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/border_color_thick"
-                android:fitsSystemWindows="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_jibun_address_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_jibun_address_content_text_view" />
+                    android:id="@+id/activity_detail_jibun_address_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/border_color_thick"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_detail_jibun_address_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_detail_jibun_address_content_text_view"/>
 
 
             <!-- -->
