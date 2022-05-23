@@ -37,7 +37,9 @@ class ImageSliderAdapter(
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val mImageView: ImageView = itemView.findViewById(R.id.imageSlider)
         fun bindSliderImage(imageURL: String?) {
-            Glide.with(context).load(imageURL).override(0, 0).into(mImageView)
+            // skeleton 사용해서 이미지 로딩 추후 바꿀것 (시간 남으면)
+            // https://leveloper.tistory.com/214
+            Glide.with(context).load(imageURL).placeholder(R.drawable.place_holder_image).into(mImageView)
         }
     }
 

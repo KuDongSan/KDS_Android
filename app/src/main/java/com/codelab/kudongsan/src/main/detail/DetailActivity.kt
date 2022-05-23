@@ -31,6 +31,12 @@ import kotlin.math.roundToInt
 class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate),
     DetailActivityView {
 
+    // 개선해야할 사항 (2022.05.23)
+    // adapter class 여러개 관리하기 힘듦 
+    // adapter class 하나로 줄이고 viewholder 여러개 만드는 과정 필요함
+    // getItemViewType 오버라이드
+    // https://blog.naver.com/ksjmgrkks
+
     var data: MutableList<OptionsItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,13 +149,13 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             if (response.options == null) {
                 data.clear()
-                activityDetailOptionsNoIncTextView.visibility = View.GONE
-                activityDetailOptionsGridRecyclerView.visibility = View.VISIBLE
+                activityDetailOptionsNoIncTextView.visibility = View.VISIBLE
+                activityDetailOptionsGridRecyclerView.visibility = View.GONE
             }
             else {
                 data.clear()
-                activityDetailOptionsNoIncTextView.visibility = View.VISIBLE
-                activityDetailOptionsGridRecyclerView.visibility = View.GONE
+                activityDetailOptionsNoIncTextView.visibility = View.GONE
+                activityDetailOptionsGridRecyclerView.visibility = View.VISIBLE
                 optionsListToItem(response.options)
                 val data: MutableList<OptionsItem> = data
                 var adapterSeller = OptionsItemRecyclerAdapter(this@DetailActivity)
@@ -162,10 +168,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
                 adapterSeller.notifyDataSetChanged()
             }
-
-
-
-
 
 
         }

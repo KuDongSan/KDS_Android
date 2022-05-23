@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_detail_title_constraint_layout"
@@ -756,7 +756,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="옵션에 포함된 항목이 없습니다"
                     android:textColor="@color/main_green_accent"
                     android:textSize="16sp"
@@ -853,7 +853,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:fontFamily="@font/roboto_bold"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="관리비에 포함된 항목이 없습니다"
                     android:textColor="@color/main_green_accent"
                     android:textSize="16sp"
@@ -983,13 +983,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textSize="15sp"
                 android:fontFamily="@font/roboto_regular"
-                tools:text="💕 남성역 도보 10분\n💕 아래층 방2, 화장실1, 부엌, 테라스, 세탁실 2 / 윗층 방2, 화장실1\n💕 단독주택이라 정확한 평수 X \n💕 전세자금대출 가능\n 22.05.06에 직방에 등록된 매물입니다."
                 android:textColor="@color/main_green"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/activity_detail_description_title_text_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_detail_description_title_divider" />
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_description_title_divider"
+                tools:text="💕 남성역 도보 10분\n💕 아래층 방2, 화장실1, 부엌, 테라스, 세탁실 2 / 윗층 방2, 화장실1\n💕 단독주택이라 정확한 평수 X \n💕 전세자금대출 가능\n 22.05.06에 직방에 등록된 매물입니다." />
 
             <View
                 android:id="@+id/activity_detail_ninth_divider"
