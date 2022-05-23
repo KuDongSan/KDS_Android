@@ -11,6 +11,7 @@
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_interests_unselected.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_launcher_background.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_map_unselected.xml" value="0.331" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_options_04.xml" value="0.279" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_settings_unselected.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/register_my_asset_background.xml" value="0.264" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/social_login_background.xml" value="0.331" />
@@ -18,6 +19,7 @@
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_assets.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_assets_recycler_item.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_detail.xml" value="0.22" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_detail_options_item_recycler_item.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_detail_viewpager.xml" value="0.3692708333333333" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />

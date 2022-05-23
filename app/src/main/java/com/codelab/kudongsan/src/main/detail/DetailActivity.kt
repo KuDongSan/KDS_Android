@@ -4,13 +4,19 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.DiscretePathEffect
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityDetailBinding
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
+import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
 import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
+import com.codelab.kudongsan.src.main.detail.models.OptionsItem
 import com.codelab.kudongsan.src.main.home.assets.AssetsService
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +31,7 @@ import kotlin.math.roundToInt
 class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate),
     DetailActivityView {
 
+    var data: MutableList<OptionsItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +39,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         DetailService(view = this).tryGetDetail(itemId = itemId)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
 
         binding.apply {
@@ -133,6 +140,32 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             }
             activityDetailResidenceTypeContentTextView.text = response.residenceType
             activityDetailJibunAddressContentTextView.text = response.jibunAddress ?: "문의"
+
+
+
+            if (response.options == null) {
+                data.clear()
+            }
+            else {
+                data.clear()
+                optionsListToItem(response.options)
+                val data: MutableList<OptionsItem> = data
+                var adapterSeller = OptionsItemRecyclerAdapter(this@DetailActivity)
+
+                adapterSeller.listData = data
+                binding.activityDetailOptionsGridRecyclerView.adapter = adapterSeller
+                binding.activityDetailOptionsGridRecyclerView.layoutManager = GridLayoutManager(this@DetailActivity, 4)
+                val spaceDecoration = VerticalSpaceItemDecoration(20)
+                binding.activityDetailOptionsGridRecyclerView.addItemDecoration(spaceDecoration)
+
+                adapterSeller.notifyDataSetChanged()
+            }
+
+
+
+
+
+
         }
     }
 
@@ -179,6 +212,37 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             "SE" -> return "남동향"
             "SW" -> return "남서향"
             else -> return "알 수 없음"
+        }
+    }
+
+    private fun optionsListToItem(options: String) {
+        val arr = options.split(";")
+        arr.forEach {
+            when(it) {
+                "01" -> data.add(OptionsItem(image = R.drawable.options_01, name = "에어컨"))
+                "02" -> data.add(OptionsItem(image = R.drawable.options_02, name = "냉장고"))
+                "03" -> data.add(OptionsItem(image = R.drawable.options_03, name = "세탁기"))
+                "04" -> data.add(OptionsItem(image = R.drawable.options_04, name = "가스레인지"))
+                "05" -> data.add(OptionsItem(image = R.drawable.options_05, name = "인덕션"))
+                "06" -> data.add(OptionsItem(image = R.drawable.options_06, name = " 전자레인지"))
+                "07" -> data.add(OptionsItem(image = R.drawable.options_07, name = "책상"))
+                "08" -> data.add(OptionsItem(image = R.drawable.options_08, name = "책장"))
+                "09" -> data.add(OptionsItem(image = R.drawable.options_09, name = " 침대"))
+                "10" -> data.add(OptionsItem(image = R.drawable.options_10, name = "옷장"))
+                "11" -> data.add(OptionsItem(image = R.drawable.options_11, name = "신발장"))
+                "12" -> data.add(OptionsItem(image = R.drawable.options_12, name = "싱크대"))
+            }
+        }
+    }
+
+    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.bottom = verticalSpaceHeight
         }
     }
 

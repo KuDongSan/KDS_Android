@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -682,19 +683,72 @@
                 tools:text="송파구 잠실동 245-19" />
 
             <View
-                android:id="@+id/activity_detail_jibun_address_divider"
+                android:id="@+id/activity_detail_fourth_divider"
                 android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
+                android:layout_height="10dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/border_color_thick"
                 android:fitsSystemWindows="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/activity_detail_jibun_address_text_view"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_detail_jibun_address_content_text_view" />
 
-
             <!-- -->
+
+            <TextView
+                android:id="@+id/activity_detail_assets_options_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="옵션 정보"
+                android:textColor="@color/main_green_accent"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_fourth_divider" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/activity_detail_assets_options_title_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/ic_up"
+                android:tint="@color/main_green_accent"
+                app:layout_constraintBottom_toBottomOf="@id/activity_detail_assets_options_title_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/activity_detail_assets_options_title_text_view" />
+
+            <View
+                android:id="@+id/activity_detail_assets_options_title_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/border_color_thick"
+                android:fitsSystemWindows="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_options_title_text_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_detail_options_grid_recycler_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_assets_options_title_divider" />
+
+
+            <View
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_options_grid_recycler_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:background="@color/main_green_accent"
+                android:layout_height="150dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

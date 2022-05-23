@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/activity_detail_options_gird_item_image_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/img_temp_assets" />
+
+    <TextView
+        android:id="@+id/activity_detail_options_grid_item_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:textColor="#808080"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="@id/activity_detail_options_gird_item_image_view"
+        app:layout_constraintStart_toStartOf="@id/activity_detail_options_gird_item_image_view"
+        app:layout_constraintTop_toBottomOf="@id/activity_detail_options_gird_item_image_view"
+        tools:text="에어컨" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
