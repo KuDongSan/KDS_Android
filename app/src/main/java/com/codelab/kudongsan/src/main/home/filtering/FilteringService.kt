@@ -18,8 +18,9 @@ class FilteringService(val view: FilteringActivityView) {
             Callback<GetFilteredAssetsResponse> {
             override fun onResponse(call: Call<GetFilteredAssetsResponse>, response: Response<GetFilteredAssetsResponse>) {
 
-//                println(response.body()!!.size)
-                view.onGetFilteringSuccess(response.body() as GetFilteredAssetsResponse)
+                if (response.body() != null) {
+                    view.onGetFilteringSuccess(response.body() as GetFilteredAssetsResponse)
+                }
             }
 
             override fun onFailure(call: Call<GetFilteredAssetsResponse>, t: Throwable) {

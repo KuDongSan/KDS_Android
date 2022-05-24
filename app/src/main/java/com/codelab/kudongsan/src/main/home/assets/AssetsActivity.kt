@@ -24,6 +24,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     val scope = CoroutineScope(Dispatchers.IO)
     var data: MutableList<AssetsListData> = mutableListOf()
+    var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,9 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
 
         if (intent.getParcelableArrayListExtra<AssetsListData>("response") != null) {
+            
             data = intent.getParcelableArrayListExtra<AssetsListData>("response")!!
+
         }
 
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
@@ -77,7 +80,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     @SuppressLint("NotifyDataSetChanged")
     private fun getData(response: GetAssetsResponse) {
         val data: MutableList<AssetsListData> = data
-        var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
+
         adapter.listData = data
         binding.activityAssetsRecyclerView.adapter = adapter
         binding.activityAssetsRecyclerView.layoutManager =

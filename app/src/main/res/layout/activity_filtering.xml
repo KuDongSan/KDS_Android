@@ -4,8 +4,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".src.main.home.filtering.FilteringActivity">
+        android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_detail_title_constraint_layout"
@@ -42,28 +41,8 @@
                 app:layout_constraintStart_toEndOf="@id/activity_detail_back_button"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/activity_detail_like_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_favorite_unselected"
-                android:tint="@color/main_green_accent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--    <View-->
-<!--            android:id="@+id/activity_detail_first_divider"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="1dp"-->
-<!--            android:background="@color/border_color_thick"-->
-<!--            android:fitsSystemWindows="true"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/activity_detail_title_constraint_layout"/>-->
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_filtering_service_type_constraint_layout"
@@ -138,10 +117,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <View
             android:id="@+id/activity_detail_second_divider"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_service_type_constraint_layout"
@@ -222,7 +203,8 @@
     <View
             android:id="@+id/activity_detail_third_divider"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_sales_type_constraint_layout"
@@ -234,7 +216,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:paddingTop="5dp"
-            android:paddingBottom="5dp"
+            android:paddingBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -246,26 +228,46 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="보증금"
+                android:text="보증금( 단위: 십 만원 )"
                 android:textColor="@color/main_green_accent"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <com.jaygoo.widget.RangeSeekbar
+<!--        app:rsb_tick_mark_text_margin="20dp"-->
+<!--        app:rsb_step_auto_bonding="true"-->
+
+        <com.jaygoo.widget.RangeSeekBar
                 android:id="@+id/activity_filtering_deposit_range_seek_bar"
+                android:layout_margin="10dp"
+                app:rsb_gravity="bottom"
+                app:rsb_mode="range"
+                app:rsb_min="0"
+                app:rsb_max="500"
+                app:rsb_indicator_show_mode="showWhenTouch"
+                app:rsb_indicator_radius="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+                app:rsb_tick_mark_layout_gravity="bottom"
+                app:rsb_tick_mark_mode="other"
+                app:rsb_tick_mark_text_array="@array/deposit_values"
+                app:rsb_tick_mark_text_margin="20dp"
+
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_title_text_view"/>
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <View
             android:id="@+id/activity_detail_fourth_divider"
             android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_constraint_layout"
@@ -289,18 +291,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="방 크기(전용면적)"
+                android:text="방 크기( 전용면적, 단위: )"
                 android:textColor="@color/main_green_accent"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-        <com.jaygoo.widget.RangeSeekbar
+        <com.jaygoo.widget.RangeSeekBar
                 android:id="@+id/activity_filtering_area_range_seek_bar"
+                android:layout_margin="10dp"
+                android:layout_marginTop="12dp"
+
+                app:rsb_gravity="bottom"
+                app:rsb_mode="range"
+                app:rsb_step_auto_bonding="true"
+                app:rsb_min="0"
+                app:rsb_max="100"
+                app:rsb_indicator_show_mode="showWhenTouch"
+                app:rsb_indicator_radius="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_title_text_view"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -308,10 +321,79 @@
     <View
             android:id="@+id/activity_detail_fifth_divider"
             android:layout_width="0dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/border_color_thick"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_constraint_layout"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_filtering_distance_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@+id/activity_detail_fifth_divider">
+
+        <TextView
+                android:id="@+id/activity_filtering_distance_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="대중교통 도보 시간"
+                android:textColor="@color/main_green_accent"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <com.jaygoo.widget.RangeSeekBar
+                android:id="@+id/activity_filtering_distance_range_seek_bar"
+                android:layout_margin="10dp"
+                app:rsb_gravity="bottom"
+                app:rsb_mode="range"
+                app:rsb_step_auto_bonding="true"
+                app:rsb_min="0"
+                app:rsb_max="100"
+                app:rsb_indicator_show_mode="showWhenTouch"
+                app:rsb_indicator_radius="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintHorizontal_weight="2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="12dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_distance_title_text_view"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+            android:id="@+id/activity_detail_sixth_divider"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
-            app:layout_constraintTop_toBottomOf="@+id/activity_filtering_sales_type_constraint_layout"
+            app:layout_constraintTop_toBottomOf="@+id/activity_filtering_distance_constraint_layout"
             app:layout_constraintStart_toStartOf="parent"/>
+
+
+    <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/activity_detail_like_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/main_green_accent"
+            android:src="@drawable/common_google_signin_btn_icon_light"
+            app:layout_constraintTop_toBottomOf="@+id/activity_detail_sixth_divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
