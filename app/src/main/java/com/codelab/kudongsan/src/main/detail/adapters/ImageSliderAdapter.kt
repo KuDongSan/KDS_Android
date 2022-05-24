@@ -39,7 +39,7 @@ class ImageSliderAdapter(
         fun bindSliderImage(imageURL: String?) {
             // skeleton 사용해서 이미지 로딩 추후 바꿀것 (시간 남으면)
             // https://leveloper.tistory.com/214
-            Glide.with(context).load(imageURL).placeholder(R.drawable.place_holder_image).into(mImageView)
+            Glide.with(context).load(imageURL).placeholder(R.drawable.kudongsan_logo).into(mImageView)
         }
     }
 

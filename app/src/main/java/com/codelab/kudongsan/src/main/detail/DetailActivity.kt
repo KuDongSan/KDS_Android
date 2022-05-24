@@ -16,6 +16,7 @@ import com.codelab.kudongsan.databinding.ActivityDetailBinding
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
 import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
 import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
+import com.codelab.kudongsan.src.main.detail.models.ManageItem
 import com.codelab.kudongsan.src.main.detail.models.OptionsItem
 import com.codelab.kudongsan.src.main.home.assets.AssetsService
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
@@ -38,6 +39,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     // https://blog.naver.com/ksjmgrkks
 
     var data: MutableList<OptionsItem> = mutableListOf()
+    var manageData: MutableList<OptionsItem> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -169,6 +171,38 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 adapterSeller.notifyDataSetChanged()
             }
 
+            if (response.manageCostInc == null) {
+                manageData.clear()
+                activityDetailManageCostNoIncTextView.visibility = View.VISIBLE
+                activityDetailManageCostGridRecyclerView.visibility = View.GONE
+                activityDetailMangeCostIncTitleSubTextView.text = if(response.manageCost == 0.0) {
+                    "관리비 없음"
+                } else {
+                    "관리비 : ${response.manageCost.toInt()}만원 (전기, 가스, 수도, 인터넷, 티비 별도)"
+                }
+            }
+            else {
+                manageData.clear()
+                activityDetailManageCostNoIncTextView.visibility = View.GONE
+                activityDetailManageCostGridRecyclerView.visibility = View.VISIBLE
+                manageCostListToItem(response.manageCostInc)
+                val data: MutableList<OptionsItem> = manageData
+                var adapterSeller = OptionsItemRecyclerAdapter(this@DetailActivity)
+
+                adapterSeller.listData = data
+                binding.activityDetailManageCostGridRecyclerView.adapter = adapterSeller
+                binding.activityDetailManageCostGridRecyclerView.layoutManager = GridLayoutManager(this@DetailActivity, 4)
+                val spaceDecoration = VerticalSpaceItemDecoration(20)
+                binding.activityDetailManageCostGridRecyclerView.addItemDecoration(spaceDecoration)
+
+                adapterSeller.notifyDataSetChanged()
+
+                activityDetailMangeCostIncTitleSubTextView.text = "관리비 : ${response.manageCost.toInt()}만원 (${manageCostListToKor(response.manageCostNotInc)} 별도)"
+            }
+
+
+
+
 
         }
     }
@@ -205,6 +239,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         return newArr.joinToString(", ")
     }
 
+
     private fun roomDirectionToKor(roomDirection: String): String {
         when(roomDirection) {
             "E" -> return "동향"
@@ -235,6 +270,19 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 "10" -> data.add(OptionsItem(image = R.drawable.options_10, name = "옷장"))
                 "11" -> data.add(OptionsItem(image = R.drawable.options_11, name = "신발장"))
                 "12" -> data.add(OptionsItem(image = R.drawable.options_12, name = "싱크대"))
+            }
+        }
+    }
+
+    private fun manageCostListToItem(items: String) {
+        val arr = items.split(";")
+        arr.forEach {
+            when(it) {
+                "01" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_01, name = "전기"))
+                "02" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_03, name = "가스")) // 가스 이미지를 못찾아서 일단 이걸로 대체
+                "03" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_03, name = "수도"))
+                "04" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_04, name = "인터넷"))
+                "05" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_05, name = "티비"))
             }
         }
     }
