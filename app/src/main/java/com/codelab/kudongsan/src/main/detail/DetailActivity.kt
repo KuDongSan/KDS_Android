@@ -75,7 +75,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         Log.d("okhttp", "onGetDetailSuccess")
 
         binding.apply {
-            activityDetailTitleTextView.text = response.address.replace("서울시 ", "") // 서울시 없애고 구 동 정보만 표시
+            activityDetailTitleTextView.text =
+                response.address.replace("서울시 ", "") // 서울시 없애고 구 동 정보만 표시
             activityDetailAreaContentTextView.text =
                 "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
             activityDetailSalesTypeTextView.text = if (response.salesType == "YEARLY_RENT") {
@@ -85,29 +86,28 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             } else {
                 "매매"
             }
-            activityDetailDepositTextView.text = if(response.deposit >= 10000) {
-                if(response.monthlyRentPrice!=null) {
-                    "${response.deposit/10000}억/${response.monthlyRentPrice}"
-                }
-                else {
-                    "${response.deposit/10000}억"
+            activityDetailDepositTextView.text = if (response.deposit >= 10000) {
+                if (response.monthlyRentPrice != null) {
+                    "${response.deposit / 10000}억/${response.monthlyRentPrice}"
+                } else {
+                    "${response.deposit / 10000}억"
                 }
             } else {
                 val dec = DecimalFormat("#,###")
-                if(response.monthlyRentPrice!=null) {
+                if (response.monthlyRentPrice != null) {
                     "${dec.format(response.deposit)}/${response.monthlyRentPrice}"
-                }
-                else {
+                } else {
                     "${dec.format(response.deposit)}"
                 }
             }
             activityDetailUpdatedAtTextView.text = "${calcDate(response.updateAt)}일전"
-            activityDetailManageCostContentTextView.text = if(response.manageCost == 0.0) {
+            activityDetailItemIdTextView.text = "매물번호 ${response.itemId}"
+            activityDetailManageCostContentTextView.text = if (response.manageCost == 0.0) {
                 "없음"
             } else {
                 "${response.manageCost.toInt()}만원"
             }
-            activityDetailRoomTypeContentTextView.text = when(response.roomType.roomTypeCode) {
+            activityDetailRoomTypeContentTextView.text = when (response.roomType.roomTypeCode) {
                 "01" -> "오픈형 원룸"
                 "02" -> "분리형 원룸"
                 "03" -> "복층형 원룸"
@@ -133,39 +133,45 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             //
 
             activityDetailParkingContentTextView.text = response.parking
-            activityDetailElevatorContentTextView.text = if(response.elevator == "true") {
+            activityDetailElevatorContentTextView.text = if (response.elevator == "true") {
                 "있음"
             } else {
                 "없음"
             }
             activityDetailMoveInDateContentTextView.text = response.moveinDate
-            activityDetailManageCostTotalContentTextView.text = if(response.manageCostNotInc==null) {
-                if (response.manageCost == 0.0) {
-                    "관리비 없음"
+            activityDetailManageCostTotalContentTextView.text =
+                if (response.manageCostNotInc == null) {
+                    if (response.manageCost == 0.0) {
+                        "관리비 없음"
+                    } else {
+                        "${response.manageCost.toInt()}만원"
+                    }
+                } else {
+                    if (response.manageCost == 0.0) {
+                        "관리비 없음\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
+                    } else {
+                        "${response.manageCost.toInt()}만원\n관리비 외 사용 따라 부과\n${
+                            manageCostListToKor(
+                                response.manageCostNotInc
+                            )
+                        }"
+                    }
                 }
-                else {
-                    "${response.manageCost.toInt()}만원"
+            activityDetailRoomTypeTotalContentTextView.text =
+                when (response.roomType.roomTypeCode) {
+                    "01" -> "오픈형 원룸 (욕실 ${response.bathroomCount}개)"
+                    "02" -> "분리형 원룸 (욕실 ${response.bathroomCount}개)"
+                    "03" -> "복층형 원룸 (욕실 ${response.bathroomCount}개)"
+                    "04" -> "투룸 (욕실 ${response.bathroomCount}개)"
+                    "05" -> "쓰리룸+ (욕실 ${response.bathroomCount}개)"
+                    "06" -> "포룸+ (욕실 ${response.bathroomCount}개)"
+                    else -> "정보 없음"
                 }
-            } else {
-                if (response.manageCost == 0.0) {
-                    "관리비 없음\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
-                }
-                else {
-                    "${response.manageCost.toInt()}만원\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
-                }
-            }
-            activityDetailRoomTypeTotalContentTextView.text = when(response.roomType.roomTypeCode) {
-                "01" -> "오픈형 원룸 (욕실 ${response.bathroomCount}개)"
-                "02" -> "분리형 원룸 (욕실 ${response.bathroomCount}개)"
-                "03" -> "복층형 원룸 (욕실 ${response.bathroomCount}개)"
-                "04" -> "투룸 (욕실 ${response.bathroomCount}개)"
-                "05" -> "쓰리룸+ (욕실 ${response.bathroomCount}개)"
-                "06" -> "포룸+ (욕실 ${response.bathroomCount}개)"
-                else -> "정보 없음"
-            }
-            activityDetailAreaTotalContentTextView.text = "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
-            activityDetailRoomDirectionContentTextView.text = roomDirectionToKor(response.roomDirection)
-            activityDetailFloorContentTextView.text = if(response.floor.floorString.length != 1) {
+            activityDetailAreaTotalContentTextView.text =
+                "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
+            activityDetailRoomDirectionContentTextView.text =
+                roomDirectionToKor(response.roomDirection)
+            activityDetailFloorContentTextView.text = if (response.floor.floorString.length != 1) {
                 "${response.floor.floorString}/${response.floor.floorAll}"
             } else {
                 "${response.floor.floorString}층/${response.floor.floorAll}"
@@ -177,8 +183,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 data.clear()
                 activityDetailOptionsNoIncTextView.visibility = View.VISIBLE
                 activityDetailOptionsGridRecyclerView.visibility = View.GONE
-            }
-            else {
+            } else {
                 data.clear()
                 activityDetailOptionsNoIncTextView.visibility = View.GONE
                 activityDetailOptionsGridRecyclerView.visibility = View.VISIBLE
@@ -188,7 +193,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
                 adapterSeller.listData = data
                 binding.activityDetailOptionsGridRecyclerView.adapter = adapterSeller
-                binding.activityDetailOptionsGridRecyclerView.layoutManager = GridLayoutManager(this@DetailActivity, 4)
+                binding.activityDetailOptionsGridRecyclerView.layoutManager =
+                    GridLayoutManager(this@DetailActivity, 4)
                 val spaceDecoration = VerticalSpaceItemDecoration(20)
                 binding.activityDetailOptionsGridRecyclerView.addItemDecoration(spaceDecoration)
 
@@ -199,13 +205,12 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 manageData.clear()
                 activityDetailManageCostNoIncTextView.visibility = View.VISIBLE
                 activityDetailManageCostGridRecyclerView.visibility = View.GONE
-                activityDetailMangeCostIncTitleSubTextView.text = if(response.manageCost == 0.0) {
+                activityDetailMangeCostIncTitleSubTextView.text = if (response.manageCost == 0.0) {
                     "관리비 없음"
                 } else {
                     "관리비 : ${response.manageCost.toInt()}만원 (전기, 가스, 수도, 인터넷, 티비 별도)"
                 }
-            }
-            else {
+            } else {
                 manageData.clear()
                 activityDetailManageCostNoIncTextView.visibility = View.GONE
                 activityDetailManageCostGridRecyclerView.visibility = View.VISIBLE
@@ -215,20 +220,25 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
                 adapterSeller.listData = data
                 binding.activityDetailManageCostGridRecyclerView.adapter = adapterSeller
-                binding.activityDetailManageCostGridRecyclerView.layoutManager = GridLayoutManager(this@DetailActivity, 4)
+                binding.activityDetailManageCostGridRecyclerView.layoutManager =
+                    GridLayoutManager(this@DetailActivity, 4)
                 val spaceDecoration = VerticalSpaceItemDecoration(20)
                 binding.activityDetailManageCostGridRecyclerView.addItemDecoration(spaceDecoration)
 
                 adapterSeller.notifyDataSetChanged()
 
-                activityDetailMangeCostIncTitleSubTextView.text = "관리비 : ${response.manageCost.toInt()}만원 (${manageCostListToKor(response.manageCostNotInc)} 별도)"
+                activityDetailMangeCostIncTitleSubTextView.text =
+                    "관리비 : ${response.manageCost.toInt()}만원 (${manageCostListToKor(response.manageCostNotInc)} 별도)"
             }
 
             activityDetailNearSubwaysContentTextView.text = getSubwaysNameList(response.subways)
-            activityDetailDescriptionContentTextView.text = response.description.substring(0 until (response.description.length - 26)) // regex 사용해서 바꾸는게 더 안전할 듯
+            activityDetailDescriptionContentTextView.text =
+                response.description.substring(0 until (response.description.length - 26)) // regex 사용해서 바꾸는게 더 안전할 듯
 
             latitude = response.location.latitude
             longitude = response.location.longtitude
+            activityDetailLocationAddressTextView.text = response.address.replace("서울시 ", "")
+
 
         }
     }
@@ -253,7 +263,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         //showCustomToast("$arr")
         val newArr = ArrayList<String>()
         arr.forEach {
-            when(it) {
+            when (it) {
                 "01" -> newArr.add("전기")
                 "02" -> newArr.add("가스")
                 "03" -> newArr.add("수도")
@@ -267,7 +277,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
 
     private fun roomDirectionToKor(roomDirection: String): String {
-        when(roomDirection) {
+        when (roomDirection) {
             "E" -> return "동향"
             "W" -> return "서향"
             "S" -> return "남향"
@@ -283,7 +293,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     private fun optionsListToItem(options: String) {
         val arr = options.split(";")
         arr.forEach {
-            when(it) {
+            when (it) {
                 "01" -> data.add(OptionsItem(image = R.drawable.options_01, name = "에어컨"))
                 "02" -> data.add(OptionsItem(image = R.drawable.options_02, name = "냉장고"))
                 "03" -> data.add(OptionsItem(image = R.drawable.options_03, name = "세탁기"))
@@ -303,9 +313,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     private fun manageCostListToItem(items: String) {
         val arr = items.split(";")
         arr.forEach {
-            when(it) {
+            when (it) {
                 "01" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_01, name = "전기"))
-                "02" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_03, name = "가스")) // 가스 이미지를 못찾아서 일단 이걸로 대체
+                "02" -> manageData.add(
+                    OptionsItem(
+                        image = R.drawable.manage_cost_03,
+                        name = "가스"
+                    )
+                ) // 가스 이미지를 못찾아서 일단 이걸로 대체
                 "03" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_03, name = "수도"))
                 "04" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_04, name = "인터넷"))
                 "05" -> manageData.add(OptionsItem(image = R.drawable.manage_cost_05, name = "티비"))
@@ -332,8 +347,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         }
     }
 
-
-
     override fun onMapReady(map: NaverMap) {
 
         // onGetDetailSuccess 호출 후에 onMapReady 콜백 호출되어야 하는데,
@@ -348,7 +361,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             val longitude = longitude
 
             Log.d("okhttp", latitude.toString())
-            Log.d("okhttp",longitude.toString())
+            Log.d("okhttp", longitude.toString())
 
             // 초기 위치값 설정 (강남역 위,경도)
             val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
@@ -358,7 +371,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             uiSetting.isLocationButtonEnabled = false // 현위치 버튼 비활성화
             uiSetting.isZoomControlEnabled = false // 줌 버튼 비활성화
 
-            locationSource = FusedLocationSource(this@DetailActivity, LOCATION_PERMISSION_REQUEST_CODE)
+            locationSource =
+                FusedLocationSource(this@DetailActivity, LOCATION_PERMISSION_REQUEST_CODE)
             naverMap.locationSource = locationSource
 
             // 마커
