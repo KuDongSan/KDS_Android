@@ -6,7 +6,10 @@ import android.graphics.Color
 import android.graphics.DiscretePathEffect
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,10 +33,7 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,16 +63,16 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mapView.onCreate(savedInstanceState)
-        mapView.getMapAsync(this)
-
         val itemId = intent.getIntExtra("itemId", -1)
         DetailService(view = this).tryGetDetail(itemId = itemId)
+        mapView.getMapAsync(this)
+        Log.d("okhttp", "Oncreate getMapAsync")
     }
 
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
+        Log.d("okhttp", "onGetDetailSuccess")
 
         binding.apply {
             activityDetailTitleTextView.text = response.address.replace("서울시 ", "") // 서울시 없애고 구 동 정보만 표시
@@ -332,30 +332,44 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         }
     }
 
+
+
     override fun onMapReady(map: NaverMap) {
-        naverMap = map
 
-        val latitude = latitude
-        val longitude = longitude
+        // onGetDetailSuccess 호출 후에 onMapReady 콜백 호출되어야 하는데,
+        // 외부 라이브러리 오버라이드된 함수여서 suspend 함수로 바꾸면 안될 듯 해서 일단 임시방편으로 핸들러로 처리
+        // 추후 코드 수정할 것
 
-        // 초기 위치값 설정 (강남역 위,경도)
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
-        naverMap.moveCamera(cameraUpdate)
+        Handler(Looper.getMainLooper()).postDelayed({
+            Log.d("okhttp", "onMapReady")
+            naverMap = map
 
-        val uiSetting = naverMap.uiSettings
-        uiSetting.isLocationButtonEnabled = false // 현위치 버튼 비활성화
-        uiSetting.isZoomControlEnabled = false // 줌 버튼 비활성화
+            val latitude = latitude
+            val longitude = longitude
 
-        locationSource = FusedLocationSource(this@DetailActivity, LOCATION_PERMISSION_REQUEST_CODE)
-        naverMap.locationSource = locationSource
+            Log.d("okhttp", latitude.toString())
+            Log.d("okhttp",longitude.toString())
 
-        // 마커
-        val marker = Marker()
-        marker.position = LatLng(latitude, longitude)
-        marker.map = naverMap
-        marker.width = 130
-        marker.height = 130
-        marker.icon = OverlayImage.fromResource(R.drawable.ic_map_pin_area);
+            // 초기 위치값 설정 (강남역 위,경도)
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
+            naverMap.moveCamera(cameraUpdate)
+
+            val uiSetting = naverMap.uiSettings
+            uiSetting.isLocationButtonEnabled = false // 현위치 버튼 비활성화
+            uiSetting.isZoomControlEnabled = false // 줌 버튼 비활성화
+
+            locationSource = FusedLocationSource(this@DetailActivity, LOCATION_PERMISSION_REQUEST_CODE)
+            naverMap.locationSource = locationSource
+
+            // 마커
+            val marker = Marker()
+            marker.position = LatLng(latitude, longitude)
+            marker.map = naverMap
+            marker.width = 130
+            marker.height = 130
+            marker.icon = OverlayImage.fromResource(R.drawable.ic_map_pin_area);
+        }, 100)
+
     }
 
     companion object {
