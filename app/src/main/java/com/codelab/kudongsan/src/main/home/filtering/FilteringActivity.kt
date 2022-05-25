@@ -17,15 +17,15 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
     FilteringActivityView {
 
     val data = ArrayList<AssetsListData>()
-
     val map = mutableMapOf<String, String>()
 
     var serviceType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //TODO intent를 통해 address 받아오는 로직 구현
+        map.put("address", "광진구")
 //        val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
-//        binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         init()
 
         binding.activityDetailBackButton.setOnClickListener {
@@ -65,12 +65,10 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
             when (checkId) {
                 R.id.radioButton4 -> {
                     map.put("salesType", "MONTHLY_RENT")
-                    binding.activityFilteringDepositTitleTextView.text = "보증금( 단위: 십 만원)"
                 }
 
                 R.id.radioButton5 -> {
                     map.put("salesType", "YEARLY_RENT")
-                    binding.activityFilteringDepositTitleTextView.text = "보증금( 단위: 백 만원)"
                 }
 
                 R.id.radioButton6 -> {
@@ -79,17 +77,54 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
                 }
             }
         }
-//        binding.activityFilteringDepositRangeSeekBar.left = 0
-//        binding.activityFilteringDepositRangeSeekBar.right = 1000000
+
+        binding.radioGroup3.setOnCheckedChangeListener { group, checkId ->
+
+            when (checkId) {
+                R.id.radioButton7 -> {
+                    map.put("nearestDistance", "5")
+                }
+
+                R.id.radioButton8 -> {
+                    map.put("nearestDistance", "10")
+                }
+
+                R.id.radioButton9 -> {
+                    map.put("nearestDistance", "20")
+                }
+                R.id.radioButton10 -> {
+                    map.put("nearestDistance", "30")
+                }
+                R.id.radioButton11 -> {
+                    map.put("nearestDistance", "")
+                }
+            }
+        }
 
         binding.activityFilteringDepositRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
             override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
-                map.put("upperDeposit", (leftValue * 10).toInt().toString())
-                map.put("lowerDeposit", (rightValue * 10).toInt().toString())
+                val stringArray = resources.getStringArray(R.array.deposit_values)
 
-                println(map.get("upperDeposit"))
-                println(map.get("lowerDeposit"))
+                map.put("upperDeposit", stringArray.get(leftValue.toInt()))
+                map.put("lowerDeposit", stringArray.get(rightValue.toInt()))
+
+            }
+
+            override fun onStartTrackingTouch(view: RangeSeekBar?, isLeft: Boolean) {
+            }
+
+            override fun onStopTrackingTouch(view: RangeSeekBar?, isLeft: Boolean) {
+
+            }
+
+        })
+
+        binding.activityFilteringAreaRangeSeekBar.setOnRangeChangedListener(object :
+        OnRangeChangedListener {
+            override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
+                map.put("upperArea", (leftValue.toInt()).toString())
+                map.put("lowerArea", (rightValue.toInt()).toString())
 
             }
 
@@ -98,13 +133,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
 
             override fun onStopTrackingTouch(view: RangeSeekBar?, isLeft: Boolean) {
             }
-
         })
-
-        map.put("address", "광진구")
-        map.put("nearestDistance", "40")
-        map.put("upperArea", "10")
-        map.put("lowerArea", "40")
 
     }
 
@@ -127,8 +156,6 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
                 )
             )
         }
-
-        println(data)
         intent.putParcelableArrayListExtra("response", data)
         startActivity(intent)
 

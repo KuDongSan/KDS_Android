@@ -16,7 +16,11 @@ class FilteringService(val view: FilteringActivityView) {
 
         getFilteringRetrofitInterface.getFilteredAssets(filteredOptions).enqueue(object :
             Callback<GetFilteredAssetsResponse> {
+
+
+
             override fun onResponse(call: Call<GetFilteredAssetsResponse>, response: Response<GetFilteredAssetsResponse>) {
+
 
                 if (response.body() != null) {
                     view.onGetFilteringSuccess(response.body() as GetFilteredAssetsResponse)

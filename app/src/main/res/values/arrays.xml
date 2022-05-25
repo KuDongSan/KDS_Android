@@ -1,8 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="deposit_values">
-        <item>MIN</item>
+    <array name="view_values">
 
-        <item>MAX</item>
+        <item>최소</item>
+
+        <item>최대</item>
+
     </array>
+
+
+
+    <array name="deposit_values">
+
+
+        <item>"0"</item>
+        <item>"100"</item>
+        <item>"200"</item>
+        <item>"300"</item>
+        <item>"400"</item>
+        <item>"500"</item>
+        <item>"1000"</item>
+        <item>"1500"</item>
+        <item>"2000"</item>
+        <item>"3000"</item>
+        <item>"3500"</item>
+        <item>"4000"</item>
+        <item>"4500"</item>
+        <item>"5500"</item>
+        <item>"6000"</item>
+        <item>"6500"</item>
+        <item>"7000"</item>
+        <item>"8000"</item>
+        <item>"9000"</item>
+        <item>"10000"</item>
+        <item>"11000"</item>
+        <item>"12000"</item>
+        <item>"13000"</item>
+        <item>"14000"</item>
+        <item>"15000"</item>
+        <item>"16000"</item>
+        <item>"17000"</item>
+        <item>"18000"</item>
+        <item>"19000"</item>
+        <item>"20000"</item>
+        <item>"30000"</item>
+        <item>"35000"</item>
+        <item>"40000"</item>
+        <item>"45000"</item>
+        <item>"50000"</item>
+        <item>"100000"</item>
+    </array>
+
+
+
 </resources>
+

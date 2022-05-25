@@ -24,25 +24,19 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     val scope = CoroutineScope(Dispatchers.IO)
     var data: MutableList<AssetsListData> = mutableListOf()
-    var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
 
 
-        if (intent.getParcelableArrayListExtra<AssetsListData>("response") != null) {
-            
-            data = intent.getParcelableArrayListExtra<AssetsListData>("response")!!
-
-        }
-
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         binding.activityAssetsBackButton.setOnClickListener {
             onBackPressed()
         }
+
         AssetsService(view = this).tryGetAssets(address = address)
-        //init()
+//        init()
     }
 
 
@@ -63,7 +57,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     private fun changeIdToAddress(id: Int): String? {
         var address: String? = null
-        when(id) {
+        when (id) {
             0 -> address = "광진구"
             1 -> address = "송파구"
             2 -> address = "종로구"
@@ -79,8 +73,8 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getData(response: GetAssetsResponse) {
-        val data: MutableList<AssetsListData> = data
-
+        var data: MutableList<AssetsListData> = data
+        var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
         adapter.listData = data
         binding.activityAssetsRecyclerView.adapter = adapter
         binding.activityAssetsRecyclerView.layoutManager =
@@ -96,25 +90,35 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
             }
         }
 
-//        response.forEach { item ->
-//            data.add(
-//                AssetsListData(
-//                    item.itemId,
-//                    item.salesType,
-//                    item.serviceType,
-//                    item.image_thumbnail,
-//                    item.deposit,
-//                    item.monthlyRentPrice,
-//                    item.manageCost,
-//                    item.area,
-//                    item.address,
-//                    item.subways[0].name,
-//                    item.subways[0].description,
-//                    item.subways[0].distance
-//                )
-//            )
-//        }
-//        adapter.notifyDataSetChanged()
+        if (intent.getParcelableArrayListExtra<AssetsListData>("response") != null) {
+            adapter.listData.clear()
+
+            val response = intent.getParcelableArrayListExtra<AssetsListData>("response")!!
+            response.forEach{item ->
+                data.add(item)
+            }
+        } else {
+        response.forEach { item ->
+            data.add(
+                AssetsListData(
+                    item.itemId,
+                    item.salesType,
+                    item.serviceType,
+                    item.image_thumbnail,
+                    item.deposit,
+                    item.monthlyRentPrice,
+                    item.manageCost,
+                    item.area,
+                    item.address,
+                    item.subways[0].name,
+                    item.subways[0].description,
+                    item.subways[0].distance
+                )
+            )
+            }
+        }
+
+        adapter.notifyDataSetChanged()
 //        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
     }
 
