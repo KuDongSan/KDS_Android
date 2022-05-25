@@ -66,17 +66,20 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         val itemId = intent.getIntExtra("itemId", -1)
         DetailService(view = this).tryGetDetail(itemId = itemId)
         mapView.getMapAsync(this)
-        Log.d("okhttp", "Oncreate getMapAsync")
+//        Log.d("okhttp", "Oncreate getMapAsync")
+        binding.activityDetailBackButton.setOnClickListener {
+            onBackPressed()
+        }
     }
 
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
-        Log.d("okhttp", "onGetDetailSuccess")
+//        Log.d("okhttp", "onGetDetailSuccess")
 
         binding.apply {
-            activityDetailTitleTextView.text =
-                response.address.replace("서울시 ", "") // 서울시 없애고 구 동 정보만 표시
+            val address = response.address.replace("서울시 ", "")
+            activityDetailTitleTextView.text = address.replace("서울특별시 ", "")
             activityDetailAreaContentTextView.text =
                 "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
             activityDetailSalesTypeTextView.text = if (response.salesType == "YEARLY_RENT") {
@@ -354,14 +357,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         // 추후 코드 수정할 것
 
         Handler(Looper.getMainLooper()).postDelayed({
-            Log.d("okhttp", "onMapReady")
+//            Log.d("okhttp", "onMapReady")
             naverMap = map
 
             val latitude = latitude
             val longitude = longitude
 
-            Log.d("okhttp", latitude.toString())
-            Log.d("okhttp", longitude.toString())
+//            Log.d("okhttp", latitude.toString())
+//            Log.d("okhttp", longitude.toString())
 
             // 초기 위치값 설정 (강남역 위,경도)
             val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))

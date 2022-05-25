@@ -2,18 +2,20 @@ package com.codelab.kudongsan.src.main.home.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.codelab.kudongsan.R
 import com.codelab.kudongsan.databinding.AssetsRecyclerItemBinding
 import com.codelab.kudongsan.src.main.home.models.AssetsRecyclerViewData
 
-class AssetsRecyclerViewAdapter: RecyclerView.Adapter<AssetsRecyclerViewAdapter.Holder>() {
+class HomeFragmentViewpagerAdapter(bannerList: ArrayList<AssetsRecyclerViewData>): RecyclerView.Adapter<HomeFragmentViewpagerAdapter.Holder>() {
     interface OnItemClickListener {
         fun OnItemClick(position: Int)
     }
 
     var itemClickListener: OnItemClickListener? = null
 
-    var listData = mutableListOf<AssetsRecyclerViewData>()
+    var item = bannerList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val binding = AssetsRecyclerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,11 +24,11 @@ class AssetsRecyclerViewAdapter: RecyclerView.Adapter<AssetsRecyclerViewAdapter.
     }
 
     override fun getItemCount(): Int {
-        return listData.size
+        return Int.MAX_VALUE
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val data = listData.get(position)
+        val data = item[position%9]
         holder.setData(data)
     }
 
@@ -45,4 +47,3 @@ class AssetsRecyclerViewAdapter: RecyclerView.Adapter<AssetsRecyclerViewAdapter.
     }
 
 }
-

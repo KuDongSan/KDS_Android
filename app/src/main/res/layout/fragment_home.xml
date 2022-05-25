@@ -7,14 +7,135 @@
     android:background="#FFFFFF"
     tools:context=".src.main.home.HomeFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_home_top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fragment_home_brand_logo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="10dp"
+            android:paddingTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kudongsan_logo"
+            android:tint="@color/main_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/fragment_home_search_button"
+            style="?android:attr/editTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/main_custom_input"
+            android:drawableEnd="@drawable/ic_search"
+            android:drawableTint="#808080"
+            android:elevation="100dp"
+            android:hint="키워드로 부동산을 간편하게 검색하세요!"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/fragment_home_brand_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/fragment_home_brand_logo"
+            app:layout_constraintTop_toTopOf="@id/fragment_home_brand_logo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/fragment_home_top_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <com.codelab.kudongsan.util.NestedScrollableHost
+                android:id="@+id/fragment_home_banner_nested_scrollable_host"
+                android:layout_width="match_parent"
+                android:layout_height="550dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/image_bottom_round"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/fragment_home_banner_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/image_bottom_round" />
+
+                <LinearLayout
+                    android:id="@+id/fragment_home_see_all_linearLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="35dp"
+                    android:background="@drawable/gray_background_round"
+                    android:elevation="2dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="4dp"
+                    android:paddingTop="6dp"
+                    android:paddingRight="4dp"
+                    android:paddingBottom="6dp">
+
+                    <TextView
+                        android:id="@+id/current_banner_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="/"
+                        android:textColor="#C2C2C2"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/total_banner_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="08"
+                        android:textColor="#C2C2C2"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" | "
+                        android:textColor="#C2C2C2"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전체보기"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.codelab.kudongsan.util.NestedScrollableHost>
 
             <TextView
                 android:id="@+id/fragment_home_title_text_view"
@@ -26,7 +147,7 @@
                 android:textColor="@color/main_green_accent"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_banner_nested_scrollable_host" />
 
             <TextView
                 android:id="@+id/fragment_home_my_current_asset_text_view"
@@ -110,31 +231,31 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/fragment_home_look_around_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="80dp"
-                android:fontFamily="@font/roboto_bold"
-                android:text="다른 부동산 둘러보기"
-                android:textColor="@color/main_green_accent"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="@id/fragment_home_my_current_asset_text_view"
-                app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_constraint_layout" />
-            
-            <com.codelab.kudongsan.util.NestedScrollableHost
-                android:layout_width="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fragment_home_look_around_text_view"
-                android:layout_height="wrap_content">
+<!--            <TextView-->
+<!--                android:id="@+id/fragment_home_look_around_text_view"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="80dp"-->
+<!--                android:fontFamily="@font/roboto_bold"-->
+<!--                android:text="다른 부동산 둘러보기"-->
+<!--                android:textColor="@color/main_green_accent"-->
+<!--                android:textSize="18sp"-->
+<!--                app:layout_constraintStart_toStartOf="@id/fragment_home_my_current_asset_text_view"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/fragment_home_alert_constraint_layout" />-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/fragment_home_horizontal_assets_list_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+<!--            <com.codelab.kudongsan.util.NestedScrollableHost-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/fragment_home_look_around_text_view">-->
 
-            </com.codelab.kudongsan.util.NestedScrollableHost>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/fragment_home_horizontal_assets_list_recycler_view"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
+
+<!--            </com.codelab.kudongsan.util.NestedScrollableHost>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
