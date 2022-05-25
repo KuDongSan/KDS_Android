@@ -37,6 +37,7 @@ import kotlinx.coroutines.*
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate),
@@ -59,6 +60,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     private val mapView: MapView by lazy {
         binding.activityDetailLocationMapView
     }
+
+    val bannerImageList: ArrayList<Int> = arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -242,7 +245,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             longitude = response.location.longtitude
             activityDetailLocationAddressTextView.text = response.address.replace("서울시 ", "")
 
-
+            val imageId = (Math.random() * bannerImageList.size).toInt()
+            activityDetailBannerImageView.setBackgroundResource(bannerImageList[imageId])
         }
     }
 

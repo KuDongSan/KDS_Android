@@ -295,8 +295,7 @@
                 android:id="@+id/activity_detail_banner_image_view"
                 android:layout_width="0dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/kudongsan_banner_1"
+                tools:src="@drawable/kudongsan_banner_1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_detail_third_divider" />
