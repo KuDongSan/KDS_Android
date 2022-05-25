@@ -923,7 +923,7 @@
                 android:layout_marginEnd="15dp"
                 android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/main_green"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/activity_detail_near_subways_title_text_view"
                 app:layout_constraintTop_toBottomOf="@id/activity_detail_near_subways_title_divider"
@@ -1002,7 +1002,57 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_detail_description_content_text_view" />
 
+            <TextView
+                android:id="@+id/activity_detail_location_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="위치"
+                android:textColor="@color/main_green_accent"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@id/activity_detail_title_content_text_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_ninth_divider" />
+
+            <androidx.constraintlayout.utils.widget.ImageFilterButton
+                android:id="@+id/activity_detail_location_title_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@color/transparent"
+                android:src="@drawable/ic_up"
+                android:tint="@color/main_green_accent"
+                app:layout_constraintBottom_toBottomOf="@id/activity_detail_location_title_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/activity_detail_location_title_text_view" />
+
+            <View
+                android:id="@+id/activity_detail_location_title_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/border_color_thick"
+                android:fitsSystemWindows="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_location_title_text_view" />
+
             <!-- -->
+
+            <com.naver.maps.map.MapView
+                android:id="@+id/activity_detail_location_map_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="15dp"
+                android:translationZ="1dp"
+                app:layout_constraintDimensionRatio="w, 1:2.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_detail_location_title_divider">
+
+            </com.naver.maps.map.MapView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

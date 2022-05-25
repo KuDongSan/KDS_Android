@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.DiscretePathEffect
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +19,16 @@ import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
 import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
 import com.codelab.kudongsan.src.main.detail.models.ManageItem
 import com.codelab.kudongsan.src.main.detail.models.OptionsItem
+import com.codelab.kudongsan.src.main.detail.models.Subway
 import com.codelab.kudongsan.src.main.home.assets.AssetsService
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.MapView
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.util.FusedLocationSource
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +40,7 @@ import java.util.*
 import kotlin.math.roundToInt
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate),
-    DetailActivityView {
+    DetailActivityView, OnMapReadyCallback {
 
     // 개선해야할 사항 (2022.05.23)
     // adapter class 여러개 관리하기 힘듦 
@@ -41,17 +51,31 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     var data: MutableList<OptionsItem> = mutableListOf()
     var manageData: MutableList<OptionsItem> = mutableListOf()
 
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
+
+    private lateinit var naverMap: NaverMap
+    private lateinit var locationSource: FusedLocationSource
+    private val mapView: MapView by lazy {
+        binding.activityDetailLocationMapView
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mapView.onCreate(savedInstanceState)
+        mapView.getMapAsync(this)
+
         val itemId = intent.getIntExtra("itemId", -1)
         DetailService(view = this).tryGetDetail(itemId = itemId)
     }
+
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
 
         binding.apply {
-            activityDetailTitleTextView.text = response.address
+            activityDetailTitleTextView.text = response.address.replace("서울시 ", "") // 서울시 없애고 구 동 정보만 표시
             activityDetailAreaContentTextView.text =
                 "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
             activityDetailSalesTypeTextView.text = if (response.salesType == "YEARLY_RENT") {
@@ -200,9 +224,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 activityDetailMangeCostIncTitleSubTextView.text = "관리비 : ${response.manageCost.toInt()}만원 (${manageCostListToKor(response.manageCostNotInc)} 별도)"
             }
 
+            activityDetailNearSubwaysContentTextView.text = getSubwaysNameList(response.subways)
+            activityDetailDescriptionContentTextView.text = response.description.substring(0 until (response.description.length - 26)) // regex 사용해서 바꾸는게 더 안전할 듯
 
-
-
+            latitude = response.location.latitude
+            longitude = response.location.longtitude
 
         }
     }
@@ -287,6 +313,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         }
     }
 
+    private fun getSubwaysNameList(subways: ArrayList<Subway>): String {
+        val arr = mutableListOf<String>()
+        for (subway in subways) {
+            arr.add("${subway.name}(${subway.description})")
+        }
+        return arr.joinToString(", ")
+    }
+
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
         RecyclerView.ItemDecoration() {
 
@@ -296,6 +330,36 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         ) {
             outRect.bottom = verticalSpaceHeight
         }
+    }
+
+    override fun onMapReady(map: NaverMap) {
+        naverMap = map
+
+        val latitude = latitude
+        val longitude = longitude
+
+        // 초기 위치값 설정 (강남역 위,경도)
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
+        naverMap.moveCamera(cameraUpdate)
+
+        val uiSetting = naverMap.uiSettings
+        uiSetting.isLocationButtonEnabled = false // 현위치 버튼 비활성화
+        uiSetting.isZoomControlEnabled = false // 줌 버튼 비활성화
+
+        locationSource = FusedLocationSource(this@DetailActivity, LOCATION_PERMISSION_REQUEST_CODE)
+        naverMap.locationSource = locationSource
+
+        // 마커
+        val marker = Marker()
+        marker.position = LatLng(latitude, longitude)
+        marker.map = naverMap
+        marker.width = 130
+        marker.height = 130
+        marker.icon = OverlayImage.fromResource(R.drawable.ic_map_pin_area);
+    }
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 
 }
