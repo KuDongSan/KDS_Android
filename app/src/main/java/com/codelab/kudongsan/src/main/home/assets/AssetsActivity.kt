@@ -5,7 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
@@ -14,28 +15,56 @@ import com.codelab.kudongsan.src.main.detail.DetailActivity
 import com.codelab.kudongsan.src.main.home.assets.adapters.AssetsRecyclerAdapter
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
 import com.codelab.kudongsan.src.main.home.assets.models.GetAssetsResponse
+import com.codelab.kudongsan.src.main.home.filtering.FilteringActivity
+import com.codelab.kudongsan.src.main.home.filtering.FilteringService
+import com.codelab.kudongsan.src.main.home.filtering.models.GetFilteredAssetsResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding::inflate),
     AssetsActivityView {
 
+    private lateinit var adapter: AssetsRecyclerAdapter
+
+    private var resultLauncher: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+
+                val hashMap = it.data!!.getSerializableExtra("map") as HashMap<String, String>
+                FilteringService(view = this).tryGetFilteredAssets(filteredOptions = hashMap)
+
+            }
+        }
     val scope = CoroutineScope(Dispatchers.IO)
     val data: MutableList<AssetsListData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
+
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         binding.activityAssetsBackButton.setOnClickListener {
             onBackPressed()
         }
+
+        binding.activityFilteringButton.setOnClickListener {
+            val intent = Intent(this@AssetsActivity, FilteringActivity::class.java)
+            intent.putExtra("address", address)
+            resultLauncher.launch(intent)
+
+        }
+
+
+
         AssetsService(view = this).tryGetAssets(address = address)
         //init()
     }
 
+
+    override fun onResume() {
+
+        super.onResume()
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -54,7 +83,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     private fun changeIdToAddress(id: Int): String? {
         var address: String? = null
-        when(id) {
+        when (id) {
             0 -> address = "광진구"
             1 -> address = "송파구"
             2 -> address = "종로구"
@@ -70,8 +99,11 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getData(response: GetAssetsResponse) {
+
+        println("Cehkc!@!@!#!@#")
+
         val data: MutableList<AssetsListData> = data
-        var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
+        adapter = AssetsRecyclerAdapter(this@AssetsActivity)
         adapter.listData = data
         binding.activityAssetsRecyclerView.adapter = adapter
         binding.activityAssetsRecyclerView.layoutManager =
@@ -86,6 +118,56 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
                 startActivity(intent)
             }
         }
+
+
+
+        response.forEach { item ->
+            data.add(
+                AssetsListData(
+                    item.itemId,
+                    item.salesType,
+                    item.serviceType,
+                    item.image_thumbnail,
+                    item.deposit,
+                    item.monthlyRentPrice,
+                    item.manageCost,
+                    item.area,
+                    item.address,
+                    item.subways[0].name,
+                    item.subways[0].description,
+                    item.subways[0].distance
+                )
+            )
+        }
+//        adapter.notifyDataSetChanged()
+//        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun getData2(response: GetFilteredAssetsResponse) {
+
+
+        adapter.listData.clear()
+
+        val data: MutableList<AssetsListData> = data
+        adapter = AssetsRecyclerAdapter(this@AssetsActivity)
+        adapter.listData = data
+        binding.activityAssetsRecyclerView.adapter = adapter
+        binding.activityAssetsRecyclerView.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+
+//        adapter.notifyDataSetChanged()
+
+        adapter.listener = object : AssetsRecyclerAdapter.OnItemClickListener {
+            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
+                val intent = Intent(this@AssetsActivity, DetailActivity::class.java)
+                intent.putExtra("itemId", adapter.listData[pos].itemId)
+                startActivity(intent)
+            }
+        }
+
+
 
         response.forEach { item ->
             data.add(
@@ -114,6 +196,16 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     }
 
     override fun onGetAssetsFailure(message: String) {
+        showCustomToast("오류 : $message")
+        Log.d("okhttp", "오류 : $message")
+        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onGetFilteringSuccess(response: GetFilteredAssetsResponse) {
+        getData2(response)
+    }
+
+    override fun onGetFilteringFailure(message: String) {
         showCustomToast("오류 : $message")
         Log.d("okhttp", "오류 : $message")
         binding.activityAssetsSwipeRefreshLayout.isRefreshing = false

@@ -8,16 +8,17 @@
     tools:context=".src.main.home.assets.AssetsActivity">
 
     <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/activity_assets_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/transparent"
-        android:src="@drawable/ic_back"
-        android:tint="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/activity_assets_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_back"
+            android:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck"/>
 
     <TextView
             android:id="@+id/activity_assets_region_title_text_view"
@@ -30,6 +31,18 @@
             app:layout_constraintBottom_toBottomOf="@id/activity_assets_back_button"
             app:layout_constraintStart_toEndOf="@id/activity_assets_back_button"
             app:layout_constraintTop_toTopOf="@id/activity_assets_back_button"/>
+
+    <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/activity_filtering_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:tint="@color/main_green_accent"
+            android:src="@drawable/common_google_signin_btn_icon_light"
+            app:layout_constraintBottom_toBottomOf="@id/activity_assets_region_title_text_view"
+            app:layout_constraintStart_toEndOf="@id/activity_assets_region_title_text_view"
+
+            app:layout_constraintTop_toTopOf="@id/activity_assets_region_title_text_view"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/activity_assets_swipe_refresh_layout"

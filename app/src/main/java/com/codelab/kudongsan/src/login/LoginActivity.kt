@@ -32,8 +32,8 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
             .into(binding.activityLoginGif)
 
         binding.activityLoginKakaoLayout.setOnClickListener {
-//            startActivity(Intent(this, MainActivity::class.java))
-            startActivity(Intent(this, FilteringActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, FilteringActivity::class.java))
 
         }
         //updateKakaoLogin()

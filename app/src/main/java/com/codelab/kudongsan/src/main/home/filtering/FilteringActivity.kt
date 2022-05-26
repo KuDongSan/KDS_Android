@@ -13,15 +13,16 @@ import com.codelab.kudongsan.src.main.home.filtering.models.GetFilteredAssetsRes
 import com.jaygoo.widget.OnRangeChangedListener
 import com.jaygoo.widget.RangeSeekBar
 
-class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteringBinding::inflate),
-    FilteringActivityView {
+class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteringBinding::inflate)
+     {
 
     val data = ArrayList<AssetsListData>()
-    val map = mutableMapOf<String, String>()
+    val map = HashMap<String, String>()
 
     var serviceType = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         //TODO intent를 통해 address 받아오는 로직 구현
         map.put("address", "광진구")
@@ -33,7 +34,12 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
         }
 
         binding.activityDetailLikeButton.setOnClickListener {
-            FilteringService(view = this).tryGetFilteredAssets(map)
+
+            val intent = Intent(this, AssetsActivity::class.java)
+            intent.putExtra("map", map)
+            setResult(RESULT_OK, intent)
+            finish()
+//            FilteringService(view = this).tryGetFilteredAssets(map)
         }
 
     }
@@ -144,27 +150,32 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
     }
 
 
-    override fun onGetFilteringSuccess(response: GetFilteredAssetsResponse) {
-
-        val intent = Intent(this, AssetsActivity::class.java)
-
-        response.forEach {
-            data.add(
-                AssetsListData(
-                    it.itemId, it.salesType, it.serviceType,
-                    it.image_thumbnail, it.deposit, it.monthlyRentPrice, it.manageCost,
-                    it.area, it.address, it.subways[0].name, it.subways[0].description, it.subways[0].distance
-                )
-            )
-        }
-        intent.putParcelableArrayListExtra("response", data)
-        startActivity(intent)
-
-    }
-
-
-    override fun onGetFilteringFailure(message: String) {
-        showCustomToast("오류 : $message")
-        Log.d("okhttp", "오류 : $message")
-    }
+//    override fun onGetFilteringSuccess(response: GetFilteredAssetsResponse) {
+//
+//
+//        response.forEach {
+//            data.add(
+//                AssetsListData(
+//                    it.itemId, it.salesType, it.serviceType,
+//                    it.image_thumbnail, it.deposit, it.monthlyRentPrice, it.manageCost,
+//                    it.area, it.address, it.subways[0].name, it.subways[0].description, it.subways[0].distance
+//                )
+//            )
+//        }
+//        val intent = Intent(this, AssetsActivity::class.java)
+//
+//        intent.putParcelableArrayListExtra("response", data)
+//        setResult(RESULT_OK, intent)
+//
+//        showCustomToast("===============Check!!!!==========")
+//
+//        finish()
+//
+//    }
+//
+//
+//    override fun onGetFilteringFailure(message: String) {
+//        showCustomToast("오류 : $message")
+//        Log.d("okhttp", "오류 : $message")
+//    }
 }
