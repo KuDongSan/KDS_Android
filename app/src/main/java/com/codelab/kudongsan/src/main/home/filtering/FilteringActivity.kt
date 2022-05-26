@@ -123,6 +123,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
         binding.activityFilteringAreaRangeSeekBar.setOnRangeChangedListener(object :
         OnRangeChangedListener {
             override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
+
                 map.put("upperArea", (leftValue.toInt()).toString())
                 map.put("lowerArea", (rightValue.toInt()).toString())
 
@@ -158,7 +159,6 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
         }
         intent.putParcelableArrayListExtra("response", data)
         startActivity(intent)
-
 
     }
 

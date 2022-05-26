@@ -23,20 +23,17 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     AssetsActivityView {
 
     val scope = CoroutineScope(Dispatchers.IO)
-    var data: MutableList<AssetsListData> = mutableListOf()
+    val data: MutableList<AssetsListData> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
-
-
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         binding.activityAssetsBackButton.setOnClickListener {
             onBackPressed()
         }
-
         AssetsService(view = this).tryGetAssets(address = address)
-//        init()
+        //init()
     }
 
 
@@ -57,7 +54,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     private fun changeIdToAddress(id: Int): String? {
         var address: String? = null
-        when (id) {
+        when(id) {
             0 -> address = "광진구"
             1 -> address = "송파구"
             2 -> address = "종로구"
@@ -73,7 +70,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
     @SuppressLint("NotifyDataSetChanged")
     private fun getData(response: GetAssetsResponse) {
-        var data: MutableList<AssetsListData> = data
+        val data: MutableList<AssetsListData> = data
         var adapter = AssetsRecyclerAdapter(this@AssetsActivity)
         adapter.listData = data
         binding.activityAssetsRecyclerView.adapter = adapter
@@ -90,14 +87,6 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
             }
         }
 
-        if (intent.getParcelableArrayListExtra<AssetsListData>("response") != null) {
-            adapter.listData.clear()
-
-            val response = intent.getParcelableArrayListExtra<AssetsListData>("response")!!
-            response.forEach{item ->
-                data.add(item)
-            }
-        } else {
         response.forEach { item ->
             data.add(
                 AssetsListData(
@@ -115,10 +104,8 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
                     item.subways[0].distance
                 )
             )
-            }
         }
-
-        adapter.notifyDataSetChanged()
+//        adapter.notifyDataSetChanged()
 //        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
     }
 

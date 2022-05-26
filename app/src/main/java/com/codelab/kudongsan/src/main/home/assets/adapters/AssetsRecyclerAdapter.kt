@@ -56,7 +56,7 @@ class AssetsRecyclerAdapter(private val context: Context) :
 
         fun setData(data: AssetsListData) {
 
-            Glide.with(itemView).load("${data.image_thumbnail}?w=0&h=640").into(binding.activityAssetsImageView)
+            Glide.with(itemView).load("${data.image_thumbnail}?w=0&h=640").placeholder(R.drawable.kudongsan_logo).into(binding.activityAssetsImageView)
             binding.activityAssetsAddressTextView.text = data.address
             binding.activityAssetsPriceTextView.text = if(data.deposit >= 10000) {
                 if(data.monthlyRentPrice!=null) {
