@@ -17,7 +17,7 @@ import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreference
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.main.MainActivity
-import com.codelab.kudongsan.src.main.home.filtering.FilteringActivity
+import com.codelab.kudongsan.src.main.home.assets.filtering.FilteringActivity
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 

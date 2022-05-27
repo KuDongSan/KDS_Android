@@ -20,7 +20,7 @@
             tools:ignore="AllowBackup"
             tools:targetApi="s">
         <activity
-                android:name=".src.main.home.filtering.FilteringActivity"
+                android:name=".src.main.home.assets.filtering.FilteringActivity"
                 android:exported="true"/>
         <activity
                 android:name=".src.main.detail.DetailActivity"

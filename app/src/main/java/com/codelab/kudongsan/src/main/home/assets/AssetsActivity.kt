@@ -15,9 +15,8 @@ import com.codelab.kudongsan.src.main.detail.DetailActivity
 import com.codelab.kudongsan.src.main.home.assets.adapters.AssetsRecyclerAdapter
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
 import com.codelab.kudongsan.src.main.home.assets.models.GetAssetsResponse
-import com.codelab.kudongsan.src.main.home.filtering.FilteringActivity
-import com.codelab.kudongsan.src.main.home.filtering.FilteringService
-import com.codelab.kudongsan.src.main.home.filtering.models.GetFilteredAssetsResponse
+import com.codelab.kudongsan.src.main.home.assets.filtering.FilteringActivity
+import com.codelab.kudongsan.src.main.home.assets.filtering.FilteringService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
@@ -35,6 +34,7 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
             }
         }
+
     val scope = CoroutineScope(Dispatchers.IO)
     val data: MutableList<AssetsListData> = mutableListOf()
 
@@ -42,12 +42,15 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
         super.onCreate(savedInstanceState)
         val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
 
+        adapter = AssetsRecyclerAdapter(this@AssetsActivity)
+
         binding.activityAssetsRegionTitleTextView.text = "$address 매물"
         binding.activityAssetsBackButton.setOnClickListener {
             onBackPressed()
         }
 
         binding.activityFilteringButton.setOnClickListener {
+
             val intent = Intent(this@AssetsActivity, FilteringActivity::class.java)
             intent.putExtra("address", address)
             resultLauncher.launch(intent)
@@ -58,12 +61,6 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
 
         AssetsService(view = this).tryGetAssets(address = address)
         //init()
-    }
-
-
-    override fun onResume() {
-
-        super.onResume()
     }
 
     override fun onBackPressed() {
@@ -100,64 +97,17 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     @SuppressLint("NotifyDataSetChanged")
     private fun getData(response: GetAssetsResponse) {
 
-        println("Cehkc!@!@!#!@#")
 
         val data: MutableList<AssetsListData> = data
-        adapter = AssetsRecyclerAdapter(this@AssetsActivity)
+
+        adapter.listData.clear()
+
         adapter.listData = data
         binding.activityAssetsRecyclerView.adapter = adapter
         binding.activityAssetsRecyclerView.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         adapter.notifyDataSetChanged()
-
-        adapter.listener = object : AssetsRecyclerAdapter.OnItemClickListener {
-            override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
-                val intent = Intent(this@AssetsActivity, DetailActivity::class.java)
-                intent.putExtra("itemId", adapter.listData[pos].itemId)
-                startActivity(intent)
-            }
-        }
-
-
-
-        response.forEach { item ->
-            data.add(
-                AssetsListData(
-                    item.itemId,
-                    item.salesType,
-                    item.serviceType,
-                    item.image_thumbnail,
-                    item.deposit,
-                    item.monthlyRentPrice,
-                    item.manageCost,
-                    item.area,
-                    item.address,
-                    item.subways[0].name,
-                    item.subways[0].description,
-                    item.subways[0].distance
-                )
-            )
-        }
-//        adapter.notifyDataSetChanged()
-//        binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    private fun getData2(response: GetFilteredAssetsResponse) {
-
-
-        adapter.listData.clear()
-
-        val data: MutableList<AssetsListData> = data
-        adapter = AssetsRecyclerAdapter(this@AssetsActivity)
-        adapter.listData = data
-        binding.activityAssetsRecyclerView.adapter = adapter
-        binding.activityAssetsRecyclerView.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-
-//        adapter.notifyDataSetChanged()
 
         adapter.listener = object : AssetsRecyclerAdapter.OnItemClickListener {
             override fun onItemClick(v: View, data: AssetsListData, pos: Int) {
@@ -201,8 +151,8 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
         binding.activityAssetsSwipeRefreshLayout.isRefreshing = false
     }
 
-    override fun onGetFilteringSuccess(response: GetFilteredAssetsResponse) {
-        getData2(response)
+    override fun onGetFilteringSuccess(response: GetAssetsResponse) {
+        getData(response)
     }
 
     override fun onGetFilteringFailure(message: String) {

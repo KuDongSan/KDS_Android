@@ -1,7 +1,6 @@
 package com.codelab.kudongsan.src.main.home.assets
 
 import com.codelab.kudongsan.src.main.home.assets.models.GetAssetsResponse
-import com.codelab.kudongsan.src.main.home.filtering.models.GetFilteredAssetsResponse
 
 interface AssetsActivityView {
 
@@ -9,7 +8,7 @@ interface AssetsActivityView {
 
     fun onGetAssetsFailure(message: String)
 
-    fun onGetFilteringSuccess(response: GetFilteredAssetsResponse)
+    fun onGetFilteringSuccess(response: GetAssetsResponse)
 
     fun onGetFilteringFailure(message: String)
 

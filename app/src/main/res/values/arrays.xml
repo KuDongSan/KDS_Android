@@ -12,7 +12,6 @@
 
     <array name="deposit_values">
 
-
         <item>"0"</item>
         <item>"100"</item>
         <item>"200"</item>
@@ -48,7 +47,6 @@
         <item>"40000"</item>
         <item>"45000"</item>
         <item>"50000"</item>
-        <item>"100000"</item>
     </array>
 
 
