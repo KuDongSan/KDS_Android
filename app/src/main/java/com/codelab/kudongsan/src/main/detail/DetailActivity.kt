@@ -1,28 +1,23 @@
 package com.codelab.kudongsan.src.main.detail
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.DiscretePathEffect
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityDetailBinding
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
 import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
-import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
-import com.codelab.kudongsan.src.main.detail.models.ManageItem
-import com.codelab.kudongsan.src.main.detail.models.OptionsItem
-import com.codelab.kudongsan.src.main.detail.models.Subway
+import com.codelab.kudongsan.src.main.detail.models.*
 import com.codelab.kudongsan.src.main.home.assets.AssetsService
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -55,26 +50,33 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     var latitude: Double = 0.0
     var longitude: Double = 0.0
 
+    var itemId: Int = -1
+    var isLiked: Boolean = false
+
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private val mapView: MapView by lazy {
         binding.activityDetailLocationMapView
     }
 
-    val bannerImageList: ArrayList<Int> = arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
+    val bannerImageList: ArrayList<Int> =
+        arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val itemId = intent.getIntExtra("itemId", -1)
-        DetailService(view = this).tryGetDetail(itemId = itemId)
-        mapView.getMapAsync(this)
+        itemId = intent.getIntExtra("itemId", -1)
+        val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+
+        if (itemId != -1 && email != null) {
+            DetailService(view = this).tryGetDetail(itemId = itemId, email = email)
+            mapView.getMapAsync(this)
+        }
 //        Log.d("okhttp", "Oncreate getMapAsync")
         binding.activityDetailBackButton.setOnClickListener {
             onBackPressed()
         }
     }
-
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
@@ -247,11 +249,49 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             val imageId = (Math.random() * bannerImageList.size).toInt()
             activityDetailBannerImageView.setBackgroundResource(bannerImageList[imageId])
+
+            isLiked = response.favorite
+            setLikeButtonImage(isLiked)
+
+            binding.activityDetailLikeButton.setOnClickListener {
+                val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+                val itemId = itemId
+
+                if (email != null && itemId != -1) {
+                    DetailService(view = this@DetailActivity).tryPostInterests(
+                        postInterestsRequest = PostInterestsRequest(
+                            email,
+                            itemId
+                        )
+                    )
+                }
+            }
+
         }
     }
 
     override fun onGetDetailFailure(message: String) {
         showCustomToast("오류 : $message")
+    }
+
+    override fun onPostInterestsSuccess(responseCode: Int) {
+        if (responseCode == 201) {
+            isLiked = !isLiked
+            setLikeButtonImage(isLiked)
+        }
+    }
+
+    override fun onPostInterestsFailure(message: String) {
+        showCustomToast("오류 : $message")
+    }
+
+    private fun setLikeButtonImage(isLiked: Boolean) {
+        Log.d("isLiked", isLiked.toString())
+        if (isLiked) {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_interests_selected)
+        } else {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_favorite_unselected)
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
