@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.databinding.ActivityDetailOptionsItemRecyclerItemBinding
+import com.codelab.kudongsan.src.main.detail.models.ManageItem
 import com.codelab.kudongsan.src.main.detail.models.OptionsItem
 
 class OptionsItemRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<OptionsItemRecyclerAdapter.ItemHolder>() {
