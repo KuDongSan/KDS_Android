@@ -1,28 +1,24 @@
 package com.codelab.kudongsan.src.main.detail
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.DiscretePathEffect
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityDetailBinding
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
 import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
 import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
 import com.codelab.kudongsan.src.main.detail.models.OptionsItem
-import com.codelab.kudongsan.src.main.home.assets.AssetsService
+import com.codelab.kudongsan.src.main.detail.models.PostInterestsRequest
 import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,11 +28,16 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     DetailActivityView {
 
     var data: MutableList<OptionsItem> = mutableListOf()
+    var itemId: Int = -1
+    var isLiked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val itemId = intent.getIntExtra("itemId", -1)
-        DetailService(view = this).tryGetDetail(itemId = itemId)
+        itemId = intent.getIntExtra("itemId", -1)
+        val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+        if (itemId != -1 && email != null) {
+            DetailService(view = this).tryGetDetail(itemId = itemId, email = email)
+        }
     }
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
@@ -53,29 +54,27 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             } else {
                 "매매"
             }
-            activityDetailDepositTextView.text = if(response.deposit >= 10000) {
-                if(response.monthlyRentPrice!=null) {
-                    "${response.deposit/10000}억/${response.monthlyRentPrice}"
-                }
-                else {
-                    "${response.deposit/10000}억"
+            activityDetailDepositTextView.text = if (response.deposit >= 10000) {
+                if (response.monthlyRentPrice != null) {
+                    "${response.deposit / 10000}억/${response.monthlyRentPrice}"
+                } else {
+                    "${response.deposit / 10000}억"
                 }
             } else {
                 val dec = DecimalFormat("#,###")
-                if(response.monthlyRentPrice!=null) {
+                if (response.monthlyRentPrice != null) {
                     "${dec.format(response.deposit)}/${response.monthlyRentPrice}"
-                }
-                else {
+                } else {
                     "${dec.format(response.deposit)}"
                 }
             }
             activityDetailUpdatedAtTextView.text = "${calcDate(response.updateAt)}일전"
-            activityDetailManageCostContentTextView.text = if(response.manageCost == 0.0) {
+            activityDetailManageCostContentTextView.text = if (response.manageCost == 0.0) {
                 "없음"
             } else {
                 "${response.manageCost.toInt()}만원"
             }
-            activityDetailRoomTypeContentTextView.text = when(response.roomType.roomTypeCode) {
+            activityDetailRoomTypeContentTextView.text = when (response.roomType.roomTypeCode) {
                 "01" -> "오픈형 원룸"
                 "02" -> "분리형 원룸"
                 "03" -> "복층형 원룸"
@@ -101,28 +100,26 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             //
 
             activityDetailParkingContentTextView.text = response.parking
-            activityDetailElevatorContentTextView.text = if(response.elevator == "true") {
+            activityDetailElevatorContentTextView.text = if (response.elevator == "true") {
                 "있음"
             } else {
                 "없음"
             }
             activityDetailMoveInDateContentTextView.text = response.moveinDate
-            activityDetailManageCostTotalContentTextView.text = if(response.manageCostNotInc==null) {
+            activityDetailManageCostTotalContentTextView.text = if (response.manageCostNotInc == null) {
                 if (response.manageCost == 0.0) {
                     "관리비 없음"
-                }
-                else {
+                } else {
                     "${response.manageCost.toInt()}만원"
                 }
             } else {
                 if (response.manageCost == 0.0) {
                     "관리비 없음\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
-                }
-                else {
+                } else {
                     "${response.manageCost.toInt()}만원\n관리비 외 사용 따라 부과\n${manageCostListToKor(response.manageCostNotInc)}"
                 }
             }
-            activityDetailRoomTypeTotalContentTextView.text = when(response.roomType.roomTypeCode) {
+            activityDetailRoomTypeTotalContentTextView.text = when (response.roomType.roomTypeCode) {
                 "01" -> "오픈형 원룸 (욕실 ${response.bathroomCount}개)"
                 "02" -> "분리형 원룸 (욕실 ${response.bathroomCount}개)"
                 "03" -> "복층형 원룸 (욕실 ${response.bathroomCount}개)"
@@ -133,7 +130,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             }
             activityDetailAreaTotalContentTextView.text = "${((response.area.exclusiveArea) * 0.3025).roundToInt()}평"
             activityDetailRoomDirectionContentTextView.text = roomDirectionToKor(response.roomDirection)
-            activityDetailFloorContentTextView.text = if(response.floor.floorString.length != 1) {
+            activityDetailFloorContentTextView.text = if (response.floor.floorString.length != 1) {
                 "${response.floor.floorString}/${response.floor.floorAll}"
             } else {
                 "${response.floor.floorString}층/${response.floor.floorAll}"
@@ -145,8 +142,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             if (response.options == null) {
                 data.clear()
-            }
-            else {
+            } else {
                 data.clear()
                 optionsListToItem(response.options)
                 val data: MutableList<OptionsItem> = data
@@ -161,9 +157,22 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 adapterSeller.notifyDataSetChanged()
             }
 
+            isLiked = response.favorite
+            setLikeButtonImage(isLiked)
 
+            binding.activityDetailLikeButton.setOnClickListener {
+                val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+                val itemId = itemId
 
-
+                if (email != null && itemId != -1) {
+                    DetailService(view = this@DetailActivity).tryPostInterests(
+                        postInterestsRequest = PostInterestsRequest(
+                            email,
+                            itemId
+                        )
+                    )
+                }
+            }
 
 
         }
@@ -171,6 +180,26 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
     override fun onGetDetailFailure(message: String) {
         showCustomToast("오류 : $message")
+    }
+
+    override fun onPostInterestsSuccess(responseCode: Int) {
+        if (responseCode == 201) {
+            isLiked = !isLiked
+            setLikeButtonImage(isLiked)
+        }
+    }
+
+    override fun onPostInterestsFailure(message: String) {
+        showCustomToast("오류 : $message")
+    }
+
+    private fun setLikeButtonImage(isLiked: Boolean) {
+        Log.d("isLiked", isLiked.toString())
+        if (isLiked) {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_interests_selected)
+        } else {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_favorite_unselected)
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -189,7 +218,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         //showCustomToast("$arr")
         val newArr = ArrayList<String>()
         arr.forEach {
-            when(it) {
+            when (it) {
                 "01" -> newArr.add("전기")
                 "02" -> newArr.add("가스")
                 "03" -> newArr.add("수도")
@@ -202,7 +231,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     }
 
     private fun roomDirectionToKor(roomDirection: String): String {
-        when(roomDirection) {
+        when (roomDirection) {
             "E" -> return "동향"
             "W" -> return "서향"
             "S" -> return "남향"
@@ -218,7 +247,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     private fun optionsListToItem(options: String) {
         val arr = options.split(";")
         arr.forEach {
-            when(it) {
+            when (it) {
                 "01" -> data.add(OptionsItem(image = R.drawable.options_01, name = "에어컨"))
                 "02" -> data.add(OptionsItem(image = R.drawable.options_02, name = "냉장고"))
                 "03" -> data.add(OptionsItem(image = R.drawable.options_03, name = "세탁기"))

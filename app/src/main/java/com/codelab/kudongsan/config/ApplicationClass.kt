@@ -43,7 +43,7 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
 
         // KakaoSDK 초기화
-       KakaoSdk.init(this,"f13d02f2853b0ec4e8253d833d096f37")
+       KakaoSdk.init(this,"3dcf0f31aaeb0fd697edfbfa6dae282f")
     }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.

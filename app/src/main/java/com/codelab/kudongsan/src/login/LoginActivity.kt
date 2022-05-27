@@ -1,11 +1,16 @@
 package com.codelab.kudongsan.src.login
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_NAME
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_THUMB
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.login.models.PostLoginRequest
@@ -20,6 +25,7 @@ import com.kakao.sdk.user.UserApiClient
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginActivityView {
 
     private val TAG = LoginActivity::class.java.simpleName
+    lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,6 +88,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         user.kakaoAccount?.profile?.thumbnailImageUrl!!
                     )
                 )
+                editor = sSharedPreferences.edit()
+                editor.putString(K_USER_NAME,user.kakaoAccount?.profile?.nickname)
+                editor.putString(K_USER_ACCOUNT,user.kakaoAccount?.email )
+                //user?.kakaoAccount?.profile?.profileImageUrl
+                editor.putString(K_USER_THUMB,user.kakaoAccount?.profile?.thumbnailImageUrl)
+                editor.apply()
             }
         }
     }
