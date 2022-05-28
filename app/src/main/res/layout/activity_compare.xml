@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -133,12 +134,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="매물번호 #32"
                 android:textColor="#808080"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@id/activity_compare_left_asset_card_view"
                 app:layout_constraintStart_toStartOf="@id/activity_compare_left_asset_card_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_compare_left_asset_card_view" />
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_left_asset_card_view"
+                tools:text="매물번호 #32" />
 
             <TextView
                 android:id="@+id/activity_compare_right_item_id_text_view"
@@ -146,17 +147,91 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="매물번호 #57"
                 android:textColor="#808080"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="@id/activity_compare_right_asset_card_view"
                 app:layout_constraintStart_toStartOf="@id/activity_compare_right_asset_card_view"
-                app:layout_constraintTop_toBottomOf="@id/activity_compare_right_asset_card_view" />
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_right_asset_card_view"
+                tools:text="매물번호 #57" />
+
+            <TextView
+                android:id="@+id/activity_compare_left_asset_address_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_left_item_id_text_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_left_item_id_text_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_left_item_id_text_view"
+                tools:text="광진구 자양동" />
+
+            <TextView
+                android:id="@+id/activity_compare_right_asset_address_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_right_item_id_text_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_right_item_id_text_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_right_item_id_text_view"
+                tools:text="송파구 문정동" />
+
+            <TextView
+                android:id="@+id/activity_compare_general_overview_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="요약 설명"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_left_asset_address_text_view" />
+
+            <TextView
+                android:id="@+id/activity_compare_general_overview_content_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_general_overview_title_text_view"
+                tools:text="매물번호 #32 매물은 면적 17평, 관리비 5만원 쓰리룸+ 구조이며, 매물번호 #57 매물은 면적 16평, 관리비 없음, 쓰리룸+ 구조입니다." />
+
+            <TextView
+                android:id="@+id/activity_compare_similarity_percentage_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="유사성 분석 결과"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_general_overview_content_text_view" />
+
+            <TextView
+                android:id="@+id/activity_compare_similarity_percentage_description_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="측정 결과값은 아래의 지표값과 별도의 계산 공식에 의하여 결정됩니다.(예시)"
+                android:textColor="#808080"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_similarity_percentage_title_text_view" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
     <!--    <com.skydoves.progressview.ProgressView-->
     <!--        android:id="@+id/progressView1"-->
