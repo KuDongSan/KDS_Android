@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/activity_compare_top_layout"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/activity_compare_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_back"
+            android:tint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_compare_top_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="매물비교"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/activity_compare_top_layout_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/border_color_thick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_compare_top_layout" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_compare_top_layout_divider">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/activity_compare_left_asset_card_view"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/activity_compare_left_asset_image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_temp_assets" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/activity_compare_right_asset_card_view"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/activity_compare_right_asset_image_view"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_temp_assets" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/activity_compare_versus_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="VS"
+                android:textColor="@color/main_green_accent"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@id/activity_compare_left_asset_card_view"
+                app:layout_constraintEnd_toStartOf="@id/activity_compare_right_asset_card_view"
+                app:layout_constraintStart_toEndOf="@id/activity_compare_left_asset_card_view"
+                app:layout_constraintTop_toTopOf="@id/activity_compare_left_asset_card_view" />
+
+            <View
+                android:id="@+id/activity_compare_versus_title_upper_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/main_green_accent"
+                app:layout_constraintBottom_toTopOf="@id/activity_compare_versus_title_text_view"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_versus_title_text_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_versus_title_text_view"
+                app:layout_constraintTop_toTopOf="@id/activity_compare_left_asset_card_view" />
+
+            <View
+                android:id="@+id/activity_compare_versus_title_down_line"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/main_green_accent"
+                app:layout_constraintBottom_toBottomOf="@id/activity_compare_left_asset_card_view"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_versus_title_text_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_versus_title_text_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_versus_title_text_view" />
+
+            <TextView
+                android:id="@+id/activity_compare_left_item_id_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="매물번호 #32"
+                android:textColor="#808080"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_left_asset_card_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_left_asset_card_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_left_asset_card_view" />
+
+            <TextView
+                android:id="@+id/activity_compare_right_item_id_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="매물번호 #57"
+                android:textColor="#808080"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/activity_compare_right_asset_card_view"
+                app:layout_constraintStart_toStartOf="@id/activity_compare_right_asset_card_view"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_right_asset_card_view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <!--    <com.skydoves.progressview.ProgressView-->
+    <!--        android:id="@+id/progressView1"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/activity_compare_top_layout"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="35dp"-->
+    <!--        app:progressView_colorBackground="@color/white"-->
+    <!--        app:progressView_colorProgress="@color/util_blue"-->
+    <!--        app:progressView_progress="40"-->
+    <!--        app:progressView_min="15"-->
+    <!--        app:progressView_max="100"-->
+    <!--        app:progressView_progressFromPrevious="true"-->
+    <!--        app:progressView_autoAnimate="true"-->
+    <!--        app:progressView_radius="12dp"-->
+    <!--        app:progressView_padding="1dp"-->
+    <!--        app:progressView_labelColorInner="@color/white"-->
+    <!--        app:progressView_labelColorOuter="@color/black"-->
+    <!--        app:progressView_labelSize="13sp"-->
+    <!--        app:progressView_labelSpace="10dp"-->
+    <!--        app:progressView_labelText="achieve 65%"-->
+    <!--        app:progressView_labelTypeface="bold" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
