@@ -220,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="측정 결과값은 아래의 지표값과 별도의 계산 공식에 의하여 결정됩니다.(예시)"
+                android:text="측정 결과값은 별도의 계산 공식에 의하여 결정됩니다.(예시)"
                 android:textColor="#808080"
                 android:maxLines="1"
                 android:ellipsize="end"

@@ -7,6 +7,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -59,6 +61,19 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         binding.activityDetailLocationMapView
     }
 
+    private val snackBarOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.snack_bar_open
+        )
+    }
+    private val snackBarClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.snack_bar_close
+        )
+    }
+
     val bannerImageList: ArrayList<Int> =
         arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
 
@@ -72,9 +87,26 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             DetailService(view = this).tryGetDetail(itemId = itemId, email = email)
             mapView.getMapAsync(this)
         }
-//        Log.d("okhttp", "Oncreate getMapAsync")
+
         binding.activityDetailBackButton.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.activityDetailLikeButton.setOnClickListener {
+            val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+            val itemId = itemId
+
+            if (email != null && itemId != -1) {
+                DetailService(view = this@DetailActivity).tryPostInterests(
+                    postInterestsRequest = PostInterestsRequest(
+                        email,
+                        itemId
+                    )
+                )
+            }
+            else {
+                showCustomToast("email: $email, itemId: $itemId")
+            }
         }
     }
 
@@ -252,20 +284,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             isLiked = response.favorite
             setLikeButtonImage(isLiked)
-
-            binding.activityDetailLikeButton.setOnClickListener {
-                val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
-                val itemId = itemId
-
-                if (email != null && itemId != -1) {
-                    DetailService(view = this@DetailActivity).tryPostInterests(
-                        postInterestsRequest = PostInterestsRequest(
-                            email,
-                            itemId
-                        )
-                    )
-                }
-            }
+            showCustomToast("${response.favorite}")
 
         }
     }
@@ -278,6 +297,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         if (responseCode == 201) {
             isLiked = !isLiked
             setLikeButtonImage(isLiked)
+            showSnackBarLayout(isLiked)
         }
     }
 
@@ -286,11 +306,18 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     }
 
     private fun setLikeButtonImage(isLiked: Boolean) {
-        Log.d("isLiked", isLiked.toString())
         if (isLiked) {
             binding.activityDetailLikeButton.setImageResource(R.drawable.ic_interests_selected)
         } else {
             binding.activityDetailLikeButton.setImageResource(R.drawable.ic_favorite_unselected)
+        }
+    }
+
+    private fun showSnackBarLayout(isLiked: Boolean) {
+        if (isLiked) {
+            showSnackBar()
+        } else {
+            showSnackBarDelete()
         }
     }
 
@@ -431,6 +458,28 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             marker.icon = OverlayImage.fromResource(R.drawable.ic_map_pin_area);
         }, 100)
 
+    }
+
+    private fun showSnackBar() {
+        binding.activityDetailFavoriteSnackBar.apply {
+            visibility = View.VISIBLE
+            startAnimation(snackBarOpen)
+            Handler(Looper.getMainLooper()).postDelayed({
+                visibility = View.GONE
+                startAnimation(snackBarClose)
+            }, 3500)
+        }
+    }
+
+    private fun showSnackBarDelete() {
+        binding.activityDetailFavoriteSnackBarCancel.apply {
+            visibility = View.VISIBLE
+            startAnimation(snackBarOpen)
+            Handler(Looper.getMainLooper()).postDelayed({
+                visibility = View.GONE
+                startAnimation(snackBarClose)
+            }, 3500)
+        }
     }
 
     companion object {
