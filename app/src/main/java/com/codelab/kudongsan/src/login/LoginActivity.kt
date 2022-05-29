@@ -40,11 +40,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         Glide.with(this).load(R.drawable.home_animation_unscreen)
             .into(binding.activityLoginGif)
 
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("Hash", keyHash)
+
         binding.activityLoginKakaoLayout.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-//            startActivity(Intent(this, FilteringActivity::class.java))
-
-
             kakaoLogin()
         }
 
