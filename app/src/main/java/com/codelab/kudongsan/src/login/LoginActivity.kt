@@ -19,6 +19,8 @@ import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.login.models.PostLoginRequest
 import com.codelab.kudongsan.src.login.models.PostLoginResponse
 import com.codelab.kudongsan.src.main.MainActivity
+import com.codelab.kudongsan.src.main.home.assets.filtering.FilteringActivity
+import com.kakao.sdk.common.util.Utility
 import com.codelab.kudongsan.util.KudongsanLoadingDialog
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
@@ -37,6 +39,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
         Glide.with(this).load(R.drawable.home_animation_unscreen)
             .into(binding.activityLoginGif)
+
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("Hash", keyHash)
 
         binding.activityLoginKakaoLayout.setOnClickListener {
             kakaoLogin()

@@ -8,4 +8,9 @@ interface AssetsActivityView {
 
     fun onGetAssetsFailure(message: String)
 
+    fun onGetFilteringSuccess(response: GetAssetsResponse)
+
+    fun onGetFilteringFailure(message: String)
+
+
 }

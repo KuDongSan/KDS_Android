@@ -11,11 +11,15 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
+
         maven {
             url 'https://naver.jfrog.io/artifactory/maven/'
         }
         maven{
             url 'https://devrepo.kakao.com/nexus/content/groups/public/'
+        }
+        maven {
+            url 'https://jitpack.io'
         }
     }
 }
