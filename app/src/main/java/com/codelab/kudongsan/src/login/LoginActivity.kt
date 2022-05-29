@@ -1,28 +1,37 @@
 package com.codelab.kudongsan.src.login
 
-import android.content.ContentValues
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
+import android.view.View
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
-import com.codelab.kudongsan.config.ApplicationClass
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_NAME
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_THUMB
 import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityLoginBinding
+import com.codelab.kudongsan.src.login.models.PostLoginRequest
+import com.codelab.kudongsan.src.login.models.PostLoginResponse
 import com.codelab.kudongsan.src.main.MainActivity
 import com.codelab.kudongsan.src.main.home.assets.filtering.FilteringActivity
 import com.kakao.sdk.common.util.Utility
+import com.codelab.kudongsan.util.KudongsanLoadingDialog
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import java.sql.Types.NULL
 
 
-class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
+class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginActivityView {
+
+    private val TAG = LoginActivity::class.java.simpleName
     lateinit var editor: SharedPreferences.Editor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,84 +44,87 @@ class LoginActivity: BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::in
             startActivity(Intent(this, MainActivity::class.java))
 //            startActivity(Intent(this, FilteringActivity::class.java))
 
+
+            kakaoLogin()
         }
-        //updateKakaoLogin()
-        //initLayout()
 
     }
 
-    private fun initLayout(){
-        // 아래 두 줄을 실행해야 API 접근이 가능해서 해쉬코드를 제게 보내주시면 감사하겠습니다.
-        var keyHash = Utility.getKeyHash(this)
-        Log.i("log_gethash",keyHash)
-
-        binding.activityLoginKakaoLayout.setOnClickListener {
-            // 카카오톡이 설치되어있는지 확인하여 ture or false return 하는 함수
-            if(UserApiClient.instance.isKakaoTalkLoginAvailable(this)){
-                UserApiClient.instance.loginWithKakaoTalk(this){
-                        token, error ->
-                    if (error != null) {
-                        Log.e(ContentValues.TAG, "로그인 실패", error)
-                    }
-                    else if (token != null) {
-                        Log.i(ContentValues.TAG, "로그인 성공 ${token.accessToken}")
-                    }
-                    // 로그인 성공시 아래의 함수 호출
-                    updateKakaoLogin()
-                }
-            }else{
-                UserApiClient.instance.loginWithKakaoAccount(this){
-                        token, error ->
-                    if (error != null) {
-                        Log.e(ContentValues.TAG, "로그인 실패", error)
-                    }
-                    else if (token != null) {
-                        Log.i(ContentValues.TAG, "로그인 성공 ${token.accessToken}")
-                    }
-                    // 로그인 성공시 아래의 함수 호출
-                    updateKakaoLogin()
-                }
+    private fun kakaoLogin() {
+        // 카카오계정으로 로그인 공통 callback 구성
+        // 카카오톡으로 로그인 할 수 없어 카카오계정으로 로그인할 경우 사용됨
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e(TAG, "카카오계정으로 로그인 실패", error)
+                showCustomToast("카카오계정으로 로그인 실패")
+            } else if (token != null) {
+                Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                showCustomToast("카카오계정으로 로그인 성공")
+                loginKuDongSan()
             }
         }
-        //로그아웃버튼 리스너 => 설정화면에 추후 부착
-//        binding.logout.setOnClickListener {
-//            UserApiClient.instance.logout {
-//                updateKakaoLoginUi()
-//                return@logout
-//            }
-//        }
+
+        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
+            UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                if (error != null) {
+                    Log.e(TAG, "카카오톡으로 로그인 실패", error)
+                    showCustomToast("카카오톡으로 로그인 실패")
+
+                    // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
+                    // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        return@loginWithKakaoTalk
+                    }
+
+                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
+                    UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+                } else if (token != null) {
+                    Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    showCustomToast("카카오톡으로 로그인 성공")
+                    loginKuDongSan()
+                }
+            }
+        } else {
+            UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
+        }
     }
 
-
-    fun updateKakaoLogin() {
+    private fun loginKuDongSan() {
         UserApiClient.instance.me { user, error ->
-            // 로그인이 되어있는 경우
-            // 유저 데이터 등록 및 서버에 로그인 정보 전송예정
-            if(user !=null){
-
-                Log.d("myLog","invoke: id=" + user.id)
-                Log.d("myLog","invoke: kakao_email=" + user.kakaoAccount?.email)
-                Log.d("myLog","invoke: nickname=" + user.kakaoAccount?.profile?.nickname)
-                Log.d("myLog","invoke: hasSignedUp=" + user.hasSignedUp)
-                Log.d("myLog","invoke: properties=" + user.properties?.keys)
-
-//                user.kakaoAccount?.profile?.nickname
-//                user.kakaoAccount?.profile?.thumbnailImageUrl
-
+            if (error != null) {
+                Log.e(TAG, "사용자 정보 요청 실패", error)
+                showCustomToast("사용자 정보 요청 실패")
+            } else if (user != null) {
+                Log.i(TAG, "사용자 정보 요청 성공")
+                showCustomToast("사용자 정보 요청 성공")
+                LoginService(view = this).tryPostLogin(
+                    postLoginRequest = PostLoginRequest(
+                        user.kakaoAccount?.profile?.nickname!!,
+                        user.kakaoAccount?.email!!,
+                        user.kakaoAccount?.profile?.thumbnailImageUrl!!
+                    )
+                )
+                showLoadingDialog(this)
                 editor = sSharedPreferences.edit()
-                editor.putString(K_USER_NAME,user?.kakaoAccount?.profile?.nickname)
-                editor.putString(K_USER_ACCOUNT,user?.kakaoAccount?.email )
+                editor.putString(K_USER_NAME,user.kakaoAccount?.profile?.nickname)
+                editor.putString(K_USER_ACCOUNT,user.kakaoAccount?.email )
                 //user?.kakaoAccount?.profile?.profileImageUrl
-                editor.putString(K_USER_THUMB,user?.kakaoAccount?.profile?.thumbnailImageUrl)
+                editor.putString(K_USER_THUMB,user.kakaoAccount?.profile?.thumbnailImageUrl)
                 editor.apply()
-                val intent = Intent(this, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                startActivity(intent)
-
-            }else{
-
             }
         }
+    }
+
+    override fun onPostLoginSuccess(response: PostLoginResponse) {
+        dismissLoadingDialog()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onPostLoginFailure(message: String) {
+        dismissLoadingDialog()
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
 }

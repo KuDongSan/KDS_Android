@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.Toast
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
@@ -32,6 +34,7 @@ class HomeFragment : Fragment(), HomeFragmentView{
     private var currentPosition = 9
     private var myHandler = MyHandler()
     private val intervalTime = 4000.toLong() // 몇초 간격으로 페이지를 넘길것인지 (4000 = 4.0초)
+
 
 //    private val MIN_SCALE = 0.85f // 뷰가 몇퍼센트로 줄어들 것인지
 //    private val MIN_ALPHA = 0.5f // 어두워지는 정도를 나타낸 듯 하다.
@@ -256,4 +259,6 @@ class HomeFragment : Fragment(), HomeFragmentView{
         binding = null
         super.onDestroyView()
     }
+
+
 }

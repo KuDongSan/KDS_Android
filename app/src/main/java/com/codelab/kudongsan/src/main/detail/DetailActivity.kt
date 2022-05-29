@@ -1,28 +1,27 @@
 package com.codelab.kudongsan.src.main.detail
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.DiscretePathEffect
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
+import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityDetailBinding
+import com.codelab.kudongsan.src.main.compare.CompareActivity
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
 import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
-import com.codelab.kudongsan.src.main.detail.models.GetDetailResponse
-import com.codelab.kudongsan.src.main.detail.models.ManageItem
-import com.codelab.kudongsan.src.main.detail.models.OptionsItem
-import com.codelab.kudongsan.src.main.detail.models.Subway
+import com.codelab.kudongsan.src.main.detail.models.*
 import com.codelab.kudongsan.src.main.home.assets.AssetsService
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraUpdate
@@ -55,26 +54,69 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     var latitude: Double = 0.0
     var longitude: Double = 0.0
 
+    var itemId: Int = -1
+    var isLiked: Boolean = false
+
     private lateinit var naverMap: NaverMap
     private lateinit var locationSource: FusedLocationSource
     private val mapView: MapView by lazy {
         binding.activityDetailLocationMapView
     }
 
-    val bannerImageList: ArrayList<Int> = arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
+    private val snackBarOpen: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.snack_bar_open
+        )
+    }
+    private val snackBarClose: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.snack_bar_close
+        )
+    }
+
+    val bannerImageList: ArrayList<Int> =
+        arrayListOf(R.drawable.kudongsan_banner_1, R.drawable.kudongsan_banner_2, R.drawable.kudongsan_banner_3)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val itemId = intent.getIntExtra("itemId", -1)
-        DetailService(view = this).tryGetDetail(itemId = itemId)
-        mapView.getMapAsync(this)
-//        Log.d("okhttp", "Oncreate getMapAsync")
+        itemId = intent.getIntExtra("itemId", -1)
+        val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+
+        if (itemId != -1 && email != null) {
+            DetailService(view = this).tryGetDetail(itemId = itemId, email = email)
+            mapView.getMapAsync(this)
+        }
+
         binding.activityDetailBackButton.setOnClickListener {
             onBackPressed()
         }
-    }
 
+        binding.activityDetailLikeButton.setOnClickListener {
+            val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+            val itemId = itemId
+
+            if (email != null && itemId != -1) {
+                DetailService(view = this@DetailActivity).tryPostInterests(
+                    postInterestsRequest = PostInterestsRequest(
+                        email,
+                        itemId
+                    )
+                )
+            }
+            else {
+                showCustomToast("email: $email, itemId: $itemId")
+            }
+        }
+
+        binding.activityDetailBottomCompareButton.setOnClickListener {
+            val intent = Intent(this, CompareActivity::class.java)
+            intent.putExtra("itemId", itemId)
+            startActivity(intent)
+        }
+    }
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onGetDetailSuccess(response: GetDetailResponse) {
@@ -247,11 +289,43 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             val imageId = (Math.random() * bannerImageList.size).toInt()
             activityDetailBannerImageView.setBackgroundResource(bannerImageList[imageId])
+
+            isLiked = response.favorite
+            setLikeButtonImage(isLiked)
+
         }
     }
 
     override fun onGetDetailFailure(message: String) {
         showCustomToast("오류 : $message")
+    }
+
+    override fun onPostInterestsSuccess(responseCode: Int) {
+        if (responseCode == 201) {
+            isLiked = !isLiked
+            setLikeButtonImage(isLiked)
+            showSnackBarLayout(isLiked)
+        }
+    }
+
+    override fun onPostInterestsFailure(message: String) {
+        showCustomToast("오류 : $message")
+    }
+
+    private fun setLikeButtonImage(isLiked: Boolean) {
+        if (isLiked) {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_interests_selected)
+        } else {
+            binding.activityDetailLikeButton.setImageResource(R.drawable.ic_favorite_unselected)
+        }
+    }
+
+    private fun showSnackBarLayout(isLiked: Boolean) {
+        if (isLiked) {
+            showSnackBar()
+        } else {
+            showSnackBarDelete()
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -391,6 +465,28 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             marker.icon = OverlayImage.fromResource(R.drawable.ic_map_pin_area);
         }, 100)
 
+    }
+
+    private fun showSnackBar() {
+        binding.activityDetailFavoriteSnackBar.apply {
+            visibility = View.VISIBLE
+            startAnimation(snackBarOpen)
+            Handler(Looper.getMainLooper()).postDelayed({
+                visibility = View.GONE
+                startAnimation(snackBarClose)
+            }, 3500)
+        }
+    }
+
+    private fun showSnackBarDelete() {
+        binding.activityDetailFavoriteSnackBarCancel.apply {
+            visibility = View.VISIBLE
+            startAnimation(snackBarOpen)
+            Handler(Looper.getMainLooper()).postDelayed({
+                visibility = View.GONE
+                startAnimation(snackBarClose)
+            }, 3500)
+        }
     }
 
     companion object {
