@@ -284,7 +284,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
 
             isLiked = response.favorite
             setLikeButtonImage(isLiked)
-            showCustomToast("${response.favorite}")
 
         }
     }

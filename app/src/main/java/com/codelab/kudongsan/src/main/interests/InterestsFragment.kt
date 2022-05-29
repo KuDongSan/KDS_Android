@@ -21,13 +21,16 @@ class InterestsFragment :
     InterestsFragmentView {
 
     val data: MutableList<InterestsListData> = mutableListOf()
-
+    val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val email = sSharedPreferences.getString(K_USER_ACCOUNT, null)
-        if (email != null) {
+
+        if (email!=null) {
             InterestsService(view = this).tryGetInterests(email = email)
+        }
+        else {
+            showCustomToast("email: $email")
         }
 
     }
@@ -75,8 +78,12 @@ class InterestsFragment :
 
     override fun onGetInterestsSuccess(response: GetInterestsResponse) {
         if (response.size != 0) {
+            data.clear()
             binding.fragmentInterestsConstraintLayout.visibility = View.GONE
             getData(response)
+        }
+        else {
+            binding.fragmentInterestsConstraintLayout.visibility = View.VISIBLE
         }
     }
 
@@ -84,6 +91,13 @@ class InterestsFragment :
         showCustomToast("오류 : $message")
         Log.d("okhttp", "오류 : $message")
         binding.fragmentInterestsSwipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (email != null) {
+            InterestsService(view = this).tryGetInterests(email = email)
+        }
     }
 
 
