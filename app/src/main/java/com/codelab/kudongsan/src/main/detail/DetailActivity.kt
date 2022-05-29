@@ -1,6 +1,7 @@
 package com.codelab.kudongsan.src.main.detail
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
@@ -17,6 +18,7 @@ import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
 import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityDetailBinding
+import com.codelab.kudongsan.src.main.compare.CompareActivity
 import com.codelab.kudongsan.src.main.detail.adapters.ImageSliderAdapter
 import com.codelab.kudongsan.src.main.detail.adapters.OptionsItemRecyclerAdapter
 import com.codelab.kudongsan.src.main.detail.models.*
@@ -107,6 +109,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             else {
                 showCustomToast("email: $email, itemId: $itemId")
             }
+        }
+
+        binding.activityDetailBottomCompareButton.setOnClickListener {
+            startActivity(Intent(this, CompareActivity::class.java))
         }
     }
 

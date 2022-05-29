@@ -89,7 +89,7 @@ class InterestsFragment :
 
     override fun onGetInterestsFailure(message: String) {
         showCustomToast("오류 : $message")
-        Log.d("okhttp", "오류 : $message")
+        //Log.d("okhttp", "오류 : $message")
         binding.fragmentInterestsSwipeRefreshLayout.isRefreshing = false
     }
 
