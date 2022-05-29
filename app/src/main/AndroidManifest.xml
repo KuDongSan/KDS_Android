@@ -41,6 +41,13 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
 
+        </activity>
+        <activity
+            android:name="com.codelab.kudongsan.src.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor"
+            android:theme="@style/AppTheme.NoActionBar" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,11 +55,6 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name="com.codelab.kudongsan.src.splash.SplashActivity"
-            android:exported="true"
-            android:screenOrientation="fullSensor"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.codelab.kudongsan.src.main.MainActivity"
             android:screenOrientation="fullSensor"

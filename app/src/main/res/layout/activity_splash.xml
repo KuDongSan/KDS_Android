@@ -8,9 +8,12 @@
     tools:context=".src.splash.SplashActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/kumpare_main_logo"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/ku_logo_dialog"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

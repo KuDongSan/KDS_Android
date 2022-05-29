@@ -3,7 +3,10 @@ package com.codelab.kudongsan.src.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
@@ -16,10 +19,12 @@ import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.login.models.PostLoginRequest
 import com.codelab.kudongsan.src.login.models.PostLoginResponse
 import com.codelab.kudongsan.src.main.MainActivity
+import com.codelab.kudongsan.util.KudongsanLoadingDialog
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import java.sql.Types.NULL
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate), LoginActivityView {
@@ -45,8 +50,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
             if (error != null) {
                 Log.e(TAG, "카카오계정으로 로그인 실패", error)
+                showCustomToast("카카오계정으로 로그인 실패")
             } else if (token != null) {
                 Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+                showCustomToast("카카오계정으로 로그인 성공")
                 loginKuDongSan()
             }
         }
@@ -56,6 +63,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
             UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
                 if (error != null) {
                     Log.e(TAG, "카카오톡으로 로그인 실패", error)
+                    showCustomToast("카카오톡으로 로그인 실패")
 
                     // 사용자가 카카오톡 설치 후 디바이스 권한 요청 화면에서 로그인을 취소한 경우,
                     // 의도적인 로그인 취소로 보고 카카오계정으로 로그인 시도 없이 로그인 취소로 처리 (예: 뒤로 가기)
@@ -67,6 +75,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                     UserApiClient.instance.loginWithKakaoAccount(this, callback = callback)
                 } else if (token != null) {
                     Log.i(TAG, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    showCustomToast("카카오톡으로 로그인 성공")
                     loginKuDongSan()
                 }
             }
@@ -79,8 +88,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         UserApiClient.instance.me { user, error ->
             if (error != null) {
                 Log.e(TAG, "사용자 정보 요청 실패", error)
+                showCustomToast("사용자 정보 요청 실패")
             } else if (user != null) {
                 Log.i(TAG, "사용자 정보 요청 성공")
+                showCustomToast("사용자 정보 요청 성공")
                 LoginService(view = this).tryPostLogin(
                     postLoginRequest = PostLoginRequest(
                         user.kakaoAccount?.profile?.nickname!!,
@@ -88,6 +99,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
                         user.kakaoAccount?.profile?.thumbnailImageUrl!!
                     )
                 )
+                showLoadingDialog(this)
                 editor = sSharedPreferences.edit()
                 editor.putString(K_USER_NAME,user.kakaoAccount?.profile?.nickname)
                 editor.putString(K_USER_ACCOUNT,user.kakaoAccount?.email )
@@ -99,11 +111,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
     }
 
     override fun onPostLoginSuccess(response: PostLoginResponse) {
+        dismissLoadingDialog()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
     override fun onPostLoginFailure(message: String) {
+        dismissLoadingDialog()
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 

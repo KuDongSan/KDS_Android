@@ -112,7 +112,9 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         }
 
         binding.activityDetailBottomCompareButton.setOnClickListener {
-            startActivity(Intent(this, CompareActivity::class.java))
+            val intent = Intent(this, CompareActivity::class.java)
+            intent.putExtra("itemId", itemId)
+            startActivity(intent)
         }
     }
 
