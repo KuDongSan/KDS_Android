@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_compare_top_layout"
@@ -59,7 +60,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp">
+            android:padding="20dp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/activity_compare_left_asset_card_view"
@@ -263,6 +264,135 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/activity_compare_similarity_percentage_description_text_view" />
 
+            <!-- -->
+
+            <TextView
+                android:id="@+id/activity_compare_price_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="보증금 및 월세"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_similarity_percentage_text_view" />
+
+            <TextView
+                android:id="@+id/activity_compare_price_description_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="보증금은 왼쪽 매물이 오른쪽 매물보다 1000만원 낮고,\n월세는 오른쪽 매물이 왼쪽 매물보다 10만원 높아요."
+                android:textColor="#808080"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_price_title_text_view" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity_compare_price_constraint_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/compare_content_background"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_price_description_text_view">
+
+                <TextView
+                    android:id="@+id/activity_compare_price_left_asset_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="매물번호 #32"
+                    android:textColor="#808080"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_compare_price_left_asset_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="월세"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_price_left_asset_name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_price_left_asset_name_text_view" />
+
+
+                <TextView
+                    android:id="@+id/activity_compare_price_left_asset_value_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="5,000/60"
+                    android:textColor="@color/util_blue"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_price_left_asset_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_price_left_asset_title_text_view" />
+
+
+                <View
+                    android:id="@+id/activity_compare_price_standard_line"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/activity_compare_price_right_asset_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="매물번호 #57"
+                    android:textColor="#808080"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@id/activity_compare_price_standard_line"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_compare_price_right_asset_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="월세"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_price_right_asset_name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_price_right_asset_name_text_view" />
+
+
+                <TextView
+                    android:id="@+id/activity_compare_price_right_asset_value_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="6,000/70"
+                    android:textColor="@color/main_green_base"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_price_right_asset_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_price_right_asset_title_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- -->
+
             <TextView
                 android:id="@+id/activity_compare_area_title_text_view"
                 android:layout_width="wrap_content"
@@ -273,7 +403,7 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/activity_compare_similarity_percentage_progress_view" />
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_price_constraint_layout" />
 
             <TextView
                 android:id="@+id/activity_compare_area_description_text_view"
@@ -307,7 +437,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #32"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -355,7 +485,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #57"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/activity_compare_area_standard_line"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -430,7 +560,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #32"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -478,7 +608,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #57"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/activity_compare_manage_cost_standard_line"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -554,7 +684,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #32"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -590,7 +720,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:text="매물번호 #57"
                     android:textColor="#808080"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/activity_compare_room_type_standard_line"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -606,8 +736,139 @@
                     app:layout_constraintStart_toStartOf="@id/activity_compare_room_type_right_asset_name_text_view"
                     app:layout_constraintTop_toBottomOf="@id/activity_compare_room_type_right_asset_name_text_view" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- -->
+
+            <TextView
+                android:id="@+id/activity_compare_transportation_title_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="지하철"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_room_type_constraint_layout" />
+
+            <TextView
+                android:id="@+id/activity_compare_transportation_description_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="왼쪽 매물이 오른쪽 매물보다 역에서 120m 더 가까워요."
+                android:textColor="#808080"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_title_text_view" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/activity_compare_transportation_constraint_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/compare_content_background"
+                android:paddingBottom="15dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_description_text_view">
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_left_asset_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="매물번호 #32"
+                    android:textColor="#808080"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_left_asset_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="건대입구역"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_transportation_left_asset_name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_left_asset_name_text_view" />
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_left_asset_value_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="200m"
+                    android:textColor="@color/util_blue"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_transportation_left_asset_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_left_asset_title_text_view" />
+
+                <View
+                    android:id="@+id/activity_compare_transportation_standard_line"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_right_asset_name_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="매물번호 #57"
+                    android:textColor="#808080"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@id/activity_compare_transportation_standard_line"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_right_asset_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="어린이대공원역"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_transportation_right_asset_name_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_right_asset_name_text_view" />
+
+                <TextView
+                    android:id="@+id/activity_compare_transportation_right_asset_value_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="320m"
+                    android:textColor="@color/main_green_base"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_compare_transportation_right_asset_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_right_asset_title_text_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_compare_transportation_constraint_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
