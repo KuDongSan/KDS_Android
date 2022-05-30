@@ -67,96 +67,508 @@
             android:layout_height="1dp"
             android:background="@color/border_color_thick" />
 
-    <!-- 거래 유형 -->
-
-    <TextView
-            android:id="@+id/activity_filtering_service_type_title_text_view"
-            android:layout_width="wrap_content"
+    <androidx.core.widget.NestedScrollView
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_filtering_top_layout_border"
-            android:layout_marginTop="15dp"
-            android:text="거래 유형"
-            android:textSize="15sp"
-            android:fontFamily="@font/roboto_regular"
-            android:layout_marginStart="15dp"
-            android:layout_height="wrap_content" />
-
-    <TextView
-            android:id="@+id/activity_filtering_service_type_value_text_view"
-            app:layout_constraintStart_toStartOf="@id/activity_filtering_service_type_title_text_view"
-            app:layout_constraintTop_toBottomOf="@id/activity_filtering_service_type_title_text_view"
-            android:layout_marginTop="10dp"
-            android:textSize="22sp"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/main_green"
-            tools:text="월세"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    <RadioGroup
-            android:id="@+id/activity_filtering_service_type_radio_group"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@id/activity_filtering_service_type_value_text_view"
-            android:layout_marginEnd="10dp"
-            android:layout_width="0dp"
+            app:layout_constraintTop_toBottomOf="@id/activity_filtering_top_layout_border"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <RadioButton
-                android:id="@+id/activity_filtering_monthly_rent_radio_button"
-                android:text="월세"
-                android:background="@drawable/radio_selector"
-                android:textColor="@drawable/selector_radio_text"
-                android:fontFamily="@font/roboto_bold"
-                android:button="@null"
-                android:textAlignment="center"
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <RadioButton
-                android:id="@+id/activity_filtering_yearly_rent_radio_button"
-                android:text="전세"
-                android:background="@drawable/radio_selector"
-                android:textColor="@drawable/selector_radio_text"
-                android:fontFamily="@font/roboto_bold"
-                android:button="@null"
-                android:textAlignment="center"
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp" />
+            <TextView
+                    android:id="@+id/activity_filtering_service_type_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="15dp"
+                    android:text="종류"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
 
-        <RadioButton
-                android:id="@+id/activity_filtering_transaction_radio_button"
-                android:text="매매"
-                android:background="@drawable/radio_selector"
-                android:textColor="@drawable/selector_radio_text"
-                android:fontFamily="@font/roboto_bold"
-                android:button="@null"
-                android:textAlignment="center"
-                android:layout_margin="5dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="40dp" />
+            <TextView
+                    android:id="@+id/activity_filtering_service_type_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_service_type_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_service_type_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="선택"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-    </RadioGroup>
+            <RadioGroup
+                    android:id="@+id/activity_filtering_service_type_radio_group"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_service_type_value_text_view"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_one_room_radio_button"
+                        android:text="원룸"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_villa_radio_button"
+                        android:text="빌라"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_office_tel_radio_button"
+                        android:text="오피스텔"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+            </RadioGroup>
+
+            <View
+                    android:id="@+id/activity_filtering_service_type_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_service_type_radio_group"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 거래 유형 -->
+
+            <TextView
+                    android:id="@+id/activity_filtering_sales_type_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_service_type_thick_divider"
+                    android:layout_marginTop="15dp"
+                    android:text="거래 유형"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:id="@+id/activity_filtering_sales_type_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_sales_type_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_sales_type_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="선택"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <RadioGroup
+                    android:id="@+id/activity_filtering_sales_type_radio_group"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_sales_type_value_text_view"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_monthly_rent_radio_button"
+                        android:text="월세"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_yearly_rent_radio_button"
+                        android:text="전세"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_transaction_radio_button"
+                        android:text="매매"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+            </RadioGroup>
+
+            <View
+                    android:id="@+id/activity_filtering_sales_type_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_sales_type_radio_group"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!--  -->
+
+            <TextView
+                    android:id="@+id/activity_filtering_deposit_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_sales_type_thick_divider"
+                    android:layout_marginTop="15dp"
+                    android:text="보증금"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:id="@+id/activity_filtering_deposit_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_deposit_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_deposit_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="0 ~ 무제한"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/activity_filtering_deposit_range_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:rsb_gravity="bottom"
+                    app:rsb_mode="range"
+                    app:rsb_min="0"
+                    app:rsb_max="34"
+                    app:rsb_steps="34"
+                    app:rsb_step_auto_bonding="true"
+                    app:rsb_tick_mark_layout_gravity="bottom"
+                    app:rsb_tick_mark_mode="other"
+                    app:rsb_tick_mark_text_margin="20dp"
+                    app:rsb_tick_mark_text_array="@array/view_values"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_value_text_view" />
+
+            <View
+                    android:id="@+id/activity_filtering_deposit_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_range_seek_bar"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 월세 -->
+
+            <TextView
+                    android:id="@+id/activity_filtering_monthly_rent_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_deposit_thick_divider"
+                    android:layout_marginTop="15dp"
+                    android:text="월세"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:id="@+id/activity_filtering_monthly_rent_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_monthly_rent_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_monthly_rent_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="0 ~ 무제한"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/activity_filtering_monthly_rent_range_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:rsb_gravity="bottom"
+                    app:rsb_mode="range"
+                    app:rsb_min="0"
+                    app:rsb_max="36"
+                    app:rsb_steps="36"
+                    app:rsb_step_auto_bonding="true"
+                    app:rsb_tick_mark_layout_gravity="bottom"
+                    app:rsb_tick_mark_mode="other"
+                    app:rsb_tick_mark_text_margin="20dp"
+                    app:rsb_tick_mark_text_array="@array/view_values"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_monthly_rent_value_text_view" />
+
+            <View
+                    android:id="@+id/activity_filtering_monthly_rent_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_monthly_rent_range_seek_bar"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 면적 -->
+
+            <TextView
+                    android:id="@+id/activity_filtering_area_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_monthly_rent_thick_divider"
+                    android:layout_marginTop="15dp"
+                    android:text="면적"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:id="@+id/activity_filtering_area_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_area_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_area_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="0 ~ 무제한"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <com.jaygoo.widget.RangeSeekBar
+                    android:id="@+id/activity_filtering_area_range_seek_bar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:rsb_gravity="bottom"
+                    app:rsb_mode="range"
+                    app:rsb_min="0"
+                    app:rsb_max="36"
+                    app:rsb_steps="36"
+                    app:rsb_step_auto_bonding="true"
+                    app:rsb_tick_mark_layout_gravity="bottom"
+                    app:rsb_tick_mark_mode="other"
+                    app:rsb_tick_mark_text_margin="20dp"
+                    app:rsb_tick_mark_text_array="@array/view_values"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_value_text_view" />
+
+            <View
+                    android:id="@+id/activity_filtering_area_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_range_seek_bar"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- 가까운 지하철역까지의 도보 거리-->
+
+            <TextView
+                    android:id="@+id/activity_filtering_distance_title_text_view"
+                    android:layout_width="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_area_thick_divider"
+                    android:layout_marginTop="15dp"
+                    android:text="가까운 지하철역까지의 도보 거리"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="15dp"
+                    android:layout_height="wrap_content" />
+
+            <TextView
+                    android:id="@+id/activity_filtering_distance_value_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_filtering_distance_title_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_distance_title_text_view"
+                    android:layout_marginTop="10dp"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/main_green"
+                    android:text="선택"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            <RadioGroup
+                    android:id="@+id/activity_filtering_distance_radio_group"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/activity_filtering_distance_value_text_view"
+                    android:layout_marginEnd="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_within_five_minutes_radio_button"
+                        android:text="5분 이내"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_within_ten_minutes_radio_button"
+                        android:text="10분 이내"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_within_twenty_minutes_radio_button"
+                        android:text="20분 이내"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_within_thirty_minutes_radio_button"
+                        android:text="30분 이내"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+                <RadioButton
+                        android:id="@+id/activity_filtering_does_not_matter_radio_button"
+                        android:text="상관없음"
+                        android:background="@drawable/radio_selector"
+                        android:textColor="@drawable/selector_radio_text"
+                        android:fontFamily="@font/roboto_bold"
+                        android:button="@null"
+                        android:textAlignment="center"
+                        android:layout_margin="5dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="40dp" />
+
+            </RadioGroup>
+
+            <View
+                    android:id="@+id/activity_filtering_distance_thick_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/border_color_thick"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_filtering_distance_radio_group"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            <!-- -->
+
+                <View
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@color/white"
+                        app:layout_constraintTop_toBottomOf="@id/activity_filtering_distance_thick_divider"
+                        android:layout_width="0dp"
+                        android:layout_height="100dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-    <View
-            android:id="@+id/activity_filtering_service_type_thick_divider"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_filtering_apply_button"
             android:layout_width="0dp"
-            android:layout_height="10dp"
-            android:layout_marginTop="15dp"
-            android:background="@color/border_color_thick"
-            app:layout_constraintTop_toBottomOf="@+id/activity_filtering_service_type_radio_group"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/compare_radius"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <!--  -->
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="적용하기"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

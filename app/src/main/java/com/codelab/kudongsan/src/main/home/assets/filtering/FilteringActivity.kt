@@ -7,12 +7,14 @@ import androidx.appcompat.app.ActionBar
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityFilteringBinding
+import com.codelab.kudongsan.databinding.ActivityFilteringTempBinding
 import com.codelab.kudongsan.src.main.home.assets.AssetsActivity
 import com.codelab.kudongsan.src.main.home.assets.models.AssetsListData
 import com.jaygoo.widget.OnRangeChangedListener
 import com.jaygoo.widget.RangeSeekBar
+import kotlin.math.absoluteValue
 
-class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteringBinding::inflate) {
+class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFilteringTempBinding::inflate) {
 
     val data = ArrayList<AssetsListData>()
     val filteredOptions = HashMap<String, String>()
@@ -20,18 +22,14 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
 
         super.onCreate(savedInstanceState)
 
-        // 기존에 액션바 어떻게?
-        val actionBar: ActionBar? = supportActionBar
-        actionBar!!.hide()
-
         filteredOptions.put("address", intent.getStringExtra("address").toString())
         init()
 
-        binding.activityDetailBackButton.setOnClickListener {
+        binding.activityFilteringBackButton.setOnClickListener {
             onBackPressed()
         }
 
-        binding.activityDetailLikeButton.setOnClickListener {
+        binding.activityFilteringApplyButton.setOnClickListener {
 
             val intent = Intent(this, AssetsActivity::class.java)
             intent.putExtra("map", filteredOptions)
@@ -44,75 +42,107 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
 
     fun init() {
 
-        binding.serviceTypeGroup.setOnCheckedChangeListener { group, checkId ->
+        binding.activityFilteringServiceTypeRadioGroup.setOnCheckedChangeListener { group, checkId ->
 
             when (checkId) {
 
-                R.id.radioButton1 -> {
+                R.id.activity_filtering_one_room_radio_button -> {
                     filteredOptions.put("serviceType", "ONEROOM")
+                    binding.activityFilteringServiceTypeValueTextView.text = "원룸"
                 }
 
-                R.id.radioButton2 -> {
+                R.id.activity_filtering_villa_radio_button -> {
                     filteredOptions.put("serviceType", "VILLA")
+                    binding.activityFilteringServiceTypeValueTextView.text = "빌라"
                 }
 
-                R.id.radioButton3 -> {
+                R.id.activity_filtering_office_tel_radio_button -> {
                     filteredOptions.put("serviceType", "OFFICETEL")
+                    binding.activityFilteringServiceTypeValueTextView.text = "오피스텔"
                 }
             }
         }
 
-        binding.salesTypeGroup.setOnCheckedChangeListener { group, checkId ->
+        binding.activityFilteringSalesTypeRadioGroup.setOnCheckedChangeListener { group, checkId ->
 
-            binding.activityFilteringDepositConstraintLayout.visibility = View.VISIBLE
+            binding.apply{
+                activityFilteringDepositTitleTextView.visibility = View.VISIBLE
+                activityFilteringDepositValueTextView.visibility = View.VISIBLE
+                activityFilteringDepositRangeSeekBar.visibility = View.VISIBLE
+                activityFilteringDepositThickDivider.visibility = View.VISIBLE
 
-            binding.activityFilteringMonthlyRentValueTextView.visibility = View.VISIBLE
-            binding.activityFilteringMonthlyRentRangeSeekBar.visibility = View.VISIBLE
-            binding.activityFilteringMonthlyRentTitleTextView.visibility = View.VISIBLE
+                activityFilteringMonthlyRentValueTextView.visibility = View.VISIBLE
+                activityFilteringMonthlyRentRangeSeekBar.visibility = View.VISIBLE
+                activityFilteringMonthlyRentTitleTextView.visibility = View.VISIBLE
+                activityFilteringMonthlyRentThickDivider.visibility = View.VISIBLE
+            }
 
             when (checkId) {
-                R.id.radioButton4 -> {
+                R.id.activity_filtering_monthly_rent_radio_button -> {
                     filteredOptions.put("salesType", "MONTHLY_RENT")
+                    binding.apply {
+                        activityFilteringSalesTypeValueTextView.text = "월세"
+                        activityFilteringDepositTitleTextView.text = "보증금"
+                    }
                 }
 
-                R.id.radioButton5 -> {
+                R.id.activity_filtering_yearly_rent_radio_button -> {
                     filteredOptions.put("salesType", "YEARLY_RENT")
-                    binding.activityFilteringMonthlyRentValueTextView.visibility = View.GONE
-                    binding.activityFilteringMonthlyRentRangeSeekBar.visibility = View.GONE
-                    binding.activityFilteringMonthlyRentTitleTextView.visibility = View.GONE
-
+                    binding.apply {
+                        activityFilteringMonthlyRentValueTextView.visibility = View.GONE
+                        activityFilteringMonthlyRentRangeSeekBar.visibility = View.GONE
+                        activityFilteringMonthlyRentTitleTextView.visibility = View.GONE
+                        activityFilteringMonthlyRentThickDivider.visibility = View.GONE
+                        activityFilteringSalesTypeValueTextView.text = "전세"
+                        activityFilteringDepositTitleTextView.text = "전세금"
+                    }
                 }
 
-                R.id.radioButton6 -> {
+                R.id.activity_filtering_transaction_radio_button -> {
                     filteredOptions.put("salesType", "DEALING")
-                    binding.activityFilteringDepositConstraintLayout.visibility = View.GONE
+                    binding.apply{
+                        activityFilteringDepositTitleTextView.visibility = View.GONE
+                        activityFilteringDepositValueTextView.visibility = View.GONE
+                        activityFilteringDepositRangeSeekBar.visibility = View.GONE
+                        activityFilteringDepositThickDivider.visibility = View.GONE
+                        activityFilteringMonthlyRentValueTextView.visibility = View.GONE
+                        activityFilteringMonthlyRentRangeSeekBar.visibility = View.GONE
+                        activityFilteringMonthlyRentTitleTextView.visibility = View.GONE
+                        activityFilteringMonthlyRentThickDivider.visibility = View.GONE
+                        activityFilteringSalesTypeValueTextView.text = "매매"
+                    }
                 }
             }
         }
 
-        binding.nearestDistanceGroup.setOnCheckedChangeListener { group, checkId ->
+        binding.activityFilteringDistanceRadioGroup.setOnCheckedChangeListener { group, checkId ->
 
             when (checkId) {
-                R.id.radioButton7 -> {
+                R.id.activity_filtering_within_five_minutes_radio_button -> {
                     filteredOptions.put("nearestDistance", "5")
+                    binding.activityFilteringDistanceValueTextView.text = "5분 이내"
                 }
 
-                R.id.radioButton8 -> {
+                R.id.activity_filtering_within_ten_minutes_radio_button -> {
                     filteredOptions.put("nearestDistance", "10")
+                    binding.activityFilteringDistanceValueTextView.text = "10분 이내"
                 }
 
-                R.id.radioButton9 -> {
+                R.id.activity_filtering_within_twenty_minutes_radio_button -> {
                     filteredOptions.put("nearestDistance", "20")
+                    binding.activityFilteringDistanceValueTextView.text = "20분 이내"
                 }
-                R.id.radioButton10 -> {
+                R.id.activity_filtering_within_thirty_minutes_radio_button -> {
                     filteredOptions.put("nearestDistance", "30")
+                    binding.activityFilteringDistanceValueTextView.text = "30분 이내"
                 }
-                R.id.radioButton11 -> {
+                R.id.activity_filtering_does_not_matter_radio_button -> {
                     filteredOptions.put("nearestDistance", "")
+                    binding.activityFilteringDistanceValueTextView.text = "상관 없음"
                 }
             }
         }
-
+        binding.activityFilteringDepositRangeSeekBar.setProgress(0f, 34f)
         binding.activityFilteringDepositRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
             override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
@@ -163,6 +193,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
 
         })
 
+        binding.activityFilteringMonthlyRentRangeSeekBar.setProgress(0f, 36f)
         binding.activityFilteringMonthlyRentRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
             override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
@@ -196,7 +227,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringBinding>(ActivityFilteri
 
         })
 
-
+        binding.activityFilteringAreaRangeSeekBar.setProgress(0f, 36f)
         binding.activityFilteringAreaRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
             override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
