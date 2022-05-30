@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -9,7 +8,7 @@
         tools:context=".src.main.home.assets.filtering.FilteringActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/activity_detail_title_constraint_layout"
+            android:id="@+id/activity_filtering_title_constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -20,28 +19,41 @@
             app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/activity_detail_back_button"
+                android:id="@+id/activity_filtering_back_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/transparent"
-                android:src="@drawable/ic_back"
+                android:src="@drawable/ic_close"
                 android:tint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/activity_detail_title_text_view"
+                android:id="@+id/activity_filtering_title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="매물 필터"
+                android:text="필터"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/activity_detail_back_button"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/activity_filtering_back_button"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/activity_filtering_top_layout_clear_all_text_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/activity_filtering_title_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/activity_filtering_title_text_view"
+                android:layout_width="wrap_content"
+                android:text="모두 초기화"
+                android:textSize="14sp"
+                android:textColor="#808080"
+                android:fontFamily="@font/roboto_regular"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -56,7 +68,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@+id/activity_detail_title_constraint_layout">
+            app:layout_constraintTop_toBottomOf="@+id/activity_filtering_title_constraint_layout">
 
         <TextView
                 android:id="@+id/activity_filtering_service_type_title_text_view"
@@ -66,11 +78,9 @@
                 android:fontFamily="@font/roboto_bold"
                 android:text="방 종류"
                 android:textColor="@color/black"
-
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
+                app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
                 android:id="@+id/service_type_group"
@@ -90,7 +100,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton1"/>
+                    android:id="@+id/radioButton1" />
+
             <RadioButton
                     android:text="빌라"
                     android:background="@drawable/radio_selector"
@@ -102,7 +113,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton2"/>
+                    android:id="@+id/radioButton2" />
+
             <RadioButton
                     android:text="오피스텔"
                     android:background="@drawable/radio_selector"
@@ -113,7 +125,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton3"/>
+                    android:id="@+id/radioButton3" />
 
         </RadioGroup>
 
@@ -129,7 +141,7 @@
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_service_type_constraint_layout"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_filtering_distance_constraint_layout"
@@ -154,7 +166,7 @@
 
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         <RadioGroup
@@ -175,7 +187,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton7"/>
+                    android:id="@+id/radioButton7" />
+
             <RadioButton
                     android:text="10분이내"
                     android:background="@drawable/radio_selector"
@@ -187,7 +200,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton8"/>
+                    android:id="@+id/radioButton8" />
+
             <RadioButton
                     android:text="20분이내"
                     android:background="@drawable/radio_selector"
@@ -198,7 +212,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton9"/>
+                    android:id="@+id/radioButton9" />
+
             <RadioButton
                     android:text="30분이내"
                     android:background="@drawable/radio_selector"
@@ -209,7 +224,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton10"/>
+                    android:id="@+id/radioButton10" />
+
             <RadioButton
                     android:text="상관없음"
                     android:background="@drawable/radio_selector"
@@ -220,7 +236,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton11"/>
+                    android:id="@+id/radioButton11" />
 
         </RadioGroup>
 
@@ -236,7 +252,7 @@
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_distance_constraint_layout"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -259,10 +275,9 @@
                 android:fontFamily="@font/roboto_bold"
                 android:text="거래유형"
                 android:textColor="@color/black"
-
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
                 android:id="@+id/sales_type_group"
@@ -282,19 +297,20 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton4"/>
+                    android:id="@+id/radioButton4" />
+
             <RadioButton
                     android:text="전세"
                     android:background="@drawable/radio_selector"
                     android:textColor="@drawable/selector_radio_text"
                     android:button="@null"
                     android:layout_margin="5dp"
-
                     android:textAlignment="center"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton5"/>
+                    android:id="@+id/radioButton5" />
+
             <RadioButton
                     android:text="매매"
                     android:background="@drawable/radio_selector"
@@ -305,7 +321,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="25dp"
-                    android:id="@+id/radioButton6"/>
+                    android:id="@+id/radioButton6" />
 
         </RadioGroup>
 
@@ -319,7 +335,7 @@
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_sales_type_constraint_layout"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_filtering_deposit_constraint_layout"
@@ -342,44 +358,39 @@
                 android:fontFamily="@font/roboto_bold"
                 android:text="보증금(전세금)"
                 android:textColor="@color/black"
-
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
                 android:id="@+id/activity_filtering_deposit_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-
                 android:textColor="@color/main_green_accent"
                 android:layout_margin="15dp"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
+
         <com.jaygoo.widget.RangeSeekBar
                 android:id="@+id/activity_filtering_deposit_range_seek_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-
                 app:rsb_gravity="bottom"
                 app:rsb_mode="range"
                 app:rsb_min="0"
                 app:rsb_max="34"
                 app:rsb_steps="34"
                 app:rsb_step_auto_bonding="true"
-
                 app:rsb_tick_mark_layout_gravity="bottom"
                 app:rsb_tick_mark_mode="other"
                 app:rsb_tick_mark_text_margin="20dp"
                 app:rsb_tick_mark_text_array="@array/view_values"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_title_text_view"/>
+                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_title_text_view" />
 
         <TextView
                 android:id="@+id/activity_filtering_monthly_rent_title_text_view"
@@ -392,7 +403,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_range_seek_bar"/>
+                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_range_seek_bar" />
 
         <TextView
                 android:id="@+id/activity_filtering_monthly_rent_value_text_view"
@@ -401,35 +412,30 @@
                 android:fontFamily="@font/roboto_bold"
                 android:textColor="@color/main_green_accent"
                 android:layout_margin="15dp"
-
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintVertical_bias="0.6"/>
-        <com.jaygoo.widget.RangeSeekBar
+                app:layout_constraintVertical_bias="0.6" />
 
+        <com.jaygoo.widget.RangeSeekBar
                 android:id="@+id/activity_filtering_monthly_rent_range_seek_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-
                 app:rsb_gravity="bottom"
                 app:rsb_mode="range"
                 app:rsb_min="0"
                 app:rsb_max="36"
                 app:rsb_steps="36"
                 app:rsb_step_auto_bonding="true"
-
                 app:rsb_tick_mark_layout_gravity="bottom"
                 app:rsb_tick_mark_mode="other"
                 app:rsb_tick_mark_text_margin="20dp"
                 app:rsb_tick_mark_text_array="@array/view_values"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_monthly_rent_title_text_view"/>
-
+                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_monthly_rent_title_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -441,7 +447,7 @@
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_deposit_constraint_layout"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_filtering_area_constraint_layout"
@@ -465,7 +471,7 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
                 android:id="@+id/activity_filtering_area_value_text_view"
@@ -477,7 +483,7 @@
                 android:layout_margin="15dp"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         <com.jaygoo.widget.RangeSeekBar
                 android:id="@+id/activity_filtering_area_range_seek_bar"
@@ -499,7 +505,7 @@
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_title_text_view"/>
+                app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_title_text_view" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -512,8 +518,7 @@
             android:background="@color/border_color_thick"
             android:fitsSystemWindows="true"
             app:layout_constraintTop_toBottomOf="@+id/activity_filtering_area_constraint_layout"
-            app:layout_constraintStart_toStartOf="parent"/>
-
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -540,7 +545,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

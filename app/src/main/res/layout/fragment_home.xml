@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="내 부동산 시세"
+                android:text="내 부동산 등록"
                 android:textColor="@color/main_green_accent"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
