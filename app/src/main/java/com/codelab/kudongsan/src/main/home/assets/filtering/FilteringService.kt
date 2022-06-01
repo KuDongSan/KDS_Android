@@ -19,9 +19,12 @@ class FilteringService(val view: AssetsActivity) {
 
             override fun onResponse(call: Call<GetAssetsResponse>, response: Response<GetAssetsResponse>) {
 
-                if (response.body() != null) {
+                if (response.body() == null) {
+                    view.showCustomToast("조건에 맞는 매물이 없습니다. ")
+                }else {
                     view.onGetFilteringSuccess(response.body() as GetAssetsResponse)
                 }
+
             }
 
             override fun onFailure(call: Call<GetAssetsResponse>, t: Throwable) {

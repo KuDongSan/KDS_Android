@@ -15,7 +15,6 @@ import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_NAME
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_THUMB
 import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseActivity
-import com.codelab.kudongsan.databinding.ActivityLoginBinding
 import com.codelab.kudongsan.src.login.models.PostLoginRequest
 import com.codelab.kudongsan.src.login.models.PostLoginResponse
 import com.codelab.kudongsan.src.main.MainActivity

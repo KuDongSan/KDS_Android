@@ -88,6 +88,8 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
 
                 R.id.activity_filtering_yearly_rent_radio_button -> {
                     filteredOptions.put("salesType", "YEARLY_RENT")
+                    filteredOptions.remove("lowerMonthlyRent")
+                    filteredOptions.remove("upperMonthlyRent")
                     binding.apply {
                         activityFilteringMonthlyRentValueTextView.visibility = View.GONE
                         activityFilteringMonthlyRentRangeSeekBar.visibility = View.GONE
