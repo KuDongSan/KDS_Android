@@ -9,6 +9,7 @@ import com.codelab.kudongsan.databinding.AssetsRecyclerItemBinding
 import com.codelab.kudongsan.src.main.home.models.AssetsRecyclerViewData
 
 class HomeFragmentViewpagerAdapter(bannerList: ArrayList<AssetsRecyclerViewData>): RecyclerView.Adapter<HomeFragmentViewpagerAdapter.Holder>() {
+
     interface OnItemClickListener {
         fun OnItemClick(position: Int)
     }

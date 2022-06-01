@@ -14,7 +14,8 @@ import com.jaygoo.widget.OnRangeChangedListener
 import com.jaygoo.widget.RangeSeekBar
 import kotlin.math.absoluteValue
 
-class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFilteringTempBinding::inflate) {
+class FilteringActivity :
+    BaseActivity<ActivityFilteringBinding>(ActivityFilteringBinding::inflate) {
 
     val data = ArrayList<AssetsListData>()
     val filteredOptions = HashMap<String, String>()
@@ -30,14 +31,32 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
         }
 
         binding.activityFilteringApplyButton.setOnClickListener {
-
             val intent = Intent(this, AssetsActivity::class.java)
             intent.putExtra("map", filteredOptions)
             setResult(RESULT_OK, intent)
             finish()
-
         }
 
+        binding.activityFilteringTopLayoutClearAllTextView.setOnClickListener {
+            clearAllValues()
+        }
+
+    }
+
+    private fun clearAllValues() {
+        showCustomToast("설정 값이 모두 초기화 됩니다.")
+        binding.apply {
+            activityFilteringServiceTypeRadioGroup.clearCheck()
+            activityFilteringServiceTypeValueTextView.text = "선택"
+            activityFilteringSalesTypeRadioGroup.clearCheck()
+            activityFilteringSalesTypeValueTextView.text = "선택"
+            activityFilteringDepositTitleTextView.text = "보증금"
+            activityFilteringDistanceRadioGroup.clearCheck()
+            activityFilteringDistanceValueTextView.text = "선택"
+            activityFilteringDepositRangeSeekBar.setProgress(0f, 34f)
+            activityFilteringMonthlyRentRangeSeekBar.setProgress(0f, 36f)
+            activityFilteringAreaRangeSeekBar.setProgress(0f, 36f)
+        }
     }
 
     fun init() {
@@ -65,7 +84,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
 
         binding.activityFilteringSalesTypeRadioGroup.setOnCheckedChangeListener { group, checkId ->
 
-            binding.apply{
+            binding.apply {
                 activityFilteringDepositTitleTextView.visibility = View.VISIBLE
                 activityFilteringDepositValueTextView.visibility = View.VISIBLE
                 activityFilteringDepositRangeSeekBar.visibility = View.VISIBLE
@@ -100,7 +119,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
 
                 R.id.activity_filtering_transaction_radio_button -> {
                     filteredOptions.put("salesType", "DEALING")
-                    binding.apply{
+                    binding.apply {
                         activityFilteringDepositTitleTextView.visibility = View.GONE
                         activityFilteringDepositValueTextView.visibility = View.GONE
                         activityFilteringDepositRangeSeekBar.visibility = View.GONE
@@ -137,7 +156,7 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
                     binding.activityFilteringDistanceValueTextView.text = "30분 이내"
                 }
                 R.id.activity_filtering_does_not_matter_radio_button -> {
-                    filteredOptions.put("nearestDistance", "")
+                    filteredOptions.remove("nearestDistance")
                     binding.activityFilteringDistanceValueTextView.text = "상관 없음"
                 }
             }
@@ -145,7 +164,12 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
         binding.activityFilteringDepositRangeSeekBar.setProgress(0f, 34f)
         binding.activityFilteringDepositRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
-            override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
+            override fun onRangeChanged(
+                view: RangeSeekBar?,
+                leftValue: Float,
+                rightValue: Float,
+                isFromUser: Boolean
+            ) {
                 val stringArray = resources.getStringArray(R.array.deposit_values)
 
                 var upperDeposit = stringArray.get(leftValue.toInt())
@@ -153,16 +177,22 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
 
 
                 if (upperDeposit.length > 4) {
-                    upperDeposit = upperDeposit.get(0) + "억 " + upperDeposit.subSequence(1, upperDeposit.length) +"만 원"
-                }else {
-                    upperDeposit = upperDeposit +"만 원"
+                    upperDeposit = upperDeposit.get(0) + "억 " + upperDeposit.subSequence(
+                        1,
+                        upperDeposit.length
+                    ) + "만 원"
+                } else {
+                    upperDeposit = upperDeposit + "만 원"
 
                 }
 
                 if (lowerDeposit.length > 4) {
-                    lowerDeposit = lowerDeposit.get(0) + "억 " + lowerDeposit.subSequence(1, lowerDeposit.length) +"만 원"
-                }else {
-                    lowerDeposit = lowerDeposit +"만 원"
+                    lowerDeposit = lowerDeposit.get(0) + "억 " + lowerDeposit.subSequence(
+                        1,
+                        lowerDeposit.length
+                    ) + "만 원"
+                } else {
+                    lowerDeposit = lowerDeposit + "만 원"
                 }
 
 
@@ -196,7 +226,12 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
         binding.activityFilteringMonthlyRentRangeSeekBar.setProgress(0f, 36f)
         binding.activityFilteringMonthlyRentRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
-            override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
+            override fun onRangeChanged(
+                view: RangeSeekBar?,
+                leftValue: Float,
+                rightValue: Float,
+                isFromUser: Boolean
+            ) {
 
                 var upperMonthlyRent = (leftValue.toInt() * 10).toString() + "만 원"
                 var lowerMonthlyRent = (rightValue.toInt() * 10).toString() + "만 원"
@@ -230,7 +265,12 @@ class FilteringActivity : BaseActivity<ActivityFilteringTempBinding>(ActivityFil
         binding.activityFilteringAreaRangeSeekBar.setProgress(0f, 36f)
         binding.activityFilteringAreaRangeSeekBar.setOnRangeChangedListener(object :
             OnRangeChangedListener {
-            override fun onRangeChanged(view: RangeSeekBar?, leftValue: Float, rightValue: Float, isFromUser: Boolean) {
+            override fun onRangeChanged(
+                view: RangeSeekBar?,
+                leftValue: Float,
+                rightValue: Float,
+                isFromUser: Boolean
+            ) {
 
                 var upperArea = (leftValue.toInt()).toString() + "㎡"
                 var lowerArea = (rightValue.toInt()).toString() + "㎡"

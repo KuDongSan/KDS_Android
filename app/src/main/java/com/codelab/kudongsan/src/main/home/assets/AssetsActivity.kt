@@ -28,10 +28,8 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
     private var resultLauncher: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
-
                 val hashMap = it.data!!.getSerializableExtra("map") as HashMap<String, String>
                 FilteringService(view = this).tryGetFilteredAssets(filteredOptions = hashMap)
-
             }
         }
 
