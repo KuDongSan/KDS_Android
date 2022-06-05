@@ -14,4 +14,8 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:navigationBarColor">@color/white</item>
     </style>
+
+    <style name="EditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textSelectHandle">@color/main_green_base</item>
+    </style>
 </resources>

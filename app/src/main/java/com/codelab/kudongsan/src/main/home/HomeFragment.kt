@@ -25,6 +25,7 @@ import com.codelab.kudongsan.src.main.home.adapters.AssetsRecyclerViewAdapter
 import com.codelab.kudongsan.src.main.home.adapters.HomeFragmentViewpagerAdapter
 import com.codelab.kudongsan.src.main.home.assets.AssetsActivity
 import com.codelab.kudongsan.src.main.home.models.AssetsRecyclerViewData
+import com.codelab.kudongsan.src.main.register.RegisterActivity
 
 class HomeFragment : Fragment(), HomeFragmentView{
 
@@ -190,8 +191,14 @@ class HomeFragment : Fragment(), HomeFragmentView{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        initRecyclerView()
         setBannerViewPager()
+        binding?.fragmentHomeRegisterMyAssetButton?.setOnClickListener{
+            startActivity(Intent(requireActivity(), RegisterActivity::class.java))
+            (activity as MainActivity).overridePendingTransition(
+                R.anim.activity_fade_in,
+                R.anim.activity_fade_out
+            )
+        }
     }
 
     override fun onCreateView(

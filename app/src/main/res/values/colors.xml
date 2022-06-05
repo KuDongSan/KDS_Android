@@ -21,5 +21,9 @@
 
     <color name="border_color_thick">#F3F3F3</color>
     <color name="box_border">#838383</color>
+    <color name="light_gray">#F8F9FA</color>
+    <color name="regular_gray">#CED4DA</color>
+    <color name="medium_gray">#808080</color>
+    <color name="dark_gray">#424242</color>
 
 </resources>

@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:padding="5dp"
+        android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/activity_register_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/transparent"
+            android:fitsSystemWindows="true"
+            android:src="@drawable/ic_back"
+            android:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/activity_register_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:fontFamily="@font/roboto_bold"
+            android:text="내 부동산 등록하기"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/activity_register_back_button"
+            app:layout_constraintStart_toEndOf="@id/activity_register_back_button"
+            app:layout_constraintTop_toTopOf="@id/activity_register_back_button" />
+
+    <TextView
+            android:id="@+id/activity_register_finish_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="완료"
+            android:textColor="@color/main_green_base"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/activity_register_title_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/activity_register_title_text" />
+
+    <View
+            android:id="@+id/activity_register_top_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="#F8F9FA"
+            android:fitsSystemWindows="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_register_back_button" />
+
+    <!-- -->
+
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/activity_register_nested_scroll_view"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_register_top_divider"
+            android:layout_height="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/activity_register_camera_layout"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:alpha="0.8"
+                    android:background="@drawable/round_gray_border"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/activity_register_camera_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        android:src="@drawable/ic_camera"
+                        android:tint="@color/main_green_base"
+                        app:layout_constraintBottom_toTopOf="@id/activity_register_camera_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                <TextView
+                        android:id="@+id/activity_register_camera_text_before"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        android:text="0/10"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_text"
+                        app:layout_constraintEnd_toEndOf="@id/activity_register_camera_image"
+                        app:layout_constraintStart_toStartOf="@id/activity_register_camera_image"
+                        app:layout_constraintTop_toTopOf="@id/activity_register_camera_text" />
+
+                <TextView
+                        android:id="@+id/activity_register_camera_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fitsSystemWindows="true"
+                        android:text="/10"
+                        android:textSize="14sp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/activity_register_camera_image"
+                        app:layout_constraintStart_toEndOf="@id/activity_register_camera_text_current"
+                        app:layout_constraintTop_toBottomOf="@id/activity_register_camera_image" />
+
+                <TextView
+                        android:id="@+id/activity_register_camera_text_current"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="1dp"
+                        android:fitsSystemWindows="true"
+                        android:text="0"
+                        android:textColor="@color/main_green_accent"
+                        android:textSize="14sp"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_text"
+                        app:layout_constraintEnd_toStartOf="@id/activity_register_camera_text"
+                        app:layout_constraintStart_toStartOf="@id/activity_register_camera_image"
+                        app:layout_constraintTop_toTopOf="@id/activity_register_camera_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_register_pictures_recycler_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_camera_layout"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_layout"
+                    app:layout_constraintStart_toEndOf="@id/activity_register_camera_layout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="15dp"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
+            <View
+                    android:id="@+id/activity_register_pictures_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_camera_layout"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_camera_layout" />
+
+            <!-- -->
+
+            <EditText
+                    android:id="@+id/activity_register_title_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:enabled="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="제목"
+                    android:inputType="text"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/regular_gray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_pictures_divider"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_pictures_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_pictures_divider"
+                    app:theme="@style/EditTextStyle" />
+
+            <View
+                    android:id="@+id/activity_register_title_edit_text_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_title_edit_text"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_title_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_title_edit_text" />
+
+            <!-- -->
+
+            <TextView
+                    android:id="@+id/activity_register_sales_type_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="거래 유형"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_title_edit_text_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_title_edit_text_divider" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_sales_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_down"
+                    android:tint="@color/dark_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_sales_type_text_view"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_title_edit_text_divider"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_sales_type_text_view" />
+
+            <View
+                    android:id="@+id/activity_register_sales_type_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_sales_type_button"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_sales_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_sales_type_text_view" />
+
+            <!-- -->
+
+            <EditText
+                    android:id="@+id/activity_register_deposit_edit_text_view"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:enabled="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="보증금 (만원)"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingStart="25dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/dark_gray"
+                    android:textColorHint="@color/regular_gray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_sales_type_divider"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_sales_type_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_sales_type_divider"
+                    app:theme="@style/EditTextStyle" />
+
+            <TextView
+                    android:id="@+id/activity_register_won_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="₩"
+                    android:textColor="@color/regular_gray"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_deposit_edit_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_deposit_edit_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_deposit_edit_text_view" />
+
+            <View
+                    android:id="@+id/activity_register_deposit_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_deposit_edit_text_view"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_deposit_edit_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_deposit_edit_text_view" />
+
+            <!-- -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/activity_register_monthly_rent_constraint_layout"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_deposit_divider"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_deposit_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_deposit_divider"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content">
+
+                <EditText
+                        android:id="@+id/activity_register_monthly_rent_edit_text_view"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/transparent"
+                        android:enabled="true"
+                        android:fitsSystemWindows="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/roboto_regular"
+                        android:hint="월세 (만원)"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:paddingStart="25dp"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
+                        android:textColor="@color/dark_gray"
+                        android:textColorHint="@color/regular_gray"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:theme="@style/EditTextStyle" />
+
+                <TextView
+                        android:id="@+id/activity_register_monthly_rent_won_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:fitsSystemWindows="true"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="₩"
+                        android:textColor="@color/regular_gray"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/activity_register_monthly_rent_edit_text_view"
+                        app:layout_constraintStart_toStartOf="@id/activity_register_monthly_rent_edit_text_view"
+                        app:layout_constraintTop_toTopOf="@id/activity_register_monthly_rent_edit_text_view" />
+
+                <View
+                        android:id="@+id/activity_register_monthly_rent_divider"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/light_gray"
+                        android:fitsSystemWindows="true"
+                        app:layout_constraintEnd_toEndOf="@id/activity_register_monthly_rent_edit_text_view"
+                        app:layout_constraintStart_toStartOf="@id/activity_register_monthly_rent_edit_text_view"
+                        app:layout_constraintTop_toBottomOf="@id/activity_register_monthly_rent_edit_text_view" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 관리비 -->
+
+            <EditText
+                    android:id="@+id/activity_register_manage_cost_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:enabled="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="관리비 (만원)"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingStart="25dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColor="@color/dark_gray"
+                    android:textColorHint="@color/regular_gray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_monthly_rent_constraint_layout"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_monthly_rent_constraint_layout"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_monthly_rent_constraint_layout"
+                    app:theme="@style/EditTextStyle" />
+
+            <TextView
+                    android:id="@+id/activity_register_manage_cost_won_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="₩"
+                    android:textColor="@color/regular_gray"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_manage_cost_edit_text"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_manage_cost_edit_text"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_manage_cost_edit_text" />
+
+            <TextView
+                    android:id="@+id/activity_register_no_manage_cost_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="관리비 없음"
+                    android:textColor="@color/regular_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_manage_cost_won_text"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_monthly_rent_constraint_layout"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_manage_cost_won_text" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_manage_cost_button_default"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_check"
+                    android:tint="@color/regular_gray"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintEnd_toStartOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_no_manage_cost_text_view"
+                    tools:visibility="invisible" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_manage_cost_button_event"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_check_event"
+                    android:tint="@color/regular_gray"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintEnd_toStartOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_no_manage_cost_text_view"
+                    tools:visibility="invisible" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_manage_cost_button_clicked"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_check_clicked"
+                    android:tint="@color/main_green_base"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintEnd_toStartOf="@id/activity_register_no_manage_cost_text_view"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_no_manage_cost_text_view"
+                    tools:visibility="visible" />
+
+            <View
+                    android:id="@+id/activity_register_manage_cost_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_manage_cost_edit_text"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_manage_cost_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_manage_cost_edit_text" />
+
+            <!-- 구조 -->
+
+            <TextView
+                    android:id="@+id/activity_register_room_type_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="구조"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_manage_cost_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_manage_cost_divider" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_room_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_down"
+                    android:tint="@color/dark_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_room_type_text_view"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_manage_cost_divider"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_room_type_text_view" />
+
+            <View
+                    android:id="@+id/activity_register_room_type_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_room_type_button"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_room_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_room_type_button" />
+
+            <!-- 면적 -->
+
+            <EditText
+                    android:id="@+id/activity_register_area_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/transparent"
+                    android:enabled="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="면적 (평)"
+                    android:inputType="text"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="15dp"
+                    android:textColorHint="@color/regular_gray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_room_type_divider"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_room_type_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_room_type_divider"
+                    app:theme="@style/EditTextStyle" />
+
+            <View
+                    android:id="@+id/activity_register_area_edit_text_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_area_edit_text"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_area_edit_text"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_area_edit_text" />
+
+            <!-- 위치 -->
+
+            <TextView
+                    android:id="@+id/activity_register_location_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="위치"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_area_edit_text_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_area_edit_text_divider" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_location_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_right"
+                    android:tint="@color/dark_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_location_text_view"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_area_edit_text_divider"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_location_text_view" />
+
+            <View
+                    android:id="@+id/activity_register_location_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_location_button"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_location_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_location_button" />
+
+            <!-- -->
+
+            <EditText
+                    android:id="@+id/activity_register_content_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    android:background="@color/transparent"
+                    android:enabled="true"
+                    android:fitsSystemWindows="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="top"
+                    android:hint="등록할 부동산 매물의 상세 설명을 작성해주세요.\n허위정보 및 부적절한 글은 게시가 제한될 수 있어요."
+                    android:inputType="textMultiLine"
+                    android:paddingTop="15dp"
+                    android:textColor="@color/dark_gray"
+                    android:textColorHint="@color/regular_gray"
+                    android:textCursorDrawable="@drawable/color_cursor"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_location_divider"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_location_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_location_divider"
+                    app:theme="@style/EditTextStyle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

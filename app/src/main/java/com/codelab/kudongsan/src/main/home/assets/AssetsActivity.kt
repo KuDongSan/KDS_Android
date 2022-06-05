@@ -48,11 +48,10 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
         }
 
         binding.activityFilteringButton.setOnClickListener {
-
             val intent = Intent(this@AssetsActivity, FilteringActivity::class.java)
             intent.putExtra("address", address)
             resultLauncher.launch(intent)
-
+            overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
         }
 
 
@@ -66,15 +65,15 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
         overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
     }
 
-    private fun init() {
-
-        binding.activityAssetsSwipeRefreshLayout.setOnRefreshListener {
-            binding.activityAssetsSwipeRefreshLayout.isRefreshing = true
-            val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
-            AssetsService(this).tryGetAssets(address = address)
-        }
-
-    }
+//    private fun init() {
+//
+//        binding.activityAssetsSwipeRefreshLayout.setOnRefreshListener {
+//            binding.activityAssetsSwipeRefreshLayout.isRefreshing = true
+//            val address = changeIdToAddress(intent.getIntExtra("regionId", 0))
+//            AssetsService(this).tryGetAssets(address = address)
+//        }
+//
+//    }
 
     private fun changeIdToAddress(id: Int): String? {
         var address: String? = null
@@ -112,10 +111,9 @@ class AssetsActivity : BaseActivity<ActivityAssetsBinding>(ActivityAssetsBinding
                 val intent = Intent(this@AssetsActivity, DetailActivity::class.java)
                 intent.putExtra("itemId", adapter.listData[pos].itemId)
                 startActivity(intent)
+                overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
             }
         }
-
-
 
         response.forEach { item ->
             data.add(

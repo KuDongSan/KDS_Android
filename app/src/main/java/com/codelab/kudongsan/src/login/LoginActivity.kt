@@ -40,8 +40,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         Glide.with(this).load(R.drawable.home_animation_unscreen)
             .into(binding.activityLoginGif)
 
-        val keyHash = Utility.getKeyHash(this)
-        Log.d("Hash", keyHash)
+//        val keyHash = Utility.getKeyHash(this)
+//        Log.d("Hash", keyHash)
 
         binding.activityLoginKakaoLayout.setOnClickListener {
             kakaoLogin()
@@ -119,6 +119,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
         dismissLoadingDialog()
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
     }
 
     override fun onPostLoginFailure(message: String) {

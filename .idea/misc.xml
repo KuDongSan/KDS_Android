@@ -3,15 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3115" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/main_btm_nav_item_color.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/radio_selector.xml" value="0.2265" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable-v24/selector_radio_text.xml" value="0.2265" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_service_type_button.xml" value="0.328" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/assets_type_button.xml" value="0.328" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/color_cursor.xml" value="0.3115" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/compare_content_background.xml" value="0.237" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/compare_radius.xml" value="0.28" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/edit_profile_background.xml" value="0.317" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/gray_background_round.xml" value="0.28" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_check.xml" value="0.3115" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_check_clicked.xml" value="0.3115" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_check_event.xml" value="0.3115" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_home_unselected.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_interests_unselected.xml" value="0.331" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/ic_launcher_background.xml" value="0.331" />
@@ -21,6 +26,7 @@
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/image_bottom_round.xml" value="0.28" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/main_custom_input.xml" value="0.28" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/register_my_asset_background.xml" value="0.264" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/round_gray_border.xml" value="0.3115" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/seek_bar_thumb.xml" value="0.24" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/snackbar_background.xml" value="0.237" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/drawable/social_login_background.xml" value="0.331" />
@@ -35,6 +41,7 @@
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_filtering_temp.xml" value="0.25" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/activity_splash.xml" value="0.16" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/assets_recycler_item.xml" value="0.22" />
         <entry key="..\:/Users/wonseok/KUmpare/app/src/main/res/layout/dialog_loading.xml" value="0.36614583333333334" />

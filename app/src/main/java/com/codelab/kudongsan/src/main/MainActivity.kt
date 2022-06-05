@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
-import com.codelab.kudongsan.databinding.ActivityAssetsBinding.inflate
 import com.codelab.kudongsan.databinding.ActivityMainBinding
 import com.codelab.kudongsan.src.main.home.HomeFragment
 import com.codelab.kudongsan.src.main.interests.InterestsFragment
 import com.codelab.kudongsan.src.main.map.MapFragment
 import com.codelab.kudongsan.src.main.settings.SettingsFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 

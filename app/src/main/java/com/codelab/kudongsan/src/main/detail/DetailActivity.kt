@@ -115,6 +115,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
             val intent = Intent(this, CompareActivity::class.java)
             intent.putExtra("itemId", itemId)
             startActivity(intent)
+            overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
         }
     }
 
@@ -487,6 +488,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
                 startAnimation(snackBarClose)
             }, 3500)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
     }
 
     companion object {

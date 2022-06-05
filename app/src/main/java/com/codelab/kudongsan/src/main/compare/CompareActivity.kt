@@ -292,9 +292,15 @@ class CompareActivity : BaseActivity<ActivityCompareBinding>(ActivityCompareBind
         return leftSalesType == rightSalesType
     }
 
+    // TODO 유사도 알고리즘 만들어야함.
     // 임시
     private fun calculateSimilarityValue(): Int {
         return Random().nextInt(101)
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.activity_fade_in, R.anim.activity_fade_out)
     }
 
 }
