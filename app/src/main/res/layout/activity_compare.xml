@@ -248,7 +248,7 @@
                 app:progressView_min="0"
                 app:progressView_padding="1dp"
                 app:progressView_progress="63"
-                app:progressView_progressFromPrevious="true"
+                app:progressView_progressFromPrevious="false"
                 app:progressView_radius="12dp" />
 
             <TextView
@@ -411,7 +411,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="왼쪽 매물이 오른쪽 매물보다 1평 더 넓어요."
+                tools:text="왼쪽 매물이 오른쪽 매물보다 1평 더 넓어요."
                 android:textColor="#808080"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -658,7 +658,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="왼쪽 매물과 오른쪽 매물의 구조가 달라요."
+                tools:text="왼쪽 매물과 오른쪽 매물의 구조가 달라요."
                 android:textColor="#808080"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -758,7 +758,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="왼쪽 매물이 오른쪽 매물보다 역에서 120m 더 가까워요."
+                tools:text="왼쪽 매물이 오른쪽 매물보다 역에서 120m 더 가까워요."
                 android:textColor="#808080"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
