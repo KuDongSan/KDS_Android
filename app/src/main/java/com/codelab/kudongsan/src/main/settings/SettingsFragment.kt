@@ -1,16 +1,19 @@
 package com.codelab.kudongsan.src.main.settings
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_NAME
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_THUMB
 import com.codelab.kudongsan.config.ApplicationClass.Companion.sSharedPreferences
 import com.codelab.kudongsan.config.BaseFragment
 import com.codelab.kudongsan.databinding.FragmentSettingsBinding
+import com.codelab.kudongsan.src.splash.SplashActivity
 import com.kakao.sdk.user.UserApiClient
 
 class SettingsFragment :
@@ -35,6 +38,18 @@ class SettingsFragment :
 
         } else {
             settingsEmail.text = sSharedPreferences.getString(K_USER_ACCOUNT, null)
+        }
+
+        binding.fragmentSettingsSettingButton.setOnClickListener {
+            // 토큰 폐기하고 다시 스플래쉬 액티비티로 시작하는 로직
+            val editor = ApplicationClass.sSharedPreferences.edit()
+            editor.putString("K_USER_NAME", "trash")
+            editor.putString("K_USER_ACCOUNT", "trash")
+            editor.putString("K_USER_THUMB", "trash")
+            editor.apply()
+            val intent = Intent(requireActivity(), SplashActivity::class.java)
+            startActivity(intent)
+            showCustomToast("로그아웃 되었습니다")
         }
 
 //        추후 로그아웃 버튼 생성시 버튼 아이디만 바꿔서 그대로사용

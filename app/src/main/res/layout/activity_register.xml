@@ -74,13 +74,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/activity_register_camera_layout"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_marginStart="15dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="15dp"
                     android:alpha="0.8"
                     android:background="@drawable/round_gray_border"
                     android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -91,64 +91,26 @@
                         android:fitsSystemWindows="true"
                         android:src="@drawable/ic_camera"
                         android:tint="@color/main_green_base"
-                        app:layout_constraintBottom_toTopOf="@id/activity_register_camera_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
-                <TextView
-                        android:id="@+id/activity_register_camera_text_before"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/activity_register_camera_image_real"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:fitsSystemWindows="true"
-                        android:text="0/10"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_text"
-                        app:layout_constraintEnd_toEndOf="@id/activity_register_camera_image"
-                        app:layout_constraintStart_toStartOf="@id/activity_register_camera_image"
-                        app:layout_constraintTop_toTopOf="@id/activity_register_camera_text" />
-
-                <TextView
-                        android:id="@+id/activity_register_camera_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fitsSystemWindows="true"
-                        android:text="/10"
-                        android:textSize="14sp"
-                        android:visibility="invisible"
+                        android:scaleType="centerCrop"
+                        android:tint="@color/main_green_base"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@id/activity_register_camera_image"
-                        app:layout_constraintStart_toEndOf="@id/activity_register_camera_text_current"
-                        app:layout_constraintTop_toBottomOf="@id/activity_register_camera_image" />
-
-                <TextView
-                        android:id="@+id/activity_register_camera_text_current"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="1dp"
-                        android:fitsSystemWindows="true"
-                        android:text="0"
-                        android:textColor="@color/main_green_accent"
-                        android:textSize="14sp"
-                        android:visibility="invisible"
-                        app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_text"
-                        app:layout_constraintEnd_toStartOf="@id/activity_register_camera_text"
-                        app:layout_constraintStart_toStartOf="@id/activity_register_camera_image"
-                        app:layout_constraintTop_toTopOf="@id/activity_register_camera_text" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/activity_register_pictures_recycler_view"
-                    app:layout_constraintTop_toTopOf="@id/activity_register_camera_layout"
-                    app:layout_constraintBottom_toBottomOf="@id/activity_register_camera_layout"
-                    app:layout_constraintStart_toEndOf="@id/activity_register_camera_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginStart="15dp"
-                    android:orientation="horizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp" />
 
             <View
                     android:id="@+id/activity_register_pictures_divider"
@@ -159,7 +121,8 @@
                     android:background="@color/light_gray"
                     android:fitsSystemWindows="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/activity_register_camera_layout"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/activity_register_camera_layout" />
 
             <!-- -->
@@ -237,6 +200,44 @@
 
             <!-- -->
 
+            <TextView
+                    android:id="@+id/activity_register_service_type_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fitsSystemWindows="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="종류"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_sales_type_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_sales_type_divider" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/activity_register_service_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/transparent"
+                    android:fitsSystemWindows="true"
+                    android:src="@drawable/ic_down"
+                    android:tint="@color/dark_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_register_service_type_text_view"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_sales_type_divider"
+                    app:layout_constraintTop_toTopOf="@id/activity_register_service_type_text_view" />
+
+            <View
+                    android:id="@+id/activity_register_service_type_divider"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/light_gray"
+                    android:fitsSystemWindows="true"
+                    app:layout_constraintEnd_toEndOf="@id/activity_register_service_type_button"
+                    app:layout_constraintStart_toStartOf="@id/activity_register_service_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_service_type_text_view" />
+
+            <!-- -->
+
             <EditText
                     android:id="@+id/activity_register_deposit_edit_text_view"
                     android:layout_width="0dp"
@@ -259,7 +260,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@id/activity_register_sales_type_divider"
                     app:layout_constraintStart_toStartOf="@id/activity_register_sales_type_divider"
-                    app:layout_constraintTop_toBottomOf="@id/activity_register_sales_type_divider"
+                    app:layout_constraintTop_toBottomOf="@id/activity_register_service_type_divider"
                     app:theme="@style/EditTextStyle" />
 
             <TextView

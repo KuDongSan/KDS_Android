@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/camera_bottom_sheet_dialog_title_text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:text="이런 사진은 어떠세요?!"
+            android:layout_height="wrap_content" />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/camera_bottom_sheet_example_first_card_view"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="40dp"
+            android:elevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/camera_bottom_sheet_example_second_card_view"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_dialog_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:src="@drawable/interior_temp"
+                android:layout_width="120dp"
+                android:scaleType="centerCrop"
+                android:layout_height="120dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/camera_bottom_sheet_example_first_text_view"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/dark_gray"
+            android:text="감성 충만한 사진"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/camera_bottom_sheet_example_first_card_view"
+            app:layout_constraintEnd_toEndOf="@id/camera_bottom_sheet_example_first_card_view"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_example_first_card_view"
+            android:layout_height="wrap_content" />
+
+    <androidx.cardview.widget.CardView
+            android:id="@+id/camera_bottom_sheet_example_second_card_view"
+            app:cardCornerRadius="10dp"
+            android:layout_marginTop="40dp"
+            android:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/camera_bottom_sheet_example_first_card_view"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_dialog_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+                android:src="@drawable/cleaned_temp"
+                android:layout_width="120dp"
+                android:scaleType="centerCrop"
+                android:layout_height="120dp" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/camera_bottom_sheet_example_second_text_view"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/dark_gray"
+            android:text="청소 잘 된 깔끔한 사진"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/camera_bottom_sheet_example_second_card_view"
+            app:layout_constraintEnd_toEndOf="@id/camera_bottom_sheet_example_second_card_view"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_example_second_card_view"
+            android:layout_height="wrap_content" />
+
+    <!-- -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:id="@+id/camera_bottom_sheet_dialog_camera_layout"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_example_first_text_view"
+            android:layout_height="wrap_content">
+
+        <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/roboto_bold"
+                android:text="사진 찍기"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/camera_bottom_sheet_dialog_camera_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:background="@color/transparent"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/camera_bottom_sheet_dialog_camera_text_view"
+                app:layout_constraintTop_toTopOf="@id/camera_bottom_sheet_dialog_camera_text_view"
+                android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+            android:id="@+id/camera_bottom_sheet_dialog_border"
+            android:background="@color/regular_gray"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_dialog_camera_layout"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_height="1dp" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:id="@+id/camera_bottom_sheet_dialog_album_layout"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_dialog_border"
+            android:layout_height="wrap_content">
+
+        <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/dark_gray"
+                android:fontFamily="@font/roboto_bold"
+                android:text="앨범에서 사진 선택"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/camera_bottom_sheet_dialog_album_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+                android:layout_width="wrap_content"
+                android:background="@color/transparent"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/camera_bottom_sheet_dialog_album_text_view"
+                app:layout_constraintTop_toTopOf="@id/camera_bottom_sheet_dialog_album_text_view"
+                android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/camera_bottom_sheet_dialog_album_layout"
+            android:layout_width="0dp"
+            android:layout_height="40dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

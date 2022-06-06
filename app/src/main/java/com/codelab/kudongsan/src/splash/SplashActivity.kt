@@ -28,10 +28,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     private fun loginKuDongSan() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
-                showCustomToast("사용자 정보 요청 실패")
                 startActivity(Intent(this, LoginActivity::class.java))
             } else if (user != null) {
-                showCustomToast("사용자 정보 요청 성공")
                 startActivity(Intent(this, MainActivity::class.java))
             }
         }

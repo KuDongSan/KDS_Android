@@ -59,8 +59,6 @@ class CompareActivity : BaseActivity<ActivityCompareBinding>(ActivityCompareBind
                             if (response[0].deposit > response[1].deposit) {
                                 "등록한 매물의 전세금이 보고 있는 매물의 전세금보다 ${(response[0].deposit) - (response[1].deposit)}만원 높아요."
                             } else if (response[0].deposit < response[1].deposit) {
-                                showCustomToast("${(response[0].deposit)}")
-                                showCustomToast("${(response[1].deposit)}")
                                 "등록한 매물의 전세금이 보고 있는 매물의 전세금보다 ${(response[1].deposit) - (response[0].deposit)}만원 낮아요."
                             } else {
                                 "등록한 매물의 전세금과 보고 있는 매물의 전세금이 동일해요!"

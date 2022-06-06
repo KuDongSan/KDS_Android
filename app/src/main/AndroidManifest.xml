@@ -44,7 +44,7 @@
         <activity
                 android:name="com.codelab.kudongsan.src.login.LoginActivity"
                 android:exported="true"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.LoginActivity">
 
         </activity>
         <activity
