@@ -16,9 +16,8 @@ import com.codelab.kudongsan.R
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityRegisterBinding
 import com.codelab.kudongsan.util.CameraBottomSheetDialog
-import com.codelab.kudongsan.util.CameraBottomSheetDialogTemp
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 
 class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate) {
 
@@ -27,8 +26,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
     var roomType: String = ""
     var isSuggested: Boolean = false
     var manageCost: String = "N"
-
-    var imageURL: Uri? = null
+    var imageURI: Uri? = null
 
     enum class SalesType {
         YEARLY_RENT, MONTHLY_RENT, DEALING
@@ -40,9 +38,29 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         ONEROOM, VILLA, OFFICETEL, APARTMENT
     }
 
+    var permissionListenerForCamera : PermissionListener = object : PermissionListener {
+        override fun onPermissionGranted() {
+            activityResultLauncherForCamera.launch(null)
+        }
+        override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+            openCamera()
+        }
+    }
+
+    var permissionListenerForGallery : PermissionListener = object : PermissionListener {
+        override fun onPermissionGranted() {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = MediaStore.Images.Media.CONTENT_TYPE
+            intent.type = "image/*"
+            activityResultLauncherForGallery.launch(intent)
+        }
+        override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
+            openGallery()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         binding.apply {
             activityRegisterCameraLayout.setOnClickListener {
@@ -65,9 +83,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
                 detectKeyboard()
             }
             activityRegisterFinishText.setOnClickListener {
-                showCustomToast("내 부동산이 등록되었습니다.")
-                // 임시
-                onBackPressed()
+//                showCustomToast("내 부동산이 등록되었습니다.")
+                
             }
             activityRegisterNoManageCostTextView.setOnClickListener {
                 isSuggested = !isSuggested
@@ -201,20 +218,42 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         }
     }
 
-    fun openGallery() {
-        showCustomToast("openGallery 호출")
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = MediaStore.Images.Media.CONTENT_TYPE
-        intent.type = "image/*"
-        activityResultLauncher.launch(intent)
+    fun openCamera(){
+        TedPermission.with(this)
+            .setPermissionListener(permissionListenerForCamera)
+            .setRationaleMessage("앱의 기능을 사용하기 위해서는 권한이 필요합니다.")
+            .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
+            .setPermissions(android.Manifest.permission.CAMERA,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .check()
     }
 
-    private val activityResultLauncher = registerForActivityResult(
+    fun openGallery() {
+        TedPermission.with(this)
+            .setPermissionListener(permissionListenerForGallery)
+            .setRationaleMessage("앱의 기능을 사용하기 위해서는 권한이 필요합니다.")
+            .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
+            .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            .check()
+    }
+
+    private val activityResultLauncherForCamera = registerForActivityResult(
+        ActivityResultContracts.TakePicturePreview()
+    ) {
+        binding.apply {
+            activityRegisterCardView.visibility = View.VISIBLE
+            Glide.with(this@RegisterActivity).load(it).into(activityRegisterCameraImageReal)
+        }
+    }
+
+    private val activityResultLauncherForGallery = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             Log.d("img", "${it.data?.data}")
-            Glide.with(this).load(it.data?.data).into(binding.activityRegisterCameraImageReal)
+            binding.apply {
+                activityRegisterCardView.visibility = View.VISIBLE
+                Glide.with(this@RegisterActivity).load(it.data?.data).into(activityRegisterCameraImageReal)
+            }
         }
     }
 

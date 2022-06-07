@@ -54,10 +54,16 @@ class CameraBottomSheetDialog() : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = CameraBottomSheetDialogBinding.inflate(inflater, container, false)
-        binding.cameraBottomSheetDialogAlbumLayout.setOnClickListener {
+        binding.apply {
+            cameraBottomSheetDialogCameraLayout.setOnClickListener {
+                (activity as RegisterActivity).openCamera()
+                dismiss()
+            }
+            cameraBottomSheetDialogAlbumLayout.setOnClickListener {
 //            requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            (activity as RegisterActivity).openGallery()
-            dismiss()
+                (activity as RegisterActivity).openGallery()
+                dismiss()
+            }
         }
         Log.d("img", "onCreateView")
         return binding.root
