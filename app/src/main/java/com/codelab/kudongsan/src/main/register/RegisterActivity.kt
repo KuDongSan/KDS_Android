@@ -20,6 +20,7 @@ import com.codelab.kudongsan.config.ApplicationClass
 import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityRegisterBinding
+import com.codelab.kudongsan.src.main.MainActivity
 import com.codelab.kudongsan.src.main.register.models.Address
 import com.codelab.kudongsan.src.main.register.models.RegisterRequest
 import com.codelab.kudongsan.src.main.register.models.RoomType
@@ -316,6 +317,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
                 if (task.isSuccessful) {
                     downloadUri = task.result
 
+                    // 우선 주소 빼고 나머지 구현 
+                    // 주소 입력방식은 레이아웃 생각중...
                     binding.apply {
                         RegisterService(this@RegisterActivity).tryPostRegister(
                             RegisterRequest(
@@ -351,6 +354,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         if(responseCode==200) {
             showCustomToast("내 부동산 등록 성공")
             onBackPressed()
+            // 등록 후 메인액티비티에서 등록한 매물이 보여야하므로
+            // 메인액티비티에서 새로운 GET api가 필요해보인다..
         }
         else {
             showCustomToast("오류 발생?")
