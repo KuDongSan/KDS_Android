@@ -28,8 +28,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     private fun loginKuDongSan() {
         UserApiClient.instance.me { user, error ->
             if (error != null) {
+                // error가 있으면
                 startActivity(Intent(this, LoginActivity::class.java))
             } else if (user != null) {
+                // user가 있으면
                 startActivity(Intent(this, MainActivity::class.java))
             }
         }

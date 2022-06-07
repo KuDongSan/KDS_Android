@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 
@@ -93,6 +94,7 @@ dependencies {
     implementation 'gun0912.ted:tedpermission:2.0.0'
 
     implementation 'com.tbuonomo:dotsindicator:4.2'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -1,4 +1,9 @@
 package com.codelab.kudongsan.src.main.register
 
-class RegisterActivityView {
+interface RegisterActivityView {
+
+    fun onPostRegisterSuccess(responseCode: Int)
+
+    fun onPostRegisterFailure(message: String)
+
 }

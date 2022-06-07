@@ -1,8 +1,11 @@
 package com.codelab.kudongsan.src.main.register
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
@@ -13,13 +16,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
 import com.codelab.kudongsan.R
+import com.codelab.kudongsan.config.ApplicationClass
+import com.codelab.kudongsan.config.ApplicationClass.Companion.K_USER_ACCOUNT
 import com.codelab.kudongsan.config.BaseActivity
 import com.codelab.kudongsan.databinding.ActivityRegisterBinding
+import com.codelab.kudongsan.src.main.register.models.Address
+import com.codelab.kudongsan.src.main.register.models.RegisterRequest
+import com.codelab.kudongsan.src.main.register.models.RoomType
 import com.codelab.kudongsan.util.CameraBottomSheetDialog
+import com.google.firebase.storage.FirebaseStorage
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
+import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
-class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate) {
+
+class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterBinding::inflate),
+    RegisterActivityView {
 
     var salesType: String = ""
     var serviceType: String = ""
@@ -27,6 +41,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
     var isSuggested: Boolean = false
     var manageCost: String = "N"
     var imageURI: Uri? = null
+    var downloadUri: Uri? = null
+    var lat = 0.0
+    var lng = 0.0
+
+    private val userKey = ApplicationClass.sSharedPreferences.getString(K_USER_ACCOUNT, null)
 
     enum class SalesType {
         YEARLY_RENT, MONTHLY_RENT, DEALING
@@ -38,22 +57,24 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         ONEROOM, VILLA, OFFICETEL, APARTMENT
     }
 
-    var permissionListenerForCamera : PermissionListener = object : PermissionListener {
+    var permissionListenerForCamera: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
             activityResultLauncherForCamera.launch(null)
         }
+
         override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
             openCamera()
         }
     }
 
-    var permissionListenerForGallery : PermissionListener = object : PermissionListener {
+    var permissionListenerForGallery: PermissionListener = object : PermissionListener {
         override fun onPermissionGranted() {
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = MediaStore.Images.Media.CONTENT_TYPE
             intent.type = "image/*"
             activityResultLauncherForGallery.launch(intent)
         }
+
         override fun onPermissionDenied(deniedPermissions: ArrayList<String>?) {
             openGallery()
         }
@@ -83,8 +104,8 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
                 detectKeyboard()
             }
             activityRegisterFinishText.setOnClickListener {
-//                showCustomToast("내 부동산이 등록되었습니다.")
-                
+                uploadImageToFirebaseStorage(imageURI)
+                showLoadingDialog(this@RegisterActivity)
             }
             activityRegisterNoManageCostTextView.setOnClickListener {
                 isSuggested = !isSuggested
@@ -105,7 +126,6 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
                     }
                 }
             }
-
 
 
         }
@@ -218,12 +238,15 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         }
     }
 
-    fun openCamera(){
+    fun openCamera() {
         TedPermission.with(this)
             .setPermissionListener(permissionListenerForCamera)
             .setRationaleMessage("앱의 기능을 사용하기 위해서는 권한이 필요합니다.")
             .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있습니다.")
-            .setPermissions(android.Manifest.permission.CAMERA,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            .setPermissions(
+                android.Manifest.permission.CAMERA,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
             .check()
     }
 
@@ -242,7 +265,20 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
         binding.apply {
             activityRegisterCardView.visibility = View.VISIBLE
             Glide.with(this@RegisterActivity).load(it).into(activityRegisterCameraImageReal)
+            imageURI = getImageUri(this@RegisterActivity, it)
         }
+    }
+
+    private fun getImageUri(context: Context, inImage: Bitmap): Uri? {
+        val bytes = ByteArrayOutputStream()
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(
+            context.contentResolver,
+            inImage,
+            "Title",
+            null
+        )
+        return Uri.parse(path)
     }
 
     private val activityResultLauncherForGallery = registerForActivityResult(
@@ -252,9 +288,77 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>(ActivityRegisterB
             Log.d("img", "${it.data?.data}")
             binding.apply {
                 activityRegisterCardView.visibility = View.VISIBLE
-                Glide.with(this@RegisterActivity).load(it.data?.data).into(activityRegisterCameraImageReal)
+                Glide.with(this@RegisterActivity).load(it.data?.data)
+                    .into(activityRegisterCameraImageReal)
+                imageURI = it.data?.data
             }
         }
+    }
+
+    //Firebase Storage에 이미지를 업로드 하는 함수.
+    @SuppressLint("SimpleDateFormat")
+    private fun uploadImageToFirebaseStorage(uri: Uri?) {
+        val storage: FirebaseStorage = FirebaseStorage.getInstance()   //FirebaseStorage 인스턴스 생성
+        //파일 이름 생성.
+        Log.d("test", "$userKey")
+        Log.d("test", "$uri")
+        val fileName = "${userKey}_IMAGE_${SimpleDateFormat("yyyymmdd_HHmmss").format(Date())}.png"
+        //파일 업로드, 다운로드, 삭제, 메타데이터 가져오기 또는 업데이트를 하기 위해 참조를 생성.
+        //참조는 클라우드 파일을 가리키는 포인터라고 할 수 있음.
+        val imagesRef = storage.reference.child("${userKey}/")
+            .child(fileName)    //기본 참조 위치/images/userId/${fileName}
+        //이미지 파일 업로드
+        imagesRef.putFile(uri!!).addOnSuccessListener {
+            dismissLoadingDialog()
+            showCustomToast("업로드 성공!")
+            // 이미지 파일 가져오기
+            imagesRef.downloadUrl.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    downloadUri = task.result
+
+                    binding.apply {
+                        RegisterService(this@RegisterActivity).tryPostRegister(
+                            RegisterRequest(
+                                title = activityRegisterTitleEditText.text.toString(),
+                                description = activityRegisterContentEditText.text.toString(),
+                                imageThumbnail = downloadUri.toString(),
+                                address = Address(jibunAddress = "", address1 = "", address2 = "", address3 = ""),
+                                area = activityRegisterAreaEditText.text.toString().toDouble() * 3.306,
+                                manageCost = activityRegisterManageCostEditText.text.toString().toDouble(),
+                                roomType = RoomType(roomType = roomType, roomTypeCode = roomType),
+                                salesType = salesType,
+                                serviceType = serviceType,
+                                deposit = activityRegisterDepositEditTextView.text.toString().toInt(),
+                                monthlyRentPrice = activityRegisterMonthlyRentEditTextView.text.toString(),
+                                lat = lat,
+                                lng = lng
+                            )
+                        )
+                    }
+
+                } else {
+                    showCustomToast("이미지 파일 다운로드 에러")
+                }
+            }
+        }.addOnFailureListener {
+            dismissLoadingDialog()
+            println(it)
+            showCustomToast("업로드 실패")
+        }
+    }
+
+    override fun onPostRegisterSuccess(responseCode: Int) {
+        if(responseCode==200) {
+            showCustomToast("내 부동산 등록 성공")
+            onBackPressed()
+        }
+        else {
+            showCustomToast("오류 발생?")
+        }
+    }
+
+    override fun onPostRegisterFailure(message: String) {
+        showCustomToast("오류 : $message")
     }
 
 }
